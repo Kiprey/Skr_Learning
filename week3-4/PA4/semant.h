@@ -2,251 +2,164 @@
 #define SEMANT_H_
 
 #include <assert.h>
-#include <iostream>  
+#include "cool-io.h"  //includes iostream; for cout, <<
 #include "cool-tree.h"
 #include "stringtab.h"
 #include "symtab.h"
+#include "list.h"
 
 #define TRUE 1
 #define FALSE 0
 
+// These are globally defined to prevent compiler warnings about
+// anonymous enumerated types.
+enum Inheritable   {CanInherit, CantInherit};
 enum Basicness     {Basic, NotBasic};
+enum Reachability  {Reachable, UnReachable};
 
+//
+// The major types in this file (Environment, ClassTable, InheritanceNode)
+// cross-reference each other, so all must be declared first to
+// allow forward references.
+//
+class Environment;
+typedef Environment *EnvironmentP;
 class ClassTable;
 typedef ClassTable *ClassTableP;
-
-class Environment
-{
-private:
-  // 可能这里是一个classTable?
-  SymbolTable<Symbol, method_class> method_table;
-  SymbolTable<Symbol, Entry> val_table; // this + 1
-  ostream& error_stream; // 
-  int semant_errors;
-public:
-  Environment() : error_stream(cerr) // TODO
-  {}
-  Environment(ClassTable*, InheritanceNode*) // TODO
-  {}
-  int get_self_type()  // TODO
-  {}
-  int lookup_class(Symbol s) // TODO
-  {}
-  int type_leq(Symbol s1, Symbol s2) // TODO
-  {}
-  int type_lub(Symbol s1, Symbol s2) // TODO
-  {}
-
-
-  ostream& semant_error()  {
-    semant_errors++;                            
-    return error_stream;
-  }
-  ostream& semant_error(tree_node* c)  {  
-      
-
-  }    
-  ostream& semant_error(Symbol filename, tree_node *t)  {
-      error_stream << filename << ":" << t->get_line_number() << ": ";
-      return semant_error();
-  }
-  void method_enterscope() {
-    method_table.enterscope();
-  }
-  void method_add(Symbol s, method_class* c) {
-    method_table.addid(s, c);
-  }
-  method_class* method_probe(Symbol s) {
-    return method_table.probe(s);
-  }
-  method_class* method_lookup(Symbol s) {
-    return method_table.lookup(s);
-  }
-  void method_exitscope() {
-    method_table.exitscope();
-  }
-  void var_enterscope() {
-    val_table.enterscope();
-  }
-  void var_add(Symbol s1, Symbol s2) {
-    val_table.addid(s1, s2);
-  }
-  Symbol var_probe(Symbol s) {
-    return val_table.probe(s);
-  }
-  Symbol* var_lookup(Symbol s){
-    return val_table.lookup(s);
-  }
-  void var_exitscope() {
-    val_table.exitscope();
-  }
-};
-
-// This is a structure that may be used to contain the semantic
-// information such as the inheritance graph.  You may use it or not as
-// you like: it is only here to provide a container for the supplied
-// methods.
-
 class InheritanceNode;
 typedef InheritanceNode *InheritanceNodeP;
 
-class InheritanceNode : public class__class{
-private:
-  Environment * env; // this + 11
-  InheritanceNodeP parentnd;                        // Parent of class    // this + 6
-  List<InheritanceNode> *children;                  // Children of class  // this + 7
-  Basicness basic_status;                    // `Basic' if class is basic
-                                              // `NotBasic' otherwise
-public:
-  InheritanceNode(Class_ nd, Basicness bstatus, ClassTableP ct) :
-    class__class((const class__class &) *nd),
-    parentnd(NULL),
-    children(NULL),
-    basic_status(bstatus)
-  {}
-  ~InheritanceNode(){
-    delete env;
-  };
-  void add_child(InheritanceNodeP n)
-  {
-    children = new List<InheritanceNode>(n,children); // n : 0; tl : 1
-  }
-  void set_parentnd(InheritanceNodeP p)
-  {
-    assert(parentnd == NULL);
-    assert(p != NULL);
-    parentnd = p;
-  }
-  List<InheritanceNode> *get_children() { return children; } 
-  InheritanceNodeP get_parentnd() { return parentnd; } 
-  void init_env(ClassTable *classtable){
-    env = new Environment(classtable, this);
-  }
-  void build_feature_tables() // TODO
-  {
+//
+// The environment of a COOL  expression can be completely characterized
+// by 
+//    1. A symbol table describing method bindings.
+//    2. A symbol table describing attribute/local variable bindings.
+//    3. A symbol table of all classes.
+//    4. The class in which the expression occurs (the class of SELF_TYPE)
+//
+class Environment
+{
+ private:
+    SymbolTable<Symbol, method_class> method_table;
+    SymbolTable<Symbol, Entry>  var_table;
+    ClassTableP class_table;
+    Class_      self_class;
 
-  }
-  int mark_reachable() // TODO
-  {
-    // TODO 总感觉少了什么， 没有需要mark的变量
-    for(List<InheritanceNode>* j = children; j != NULL; j = j->tl())
-      j->hd()->mark_reachable();
-  }
-  int check_main_method() // TODO
-  {
-    if(env->method_probe(main_meth))
-    {
-      if(0 /* // TODO */)
-        env->semant_error(this) << "\'main\' method in class Main should have no arguments.";
-    }
-    else
-      env->semant_error(this) << "No 'main' method in class Main.";
+  public:
+    Environment(ClassTableP ct, InheritanceNodeP sc);
+    Environment(SymbolTable<Symbol, method_class> mt,
+		SymbolTable<Symbol, Entry>  vt,
+		ClassTableP ct,
+		InheritanceNodeP sc);
+    EnvironmentP clone_Environment(InheritanceNodeP n);
+
+
+    // class table operations
+    //
+    // Standard ways to report errors.
+    //
+    ostream& semant_error();
+    ostream& semant_error(tree_node *t);
     
-    // "'main' method in class Main should have no arguments.
-    // "No 'main' method in class Main."
-  };
-  int type_check_features() // TODo
-  {
+    InheritanceNodeP lookup_class(Symbol s);
 
-  }
+    // method table operations 
+    void method_add(Symbol s, method_class *m);
+    method_class *method_lookup(Symbol s);
+    method_class *method_probe(Symbol s);
+    void method_enterscope();
+    void method_exitscope();
 
+    // attribute table operations
+    void var_add(Symbol s, Symbol typ);
+    Symbol var_lookup(Symbol s);
+    Symbol var_probe(Symbol s);
+    void var_enterscope();
+    void var_exitscope();
+
+    // type operations
+    Symbol get_self_type();
+    int type_leq(Symbol subtype, Symbol supertype);
+    Symbol type_lub(Symbol t1, Symbol t2);
 };
 
 
-class ClassTable : public SymbolTable<Symbol, InheritanceNode>{
-private:
-  List<InheritanceNode> *nds; // this + 1
+// A node of the inheritance graph is a Cool class with associated info:
+//     1. parent in the inheritance graph
+//     2. children " "       "        "
+//     3. can inherit/can't inherit from this class
+//     4. basic/not basic class
+//     5. this class is reachable/unreachable from the Object class
+//           via the "inherits from" relation
+//     6. a type checking environment
+//
+class InheritanceNode : public class__class
+{
+ private:
+  InheritanceNodeP parentnd;
+  List<InheritanceNode> *children;
+  Inheritable  inherit_status;
+  Basicness    basic_status;
+  Reachability reach_status;
+  EnvironmentP env;
+  
+ public:
+  InheritanceNode(Class_ c, Inheritable istatus, Basicness bstatus);
+  int basic() { return (basic_status == Basic); }
+  int inherit() { return (inherit_status == CanInherit); }
+  void mark_reachable();
+  int reachable() { return (reach_status == Reachable); }
+  void add_child(InheritanceNodeP child);
+  List<InheritanceNode> *get_children() { return children; }
+  void set_parentnd(InheritanceNodeP p);
+  InheritanceNodeP get_parentnd();
+  //
+  // The type checking environment of class X is established by copying 
+  // the environment of X's parent and setting setting the self class to be 
+  // X.
+  //
+  void copy_env(EnvironmentP e) { env = e->clone_Environment(this); }
+  void build_feature_tables();
+  //
+  // For the root Object class, a fresh environment structure is created.
+  //
+  void init_env(ClassTableP ct);
+  void type_check_features();
+  void check_main_method();
+  method_class *method_lookup(Symbol s) { return env->method_lookup(s); }
+};
 
-  int semant_errors;
+
+class ClassTable : public SymbolTable<Symbol, InheritanceNode>
+{
+//
+// Much of the type checker is built into the construction
+// of the class table.
+//
+private:
+  List<InheritanceNode> *nds;
+  int semant_errors;             // counts the number of semantic errors
   void install_basic_classes();
+  void install_class(InheritanceNodeP nd);
+  void install_classes(Classes cs);
+  void check_improper_inheritance();
+  void build_inheritance_tree();
+  void set_relations(InheritanceNodeP nd);
+  void check_for_cycles();
+  void build_feature_tables();
+  void check_main();
   ostream& error_stream;
 
 public:
   ClassTable(Classes);
   int errors() { return semant_errors; }
+  InheritanceNodeP root();
   ostream& semant_error();
   ostream& semant_error(Class_ c);
   ostream& semant_error(Symbol filename, tree_node *t);
-
-
-  // *********************************************
-  InheritanceNodeP root()
-  {
-    return probe(Object);
-  }
-  void install_class(InheritanceNodeP nd)
-  {
-    Symbol name = nd->get_name();
-
-    if (probe(name))
-      return;
-
-    // The class name is legal, so add it to the list of classes
-    // and the symbol table.
-    nds = new List<InheritanceNode>(nd,nds);
-    addid(name,nd);
-  }
-
-  void install_classes(Classes cs)
-  {
-    for(int i = cs->first(); cs->more(i); i = cs->next(i))
-      install_class(new InheritanceNode(cs->nth(i), NotBasic, this));
-  }
-
-  void build_inheritance_tree()
-  {
-    for(List<InheritanceNode> *l = nds; l; l = l->tl())
-        set_relations(l->hd());
-  }
-
-  void set_relations(InheritanceNodeP nd)
-  {
-    InheritanceNode *parent_node = probe(nd->get_parent());
-    nd->set_parentnd(parent_node);
-    parent_node->add_child(nd);
-  }
-
-  void build_feature_tables()  {
-    root()->init_env(this);
-    root()->build_feature_tables();
-  }
-
-  void check_main(){
-    if(probe(Main))
-      if(nds != NULL)
-        nds->hd()->check_main_method();
-    else
-      semant_error() << "Class Main is not defined." << endl;
-  }
-
-  void check_for_cycles()
-  { 
-    for(List<InheritanceNode>* i = nds; i; i = nds->tl())
-      for(InheritanceNodeP j = i->hd(); j; j = j->get_parentnd())
-        if(i->hd()->get_name() == j->get_name())
-          semant_error(i->hd()) << "Class " << i->hd()->get_name() << ", or an ancestor of " 
-            << i->hd()->get_name() << ", is involved in an inheritance cycle." << endl;
-  }
-
-  ClassTable check_improper_inheritance() 
-  {
-    if(nds != NULL)
-    {
-      while(1)
-      {
-        Class_ tmpClass = nds->hd(); 
-        if(probe(tmpClass->get_name())) // TODO
-          semant_error(tmpClass) << "Class " << tmpClass->get_name() << " cannot inherit class " << "xx" << "." << endl;
-        else
-          semant_error(tmpClass) << "Class " << tmpClass->get_name() << " inherits from an undefined class ";
-      }
-    }
-  }
-
 };
 
 
 
-
-
 #endif
+
