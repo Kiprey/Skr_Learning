@@ -86,17 +86,12 @@
   - 检查是否有不正确的类继承。即检查是否存在某个类继承了一个 __未声明或无法被继承__ 的类等等。
   - 将所有类按照继承关系建立 __继承树__ 。例如：
 
-    ```mermaid
-    graph TB;
-    Object --> String;
-    Object --> Int;
-    Object --> IO
-    Object --> Bool
-    Object --> A
-    IO --> B
-    C --> D
-    D --> E
-    E --> C
+    ```text
+              { -> [String]
+              { -> [Int]
+    [OBJECT] ={ -> [IO]     -> [B]
+              { -> [Bool]
+              { -> [A]
     ```
   
     `InheritanceNode`是类继承的基本单元。每个`InheritanceNode`都和一个cool语言中的类绑定。同时每个`InheritanceNode`中都存在一个指向`Environment`的指针成员。
@@ -441,12 +436,12 @@
   - 那为什么是改不了的呢？我们需要从`type_leq`这两个函数的功能开始说起
   - `type_leq`的功能是，查找`supertype`是否位于`subtype`的传递链中。以下图为例：
 
-      ```mermaid
-      graph LR;
-      OBJECT-->A
-      OBJECT-->B;
-      B-->C;
+      ```text
+                { -> [A]
+      [OBJECT] ={
+                { -> [B] -> [C]
       ```
+
 
     - `type_leq(C, B)`会返回`true`
     - `type_leq(C, A)`返回`false`
