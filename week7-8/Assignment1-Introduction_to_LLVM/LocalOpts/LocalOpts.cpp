@@ -71,16 +71,9 @@ private:
 						{
 							if (Instruction* another_inst = dyn_cast<Instruction>(inst.getOperand(0)))
 							{	
-								if(another_inst->getOpcode() == Instruction::Load)
-								{
-									for(auto i = another_inst->op_begin(); i != another_inst->op_end(); i++)
-										outs() << "oprand: " << *i << "\n";
-								}
-								//  TODO load指令躲不开
 								// 如果这两条指令刚好一加一减，同时第二个操作数是一样的，则
 								if(inst.getOpcode() + another_inst->getOpcode() == Instruction::Add + Instruction::Sub
-									&& dyn_cast<ConstantInt>(another_inst->getOperand(1))->getZExtValue() 
-										== val->getZExtValue())
+									&& another_inst->getOperand(1) == val)
 								{
 									++multi_inst_optimization_num;
 									inst.replaceAllUsesWith(another_inst->getOperand(0));

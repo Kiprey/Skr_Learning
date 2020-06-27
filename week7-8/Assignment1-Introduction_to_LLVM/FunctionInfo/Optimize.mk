@@ -1,8 +1,5 @@
-OPTIMIZER := LocalOpts.so
-OPT_PASSES := -Local-Opts
-# OPT_PASSES := -algebraic-identity \
-              -strength-reduction \
-              -multi-inst-opt
+OPTIMIZER := FunctionInfo.so
+OPT_PASSES := -function-info
 
 LLVM_VERSION ?= 9
 CLANG_VERSION ?= 8
@@ -17,24 +14,25 @@ TEST_OPT_LLs := $(addprefix ./tests/,$(addsuffix -opt.ll,$(TEST_SRCs)))
 
 all: $(TEST_OPT_LLs) $(TEST_RAW_LLs) 
 
-./tests/%-opt.ll: ./tests/%-opt.bc
-	llvm-dis-$(LLVM_VERSION) $< -o=$@
-	
-./tests/%.ll: ./tests/%-m2r.bc
+# Every disassembly file depends on the corresponding bytecode.
+./tests/%.ll: ./tests/%.bc
 	llvm-dis-$(LLVM_VERSION) $< -o=$@
 
-./tests/%-opt.bc: ./tests/%-m2r.bc $(OPTIMIZER)
+# Every optimized bytecode depends on the corresponding raw bytecode and the optimizer.
+./tests/%-opt.bc: ./tests/%.bc $(OPTIMIZER)
 	env LD_LIBRARY_PATH=. opt-$(LLVM_VERSION) -load $(OPTIMIZER) $(OPT_PASSES) $< -o $@
 
-./tests/%-m2r.bc: ./tests/%.bc
-	opt-$(LLVM_VERSION) -mem2reg $< -o $@
-
+# Every raw bytecode is compiled from the corresponding C source file. You can
+# also use the option `-O0 -Xclang -disable-O0-optnone` (rather than `-O2`) to
+# disable Clang native optimizations.
 ./tests/%.bc: ./tests/%.c
-	clang-$(CLANG_VERSION) -O0 -Xclang -disable-O0-optnone -emit-llvm -c $< -o $@
+	clang-$(CLANG_VERSION) -O2 -emit-llvm -c $< -o $@
 
+# Build the optimizer from the source files.
 $(OPTIMIZER): $(OPT_OBJs)
 	$(CXX) -dylib -fPIC -shared $^ -o $@
 
 .PHONY: clean
 clean:
 	$(RM) $(TEST_OPT_LLs) $(TEST_RAW_LLs) $(OPTIMIZER) $(OPT_OBJs)
+	echo $(TEST_OPT_LLs) $(TEST_RAW_LLs) $(OPTIMIZER) $(OPT_OBJs)
