@@ -264,7 +264,6 @@ protected:
         {
             // OUT[B]和IN[B]的节点集合
             BitVector ibv;
-            BitVector obv;
             // 确定IN集合
             // 注：basicBlock不存在operator==函数，故只能比较其地址是否相同
             if(&basicBlock == &(*BBTraversalOrder(func).begin()))
@@ -278,12 +277,10 @@ protected:
             for(const Instruction& inst : InstTraversalOrder(basicBlock))
             {
                 // 对_inst_bv_map的修改在TransferFunc内
-                // 传入旧的obv，判断是否修改out集。
-                obv = _inst_bv_map[&inst];
-                // TransferFunc的第三个参数感觉有点多余
-                transform |= TransferFunc(inst, ibv, obv);
+                // 传入旧的obv，用于修改out集。
+                transform |= TransferFunc(inst, ibv, _inst_bv_map[&inst]);
                 // 计算出的inst_out集合，是下一次transfer的in集合，所以需要赋值
-                ibv = obv;
+                ibv = _inst_bv_map[&inst];
             }
         }
         return transform;

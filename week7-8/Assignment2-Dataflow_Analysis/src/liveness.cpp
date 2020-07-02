@@ -106,29 +106,26 @@ protected:
     {
         // 注意：此时的ibv传入的是out集合，obv传入的是in集
         // @DONE 计算单个指令的IN集合
+        // 注：使用getDomainIndex函数时，其参数中的Variable会隐式构造，不必手动调用
 
-        // 用于结尾处判断是否修改
-        BitVector origin_obv = obv;
-        // 对obv进行def/use操作，届时将obv赋值给map
-        obv = ibv;
+        BitVector new_obv = ibv;
         
         // use操作
         for(auto iter = inst.op_begin(); iter != inst.op_end(); iter++)
         {
-            // 满足这个条件的操作数，肯定存在domain里
-            if (isa < Instruction > (*iter) || isa < Argument > (*iter))
-            {
-                const Value* val = dyn_cast<Value>(*iter);
-                assert(val != NULL);
-                obv[getDomainIndex(Variable(val))] = true;
-            }
+            const Value* val = dyn_cast<Value>(*iter);
+            assert(val != NULL);
+            // 如果当前Variable存在于domain
+            if(_domain.find(val) != _domain.end())
+                new_obv[getDomainIndex(val)] = true;
         }
         // def操作。不是所有的指令都会定值，例如ret，所以要设置条件判断
-        if(getDomainIndex(Variable(&inst)) != -1)
-            obv[getDomainIndex(Variable(&inst))] = false;   
-
-        _inst_bv_map[&inst] = obv;
-        return origin_obv != obv;
+        if(getDomainIndex(&inst) != -1)
+            new_obv[getDomainIndex(&inst)] = false;   
+        
+        bool hasChanged = new_obv != obv;
+        obv = new_obv;
+        return hasChanged;
     }
     virtual void InitializeDomainFromInstruction(const Instruction & inst) override
     {

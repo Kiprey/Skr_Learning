@@ -109,45 +109,19 @@ protected:
                   BitVector & obv) override
     {
         // @DONE 计算单个指令的out集合
+        // 注：使用getDomainIndex函数时，其参数中的Expression会隐式构造，不必手动调用
+        BitVector new_obv = ibv;
 
-        // 用于结尾处判断是否修改
-        BitVector origin_obv = obv;
-        // 对obv进行gen/kill操作，届时将obv赋值给map
-        obv = ibv;
-
-        // 只针对二元运算符进行操作
-        if(isa<BinaryOperator> (inst))
-        {
-            // 将x op y generate
-            obv[getDomainIndex(Expression(inst))] = true;
-            // 将 z相关的表达式 kill
-            // 事实上，这里不需要kill，因为LLVM的SSA（不过为了学习，代码还是写出来了）
-            for(const User* user : inst.users())
-                if(const Instruction* user_inst = dyn_cast<BinaryOperator>(user))
-                    // 不需要验证user_inst是否存在于domain
-                    // 因为domain已经添加了整个函数的二元指令
-                    obv[getDomainIndex(Expression(*user_inst))] = false;
-            /*
-            公式：
-            初始时，e_genB和e_killB都为空
-            且
-                e_genB = e_genB + "x op y" - "exprs(z)"
-                e_killB = e_killB + "exprs(z)" - "x op y" 
-            可以看出，每个Instruction中e_genB的改变量与（-e_killB，注意负号）是一样的
-            所以可以推出 
-                ==>> e_genB == -e_killB
-
-            所以OUT[B] = e_genB U (IN[B] - e_killB)
-                        = e_genB U (IN[B] + e_genB)
-                        = IN[B] U e_genB
-            于是后续就可以不再对e_kill集合进行分析
-
-            注意，上述的几点是建立在Instrucion的基础之上。
-            如果是以基本块为基础时，e_genB不一定会与 -e_killB 相同
-            */
-        }
-        _inst_bv_map[&inst] = obv;
-        return origin_obv != obv;
+        // kill 所有引用的表达式
+        for(auto elem : _domain)
+            if(elem.getLHSOperand() == &inst || elem.getRHSOperand() == &inst)
+                new_obv[getDomainIndex(elem)] = false;
+        // gen x_op_y 注意这里要判断是否为二元运算符
+        if(isa<BinaryOperator>(inst) && _domain.find(inst) != _domain.end())
+            new_obv[getDomainIndex(Expression(inst))] = true;
+        bool hasChanged = new_obv != obv;
+        obv = new_obv;
+        return hasChanged;
     }
     virtual void InitializeDomainFromInstruction(const Instruction & inst) override
     {
