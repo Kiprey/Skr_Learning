@@ -66,7 +66,7 @@ int test(int x)
 将上文中的C++代码用`clang`编译后生成的IR如下
 > 注意： 用clang编译时，需要设置`-O0 -disable-O0-optnone`这两项flag，以取消`clang`自身的代码优化
 
-{% codeblock lang: asm)
+```s
 ; 一个文件一个模块（Module）
 
 ; ModuleID = './tests/algebra.bc'
@@ -129,7 +129,7 @@ attributes #0 = { noinline nounwind uwtable "correctly-rounded-divide-sqrt-fp-ma
 
 !0 = !{i32 1, !"wchar_size", i32 4}
 !1 = !{!"clang version 8.0.1-7 (tags/RELEASE_801/final)"}
-{% endcodeblock)
+```
 
 ## 3. Pass初探
 
@@ -262,7 +262,8 @@ attributes #0 = { noinline nounwind uwtable "correctly-rounded-divide-sqrt-fp-ma
       ```
 
     - IR代码示例
-        {% codeblock lang: asm)
+
+        ```s
         ; 执行Pass前
         %12 = load i32, i32* %2, align 4
         %13 = add nsw i32 %12, 0
@@ -281,7 +282,7 @@ attributes #0 = { noinline nounwind uwtable "correctly-rounded-divide-sqrt-fp-ma
         Instruction referencing instruction not embedded in a basic block!
           %12 = load i32, i32* %2, align 4
           <badref> = add nsw i32 %12, 0
-        {% endcodeblock)
+        ```
 
   - 建立新指令
 
@@ -528,7 +529,7 @@ attributes #0 = { noinline nounwind uwtable "correctly-rounded-divide-sqrt-fp-ma
   > 语法：`<result>` = phi [fast-math-flags] `<ty>` [ `<val0>`, `<label0>`], ...
   > 在一个基本块中，`Phi`指令前不允许出现非`Phi`指令。
 
-  {% codeblock lang: asm)
+  ```s
     %2 = icmp slt i32 %0, 0
     br i1 %2, label %3, label %4
 
@@ -541,7 +542,7 @@ attributes #0 = { noinline nounwind uwtable "correctly-rounded-divide-sqrt-fp-ma
   5:                                                ; preds = %4, %3
     ; 如果执行流通过%3分支，则x = 2; 否则如果;执行流通过%4分支，则x = 0
     %.0 = phi i32 [ 2, %3 ], [ 0, %4 ]
-  {% endcodeblock)
+  ```
 
   > 注：此函数并不是一条实际的指令，需要编译器后端对其做相应的处理，从而得到正确的汇编代码。此过程名为`resolution`。
 
