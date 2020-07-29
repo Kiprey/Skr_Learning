@@ -1,0 +1,47 @@
+# 这部分可执行代码设置在内存地址为0的地方。
+# 原因是程序始终会从地址为0的内存处开始执行代码
+    .pos 0
+    irmovq stack, %rsp  # 设置栈指针
+    call main           # 执行main函数
+    halt                # 程序停止
+
+    .align 8            # 八字节对齐
+node1:
+    .quad 0x00001
+    .quad node3
+node2:
+    .quad 0x00010
+    .quad node4
+node3:
+    .quad 0x01000
+    .quad node5
+node4:
+    .quad 0x10000
+    .quad 0
+node5:
+    .quad 0x00100
+    .quad node2
+
+
+main:
+    irmovq node1, %rdi  # arg1
+    call sum_list       # call
+    pushq %rax          # 将返回值存储至栈上
+    ret
+
+sum_list:               # ls: %rdi
+    irmovq $0, %rax    
+    jmp condition
+loop:
+    mrmovq (%rdi), %rbx
+    addq %rbx, %rax 
+    mrmovq 8(%rdi), %rdi
+condition:
+    andq %rdi, %rdi       # 设置标志位，判断ls是否等于NULL
+    jne loop
+    ret
+
+# 设置初始栈的地址
+    .pos 0x200
+stack:
+

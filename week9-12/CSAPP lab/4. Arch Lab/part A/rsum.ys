@@ -1,0 +1,45 @@
+    .pos 0
+    irmovq stack, %rsp  # 设置栈指针
+    call main           # 执行main函数
+    halt                # 程序停止
+
+    .align 8            
+node1:
+    .quad 0x00001
+    .quad node3
+node2:
+    .quad 0x00010
+    .quad node4
+node3:
+    .quad 0x01000
+    .quad node5
+node4:
+    .quad 0x10000
+    .quad 0
+node5:
+    .quad 0x00100
+    .quad node2
+
+
+main:
+    irmovq node1, %rdi  # arg1
+    call rsum_list       # call
+    pushq %rax          # 将返回值存储至栈上
+    ret
+
+rsum_list:               # ls: %rdi
+    pushq %r12
+    andq %rdi, %rdi     # 判断%rdx是否等于NULL
+    je back  
+    mrmovq (%rdi), %r12 # 将中间结果保存到 调用者保存 的寄存器
+    mrmovq 8(%rdi), %rdi # 设置递归调用的函数参数
+    call rsum_list
+    addq %r12, %rax
+back:
+    popq %r12
+    ret
+
+# 设置初始栈的地址
+    .pos 0x200
+stack:
+
