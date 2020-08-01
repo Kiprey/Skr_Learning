@@ -167,13 +167,11 @@ fflush(stdout);
 void eval(char *cmdline)
 {
     char* argv[MAXARGS];
-    char buf[MAXLINE];
     int state = UNDEF;
     sigset_t set;
     pid_t pid;
     // 处理输入的数据
-    strcpy(buf, cmdline);
-    if(parseline(buf, argv) == 1)
+    if(parseline(cmdline, argv) == 1)
         state = BG;
     else
         state = FG;
@@ -215,7 +213,7 @@ void eval(char *cmdline)
             }
         }cmdline
         // 将当前进程添加进job中，无论是前台进程还是后台进程
-        addjob(jobs, pid, state, buf);
+        addjob(jobs, pid, state, cmdline);
         // 恢复受阻塞的信号 SIGINT SIGTSTP SIGCHLD
         if(sigprocmask(SIG_UNBLOCK, &set, NULL) < 0)
             unix_error("sigprocmask error");
