@@ -103,15 +103,15 @@
       - 堆内存。当调用内存分配或释放函数时。对可以在运行时动态地扩展和收缩。
       - 共享库。地址中间部分是一块用来存放像C标准库和数学库这样地共享库代码和数据的区域。
       - 栈内存。位于用户虚拟地址空间顶部的是用户栈，编译器用它来实现函数调用。
-      - 内核虚拟内存。地址空间最顶部的区域是为内核保留的。不允许应用程序读/写/执行这个区域的内容。应用程序只能调用内核来执行这些操作。
-      ![Wrong](img/csapp/chapters1_vm.png)
+      - 内核虚拟内存。地址空间最顶部的区域是为内核保留的。不允许应用程序读/写/执行这个区域的内容。应用程序只能调用内核来执行这些操作。  
+      ![Wrong](img/csapp/chapters1_vm.png)  
 
 ## 二、 信息的表示和处理
 
 ### 1) 字节顺序
 
-- 字节顺序分为*大端序*(big-endian)和*小端序*(liggle-endian)。大多数机器使用的都是小端序。
-  ![Wrong](img/csapp/chapters2_endian.png)
+- 字节顺序分为*大端序*(big-endian)和*小端序*(liggle-endian)。大多数机器使用的都是小端序。  
+  ![Wrong](img/csapp/chapters2_endian.png)  
 
 ### 2) 补码(two's complement)
 
@@ -188,10 +188,12 @@
   - 特殊情况
     1. **无穷大** 。exp == 255 && frac == 0
     2. **NaN** 。exp == 255 && frac != 0
-  ![Wrong](img/csapp/chapters2_ieee_float_example.png)
+
+  ![Wrong](img/csapp/chapters2_ieee_float_example.png)  
 - 尽管浮点数可表达的范围较大，但当浮点数越来越大时，其精度会越来越小；当浮点数越来越小时，其精度也会越来越大。不管精度如何变化，这其中始终存在一个范围。
   > 浮点数无法精确表示所有的小数。大多数小数都只能近似表示，例如0.1表示为0.100000001。  
   > 浮点数也无法精确表示超大整数。超大整数的表示可能会丢失一些精度，例如表示的整数与预期值相差1等等。
+
   ![Wrong](img/csapp/chapters2_ieee_range.png)  
 - float类型最好不要与double类型的数据进行比较，否则会产生一些奇怪的错误，例如以下代码
 
@@ -291,7 +293,8 @@
   - 可能有附加的*寄存器指示符字节*(register specifier byte)，用于指定1~2个寄存器。
   - 有些指令需要一个附加的*常数 字*(constant word)。这个立即数成为指令的某个操作数.  
     > 例如`irmovq $1, %rax`。
-  ![Wrong](img/csapp/chapters4_y86_isa.png)
+
+  ![Wrong](img/csapp/chapters4_y86_isa.png)  
 
 ### 3) 异常
 
@@ -300,7 +303,7 @@
 
 ### 4) SEQ阶段
 
-![Wrong](img/csapp/chapters4_y86_graph.png)
+![Wrong](img/csapp/chapters4_y86_graph.png)  
 > 详细细节请翻阅CSAPP第三版第277页，这里只是简单概述
 
 - 取指阶段
@@ -308,21 +311,22 @@
   - PC增加硬件单元会根据当前PC以及CPU内的信号来生成下一条指令的PC。  
     $new PC = old PC + 1 + r + 8i$（$r$为当前指令是否需要寄存器指示字节，$i$为需要的常数字节数）
     > 注意，此时只是计算，还没有设置下一条的PC
-  ![Wrong](img/csapp/chapters4_y86_fetch.png)
+
+  ![Wrong](img/csapp/chapters4_y86_fetch.png)  
 - 译码和写回阶段
-  - 寄存器文件有两个读端口A和B，从这两个端口同时读取寄存器值valA和valB
-  ![Wrong](img/csapp/chapters4_y86_translate.png)
+  - 寄存器文件有两个读端口A和B，从这两个端口同时读取寄存器值valA和valB  
+  ![Wrong](img/csapp/chapters4_y86_translate.png)  
 - 执行阶段
   - 执行阶段包括ALU，该单元更具`alufun`信号的设置，对输入的`aluA`、`aluB`执行特定操作。
   - 指令阶段还包括条件码寄存器。每次运行时，ALU都会产生三个与条件码相关的信号——零、符号、溢出。
-  - 标号为`cond`的硬件单元会根据条件码和功能码来确定是否进行条件分支或条件数据传送。
-  ![Wrong](img/csapp/chapters4_y86_exec.png)
+  - 标号为`cond`的硬件单元会根据条件码和功能码来确定是否进行条件分支或条件数据传送。  
+  ![Wrong](img/csapp/chapters4_y86_exec.png)  
 - 访存阶段
-  - 该阶段的任务为读写程序数据。读写的对象除了主存以外，还包括寄存器文件
-  ![Wrong](img/csapp/chapters4_y86_visitM.png)
+  - 该阶段的任务为读写程序数据。读写的对象除了主存以外，还包括寄存器文件  
+  ![Wrong](img/csapp/chapters4_y86_visitM.png)  
 - 更新PC阶段
-  - 根据指令的类型以及是否选择分支来设置新的PC。如果没有跳转，则使用取指阶段计算出的新PC值。
-  ![Wrong](img/csapp/chapters4_y86_updatePC.png)
+  - 根据指令的类型以及是否选择分支来设置新的PC。如果没有跳转，则使用取指阶段计算出的新PC值。  
+  ![Wrong](img/csapp/chapters4_y86_updatePC.png)  
 
 ### 5) 流水线
 
@@ -335,10 +339,10 @@
 
   这些相关可能会导致流水线产生计算错误，称为冒险(hazard)。其中也分为*数据冒险*和*控制冒险*。
 - 避免冒险的方式
-  - 暂停(stalling)。暂停技术阻塞一组指令在它们所处的阶段，而允许其他指令继续通过流水线，直到冒险条件不再满足。其处理方法为：每次要阻塞一条指令在译码阶段，就在指令阶段插入一个气泡（bubble）。气泡类似nop指令，不会更改寄存器、内存、条件码与程序状态。
-    ![Wrong](img/csapp/chapters4_pipelin_bubble.png)
-  - 转发(formarding)。将结果值直接从一个流水线阶段传到较早阶段的技术称为数据转发，也称旁路(bypassing)。
-    ![Wrong](img/csapp/chapters4_pipelin_forward.png)
+  - 暂停(stalling)。暂停技术阻塞一组指令在它们所处的阶段，而允许其他指令继续通过流水线，直到冒险条件不再满足。其处理方法为：每次要阻塞一条指令在译码阶段，就在指令阶段插入一个气泡（bubble）。气泡类似nop指令，不会更改寄存器、内存、条件码与程序状态。  
+    ![Wrong](img/csapp/chapters4_pipelin_bubble.png)  
+  - 转发(formarding)。将结果值直接从一个流水线阶段传到较早阶段的技术称为数据转发，也称旁路(bypassing)。  
+    ![Wrong](img/csapp/chapters4_pipelin_forward.png)  
 - 为了提高CPU的运行速度，应尽量避免流水线冒险
 
 ## 五、 优化程序性能
@@ -424,8 +428,8 @@
 - Cache是一种小容量高速缓冲存储器，它由SRAM组成，其直接制作在CPU芯片内，速度几乎与CPU一样快。
 - 程序运行时，CPU使用的一部分数据/指令会预先成批拷贝在Cache中，当CPU需要从内存读/写数据或指令时，先检查Cache，若有，就直接从Cache中读取，而不用访问主存储器。
 - 由于程序访问的局部性特征，大多数情况下CPU可以直接从这个高速缓存中取得指令和数据，不必再访问主存。这大大提高了访存速度。
-- Cache的通用组织
-  ![Wrong](img/csapp/chapter6_cache.png)
+- Cache的通用组织  
+  ![Wrong](img/csapp/chapter6_cache.png)  
 - 有效位
   - 有效位为0时表示信息无效，为1表示信息有效
   - 开机或复位时，所有高速缓存行的有效位V = 0
@@ -436,14 +440,14 @@
 
 #### a. 直接映射高速缓存
 
-- 每个组只有一行的高速缓存称为*直接映射*高速缓存(direct-mapped cache)
-  ![Wrong](img/csapp/chapter6_directMap-cache.png)
+- 每个组只有一行的高速缓存称为*直接映射*高速缓存(direct-mapped cache)  
+  ![Wrong](img/csapp/chapter6_directMap-cache.png)  
 - 高速缓存请求数据的流程
-  - 组选择：从主存地址中的特定偏移处抽取s个组索引，这些位被解释成一个对应的无符号整数高速缓存组号。
-    ![Wrong](img/csapp/chapter6_directMap-cache_group.png)
+  - 组选择：从主存地址中的特定偏移处抽取s个组索引，这些位被解释成一个对应的无符号整数高速缓存组号。  
+    ![Wrong](img/csapp/chapter6_directMap-cache_group.png)  
   - 行匹配：直接映射高速缓存中每组只有一个高速缓存行。如果当前行的有效位已经设置，并且标记(tag)匹配，则缓存命中。
-  - 字选择：根据后b位的块内偏移来获取所需的字
-    ![Wrong](img/csapp/chapter6_directMap-cache_line.png)
+  - 字选择：根据后b位的块内偏移来获取所需的字  
+    ![Wrong](img/csapp/chapter6_directMap-cache_line.png)  
   - 行替换：如果缓存不命中，则需要从下一级存储层次结构中取出请求的块，并驱逐并替换高速缓存行。  
 - 优点：唯一映射；命中时间小
 - 缺点：缺失率高；关联度低
@@ -451,21 +455,21 @@
 #### b. 全相联高速缓存
 
 - *全相联高速缓存*（fully associative cache）是由一个包含所有高速缓存行的组组成的。
-- 全相联高速缓存的结构较为简单
-  ![Wrong](img/csapp/chapter6_fullMap-cache.png)
-- 全相联高速缓存中的行匹配和字选择与上述的类似，组只有一行所以默认只选择组0。
-  ![Wrong](img/csapp/chapter6_fullMap-cache_found.png)
+- 全相联高速缓存的结构较为简单  
+  ![Wrong](img/csapp/chapter6_fullMap-cache.png)  
+- 全相联高速缓存中的行匹配和字选择与上述的类似，组只有一行所以默认只选择组0。  
+  ![Wrong](img/csapp/chapter6_fullMap-cache_found.png)  
 - 由于全相联高速缓存电路必须并行搜索许多相匹配的标记，构成一个又大又快的相联高速缓存十分困难，而且造价昂贵。因此全相联高速缓存只适合做小的高速缓存。
   > 例如虚拟内存系统中的翻译备用缓冲器，该部件用于缓存页表项。
 
 #### c. 组相联高速缓存
 
-- *组相联高速缓存*（set associative cache）是上述两种高速缓存的结合体。下图是它的结构
-  ![Wrong](img/csapp/chapter6_setMapCache.png)
-- 组相联高速缓存的组匹配
-  ![Wrong](img/csapp/chapter6_setMapCache_group.png)
-- 组相联高速缓存的行匹配与字选择
-  ![Wrong](img/csapp/chapter6_setMapCache_line.png)
+- *组相联高速缓存*（set associative cache）是上述两种高速缓存的结合体。下图是它的结构  
+  ![Wrong](img/csapp/chapter6_setMapCache.png)  
+- 组相联高速缓存的组匹配  
+  ![Wrong](img/csapp/chapter6_setMapCache_group.png)  
+- 组相联高速缓存的行匹配与字选择  
+  ![Wrong](img/csapp/chapter6_setMapCache_line.png)  
 - 组相联高速缓存的不命中。
   - 当数据不命中时，需要替换该组中的某一行。其常用的替换算法有：
     - 随机替换算法（rand）
@@ -623,8 +627,8 @@
 
 - Linux*信号*(signal)是一种更高层的软件形式的异常。它允许进程和内核中断其他进程。
 - 信号提供了一种机制，通知用户进程发生了这些异常。
-- 以下是linux系统上支持的信号列表
-  ![Wrong](img/csapp/signals.png)
+- 以下是linux系统上支持的信号列表  
+  ![Wrong](img/csapp/signals.png)  
 - 传递一个信号到目的进程的步骤
   - 发送信号
     - 内核通过 更新目的进程上下文的某个状态，发送一个信号给目标进程
@@ -714,8 +718,8 @@
 #### 2. 因特网域名
 
 - 因特网定义了一组*域名*(domain name)以及一种将域名映射到IP地址的机制，便于人们记忆。
-- 域名集合形成了一个层次结构。
-  ![Wrong](img/csapp/doman_struct.png)
+- 域名集合形成了一个层次结构。  
+  ![Wrong](img/csapp/doman_struct.png)  
 - 因特网定义了域名集合和IP地址集合之间的映射。在现代，映射通过DNS(Doman Name System，域名系统)维护。
 
 #### 3. 因特网连接
@@ -729,8 +733,8 @@
 ### 3) 套接字接口
 
 - **套接字接口**(socket interface)是一组函数，它们和Unix I/O 函数结合，用以创建网络应用。
-- 以下是一个典型的客户端-服务器事务的上下文中的套接字接口概述。  
-  ![Wrong](img/csapp/socket_concept_pic.png)
+- 以下是一个典型的客户端-服务器事务的上下文中的套接字接口概述。   
+  ![Wrong](img/csapp/socket_concept_pic.png)  
 - 套接字地址结构
   
   ```cpp
@@ -754,14 +758,14 @@
   > 注意区分开**监听描述符**和**已连接描述符**。  
   > 1.监听描述符作为客户端连接请求的一个端点，通常被创建一次，并存在于服务器的整个生命周期。  
   > 2.已连接描述符是客户端和服务器之间已经建立起的连接的一个端点。服务器每次接收连接请求时都会创建一次，它只存在于服务器为一个客户端服务的过程。  
-  ![Wrong](img/csapp/connfdOrlistenfg.png)
+  ![Wrong](img/csapp/connfdOrlistenfg.png)  
   > **监听描述符**和**已连接描述符**概念的区分可以方便并发服务器的建立。
 - 程序可以使用`socket`、`connect`、`bind`、`listen`、`accept`函数等等来建立连接。
 
 ## 十二. 并发编程
 
 - 在访问一块共享变量时，并发程序需要对该变量进行上锁，以免产生不必要的条件竞争。
-- 并发编程一定要避免死锁
-  ![Wrong](img/csapp/deadLockPic.png)
+- 并发编程一定要避免死锁  
+  ![Wrong](img/csapp/deadLockPic.png)  
 
 > 其余暂略，待学习操作系统时再学并发

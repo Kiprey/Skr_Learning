@@ -64,24 +64,24 @@
 ### 1) phases_1
 
 单步进入`phase_1`函数。程序会通过`string_no_equal`函数判断输入的字符串是否与特定字符串相等，如果不相等则炸弹爆炸。  
-![Wrong](img/csapp-lab-writeup/bomblab_phases_1.png)
+![Wrong](img/csapp-lab-writeup/bomblab_phases_1.png)  
 由此可得出`phases1`为`Border relations with Canada have never been better.`(勿漏句末*点号*)
 
 ### 2) phases_2
 
-`phases_2`函数中，首先会调用`read_six_numbers`函数，从刚刚的一行输入中读取6个数字, 并判断`a == 1 ?`，
-![Wrong](img/csapp-lab-writeup/bomblab_phases_2_1.png)
+`phases_2`函数中，首先会调用`read_six_numbers`函数，从刚刚的一行输入中读取6个数字, 并判断`a == 1 ?`，  
+![Wrong](img/csapp-lab-writeup/bomblab_phases_2_1.png)  
 > 为了简化说明，我们将输入的6个数分别取名为**a, b, c, d, e, f**。
 > 将**a是否等于b**命名为`a = b ?`
 
 之后循环判断  **2 * 当前遍历到的数 == 下一个遍历到的数 ?**  
-![Wrong](img/csapp-lab-writeup/bomblab_phases_2_2.png)
+![Wrong](img/csapp-lab-writeup/bomblab_phases_2_2.png)  
 即判断输入的6个数是否是**以2为公比的非零等比数列**，如果所有条件都满足则通过此关卡。由此可得出`phases2`可以是`1 2 4 8 16 32`
 
 ### 3) phases_3
 
-`phases_3`函数中，程序会先将读入的一行字符串转化为两个数字（如果转换的数字个数不为2则爆炸）然后判断第一个数`a < 7 ?`。第二个数的值取决于第一个数。如果第二个数与第一个数所指定的常数相等，则通过此关卡。
-![Wrong](img/csapp-lab-writeup/bomblab_phases_3.png)
+`phases_3`函数中，程序会先将读入的一行字符串转化为两个数字（如果转换的数字个数不为2则爆炸）然后判断第一个数`a < 7 ?`。第二个数的值取决于第一个数。如果第二个数与第一个数所指定的常数相等，则通过此关卡。  
+![Wrong](img/csapp-lab-writeup/bomblab_phases_3.png)  
 由此我们可以得到`phases3`： `7 327`（答案不唯一）
 
 ### 4) phases_4
@@ -92,7 +92,7 @@
 - 执行函数`func4(a, 0, 14)`，并判断其返回值是否等于0
 - 判断输入的第二个数`b`是否等于0
 
-![Wrong](img/csapp-lab-writeup/bomblab_phases_4.png)
+![Wrong](img/csapp-lab-writeup/bomblab_phases_4.png)  
 `func4`函数比较特殊，该函数会在内部递归调用自身。通过分析其反汇编代码，得到以下C代码  
 
   ```cpp
@@ -123,8 +123,8 @@
 `phases_5`函数中，程序会  
 
 1. 判断读入的字符串长度是否等于6
-2. 循环6次，以`ch & 0xf`为索引，每次在全局字符串**maduiersnfotvbyl**中获取一个字符
-  ![Wrong](img/csapp-lab-writeup/bomblab_phases_5.png)
+2. 循环6次，以`ch & 0xf`为索引，每次在全局字符串**maduiersnfotvbyl**中获取一个字符  
+  ![Wrong](img/csapp-lab-writeup/bomblab_phases_5.png)  
 3. 待6次循环结束后，将选出的字符串与字符串`flyers`相比较，如果相同，则通过当前关卡
 
   故根据上面的信息可得，`phases_5`: `ionefg` / `IONEFG` （答案不为一）
@@ -133,8 +133,8 @@
 
 函数`phases_6`提高了难度。为了便于说明，我们为输入的6个数字命名为 **a1, a2, a3, a4, a5, a6**。  
 
-- 第一部分是一个嵌套循环。
-  ![Wrong](img/csapp-lab-writeup/bomblab_phases_6_1.png)
+- 第一部分是一个嵌套循环。  
+  ![Wrong](img/csapp-lab-writeup/bomblab_phases_6_1.png)  
   为便于理解，将该嵌套循环的汇编代码翻译为如下C代码：
 
   ```cpp
@@ -167,8 +167,8 @@
   ```
 
   这个代码比较简单，因为它实际上就是遍历检测所输入的6个数是否出现重复，如果存在重复则爆炸。同时还将输入的数字限制在了1-6中(注意其中的数字是 **无符号** 整数)
-- 第二部分是一个简单的循环。这个循环将输入的六个数字设置为 `inputNum[i] = 7 - inputNum[i]`
-  ![Wrong](img/csapp-lab-writeup/bomblab_phases_6_2.png)
+- 第二部分是一个简单的循环。这个循环将输入的六个数字设置为 `inputNum[i] = 7 - inputNum[i]`  
+  ![Wrong](img/csapp-lab-writeup/bomblab_phases_6_2.png)  
 - 第三部分同样是一个循环，为便于说明，将该部分的汇编代码转换为如下的C代码：
   > 为了便于直观，调换了部分代码的顺序，不影响最终结果
 
@@ -199,7 +199,7 @@
 
   程序遍历之前转换的值，并将其作为索引，来获取链表上特定位置的地址，并将其存入栈中。
 - 第四部分还是一个万年不变的循环。  
-  ![Wrong](img/csapp-lab-writeup/bomblab_phases_6_3.png)
+  ![Wrong](img/csapp-lab-writeup/bomblab_phases_6_3.png)  
   这个循环会改变原来的链表顺序，并将其设置为栈上链表的顺序。其代码如下
 
     ```cpp
@@ -212,29 +212,29 @@
     rcx->address = NULL;
     ```
 
-- 第五部分是一个校验循环。这个循环会使用新顺序来获取链表上的值并判断其关系，其中链表上的值必须逐级递减，否则炸弹爆炸。
-  ![Wrong](img/csapp-lab-writeup/bomblab_phases_6_4.png)
+- 第五部分是一个校验循环。这个循环会使用新顺序来获取链表上的值并判断其关系，其中链表上的值必须逐级递减，否则炸弹爆炸。  
+  ![Wrong](img/csapp-lab-writeup/bomblab_phases_6_4.png)  
   由于链表上的值顺序为 **node3 > node4 > node5 > node6 > node1 > node2**  
-  ![Wrong](img/csapp-lab-writeup/bomblab_phases_6_5.png)
+  ![Wrong](img/csapp-lab-writeup/bomblab_phases_6_5.png)  
   故我们最后终于可以得出`phases6`: `4 3 2 1 6 5`
 
 ### 7) secret_phase
 
 - 当6个关卡都通过之后，我们跟进`phase_defused`，发现还有隐藏关卡。
-  在进入隐藏关卡前，我们需要先通过两个判断。
-  ![Wrong](img/csapp-lab-writeup/phases_defuse_1.png)
+  在进入隐藏关卡前，我们需要先通过两个判断。  
+  ![Wrong](img/csapp-lab-writeup/phases_defuse_1.png)  
   将第一个判断的`sscanf`操作的字符串所在内存输出，可以看出，该字符串是`phases_4`关卡的输入  
-  函数参数：
-  ![Wrong](img/csapp-lab-writeup/phases_defuse_2.png)
-  内部内存的值：
-  ![Wrong](img/csapp-lab-writeup/phases_defuse_3.png)
-  同时，第二个判断所对比的字符串为
-  ![Wrong](img/csapp-lab-writeup/phases_defuse_4.png)
+  函数参数：  
+  ![Wrong](img/csapp-lab-writeup/phases_defuse_2.png)  
+  内部内存的值：  
+  ![Wrong](img/csapp-lab-writeup/phases_defuse_3.png)  
+  同时，第二个判断所对比的字符串为  
+  ![Wrong](img/csapp-lab-writeup/phases_defuse_4.png)  
   故我们可以在`phases_4`关卡的输入后追加字符串`DrEvil`来进入隐藏关卡`secret_phase`。
 - `secret_phase`关卡中会先读入一个数字`inputNum`，并满足该条件`(inputNum - 1）<= 0x3e8(1000)`, 即输入的数字必须小于等于1001。  
   之后执行函数`fun7(&n1, inputNum)`。当该函数的返回值为2时则通过此关卡。
-  全局变量`n1`是一个树节点，其所有相关的树节点如下所示
-  ![Wrong](img/csapp-lab-writeup/secret_phase_1.png)
+  全局变量`n1`是一个树节点，其所有相关的树节点如下所示  
+  ![Wrong](img/csapp-lab-writeup/secret_phase_1.png)  
   为便于理解，将函数`fun7`的汇编代码转为C代码：
 
     ```cpp
@@ -275,8 +275,8 @@
   22
   ```
 
-  通关截图
-  ![Wrong](img/csapp-lab-writeup/success.png)
+  通关截图  
+  ![Wrong](img/csapp-lab-writeup/success.png)  
   
 ## 3. Attack Lab
 
@@ -286,11 +286,11 @@
 
 - `ctarget`文件：该文件用于代码注入实验。
 - 在代码注入实验中，通过使缓冲区溢出、注入攻击代码来完成特殊目的。
-- 在`stable_stable_launch`函数中有个很有意思的操作。程序会mmap出一块RWX的内存，并将栈指针迁移到这块固定地址的内存上。这一步方便了后续的代码执行操作，否则原始栈上数据是不可执行的(NX)
-  ![Wrong](img/csapp-lab-writeup/ctarget_1.png)
+- 在`stable_stable_launch`函数中有个很有意思的操作。程序会mmap出一块RWX的内存，并将栈指针迁移到这块固定地址的内存上。这一步方便了后续的代码执行操作，否则原始栈上数据是不可执行的(NX)  
+  ![Wrong](img/csapp-lab-writeup/ctarget_1.png)  
 - 代码注入脆弱点位于`getbuf`函数中，该函数会调用`gets`函数，这可能会造成溢出。  
-  在该函数中，字符串所存入的地址为`0x5561dc78`，当前函数的返回地址存储于`0x5561dca0`，其相对偏移为`40`
-  ![Wrong](img/csapp-lab-writeup/ctarget_2.png)
+  在该函数中，字符串所存入的地址为`0x5561dc78`，当前函数的返回地址存储于`0x5561dca0`，其相对偏移为`40`  
+  ![Wrong](img/csapp-lab-writeup/ctarget_2.png)  
 - **phase1**
   - 该关卡只要求将程序的控制流返回至`touch1`函数中即可，其中该函数的地址为`0x4017c0`  
   - 这里需要利用栈溢出来修改栈上的**函数返回地址**
@@ -309,11 +309,11 @@
 
     通过当前关卡的截图如下
 
-    ![Wrong](img/csapp-lab-writeup/ctarget_touch1.png)
+    ![Wrong](img/csapp-lab-writeup/ctarget_touch1.png)  
 
 - **phase2**
-  - `touch2`函数与`touch1`不太一样，它多了一项寄存器的比较。只有当`%edx == <cookie>`时才能通过当前关卡。
-    ![Wrong](img/csapp-lab-writeup/ctarget_3.png)
+  - `touch2`函数与`touch1`不太一样，它多了一项寄存器的比较。只有当`%edx == <cookie>`时才能通过当前关卡。  
+    ![Wrong](img/csapp-lab-writeup/ctarget_3.png)  
   - 此时我们就需要在栈上布下代码，使控制流在`getBuf`函数返回时**跳转至栈上的代码**，**修改%edx寄存器**并最终**跳转回`touch2`函数**。这部分代码为
     > `touch2`函数的地址为`0x4017ec`
 
@@ -329,7 +329,7 @@
       gcc -c asm.s -o asm.o && objdump -d asm.o
       ```
 
-    ![Wrong](img/csapp-lab-writeup/ctarget_asm_1.png)
+    ![Wrong](img/csapp-lab-writeup/ctarget_asm_1.png)  
 
   - 最后我们的输入数据如下
 
@@ -342,14 +342,14 @@
       78 dc 61 55 00 00 00 00  
       ```
 
-    通过当前关卡的截图如下
-    ![Wrong](img/csapp-lab-writeup/ctarget_touch2.png)
+    通过当前关卡的截图如下  
+    ![Wrong](img/csapp-lab-writeup/ctarget_touch2.png)  
 - **phase3**
   - `touch3`函数与`touch2`函数类似，都存在着一个比较的判断，通过该判断即可通过当前关卡。  
-    所不同的是，`touch3`函数中使用另一个函数`hexmatch`进行判断。`hexmatch`传入的参数分别为`&cookie`与`touch3`的第一个参数`%rdi`。
-    ![Wrong](img/csapp-lab-writeup/ctarget_3_2.png)
-  - 分析`hexmatch`函数，可以发现，当栈溢出时刻的`%rdi == 0x5561dc13`时，即可通过当前关卡。
-    ![Wrong](img/csapp-lab-writeup/ctarget_3_1.png)
+    所不同的是，`touch3`函数中使用另一个函数`hexmatch`进行判断。`hexmatch`传入的参数分别为`&cookie`与`touch3`的第一个参数`%rdi`。  
+    ![Wrong](img/csapp-lab-writeup/ctarget_3_2.png)  
+  - 分析`hexmatch`函数，可以发现，当栈溢出时刻的`%rdi == 0x5561dc13`时，即可通过当前关卡。  
+    ![Wrong](img/csapp-lab-writeup/ctarget_3_1.png)  
   - 由于该关卡修改的寄存器与第二关的寄存器一致，所以可以直接修改第二关的输入数据，即可得到当前关卡的输入数据。
 
     ```text
@@ -361,7 +361,7 @@
     78 dc 61 55 00 00 00 00
     ```
 
-    ![Wrong](img/csapp-lab-writeup/ctarget_3_3.png)
+    ![Wrong](img/csapp-lab-writeup/ctarget_3_3.png)  
   - **注意!** 这个解实际上是 **非预期解** 。按照正常的逻辑，用于存放cookie字符串的内存地址应该是随机的。
 
       ```cpp
@@ -383,8 +383,8 @@
 - `rtarget`文件： 该文件用于ROP实验
 - 该文件使用了**栈随机化(ASLR)** 与 **栈不可执行(NX)** 这两项技术来防止代码注入攻击，所以我们要使用 **ROP** 攻击来完成特定目的。
 - `gets`输入点与函数返回地址存放位置之间的相对偏移仍是`40`。
-- 下面是一张汇编与机器表示相关的表格
-  ![Wrong](img/csapp-lab-writeup/attack_lab_ref.png)
+- 下面是一张汇编与机器表示相关的表格  
+  ![Wrong](img/csapp-lab-writeup/attack_lab_ref.png)  
 - **phase4**
   - 使用`objdump -S rtarget > rtarget.s`指令将`rtarget`文件中的反汇编输出
     > 这里只截取了ROP可能会用到的部分汇编
@@ -414,8 +414,8 @@
       4019a5: c3                    retq
       ```
 
-    - 上述的两条`popq rax`与`movq %rax, %rdi` 之间的配合，间接构成了一条`popq %rdi`指令，这样我们就可以设置寄存器`%rdi`，完成目的。实际效果如下：
-      ![Wrong](img/csapp-lab-writeup/rtarget_2_1.png)
+    - 上述的两条`popq rax`与`movq %rax, %rdi` 之间的配合，间接构成了一条`popq %rdi`指令，这样我们就可以设置寄存器`%rdi`，完成目的。实际效果如下：  
+      ![Wrong](img/csapp-lab-writeup/rtarget_2_1.png)  
 
   - 综上所述，我们需要完成
     - 栈溢出跳转至`popq %rax`
@@ -436,8 +436,8 @@
       ec 17 40 00 00 00 00 00
       ```
 
-    过关截图
-      ![Wrong](img/csapp-lab-writeup/rtarget_2_2.png)
+    过关截图  
+      ![Wrong](img/csapp-lab-writeup/rtarget_2_2.png)  
 - **phase5**
   - 在这一关中，主要会用到如下几个函数
 
@@ -468,8 +468,8 @@
 
     这些gadgets组合起来，可以获得指定偏移量的栈地址。如果将cookie字符串写入至此地址上，则可以达到 **%rdi指向cookie字符串** 这个目的，这样便可以通过当前关卡。
 
-    使用效果如下
-      ![Wrong](img/csapp-lab-writeup/rtaget_3_1.png)
+    使用效果如下  
+      ![Wrong](img/csapp-lab-writeup/rtaget_3_1.png)  
   - 最后的输入数据如下
     > 注意第13行只有7个字节，并非笔者的疏忽
 
@@ -490,8 +490,8 @@
     35 39 62 39 39 37 66 61
     ```
 
-    过关截图
-      ![Wrong](img/csapp-lab-writeup/rtarget_3_2.png)
+    过关截图  
+      ![Wrong](img/csapp-lab-writeup/rtarget_3_2.png)  
 
 ## 4. Architecture Lab
 
@@ -506,8 +506,8 @@
     ./yas $*.ys && ./yis $*.yo
     ```
 
-  执行效果如图所示
-    ![Wrong](img/csapp-lab-writeup/y86_disp.png)
+  执行效果如图所示  
+    ![Wrong](img/csapp-lab-writeup/y86_disp.png)  
 
 - `sum_list`函数的`Y86`汇编 - [github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP-Lab/4.%20Arch%20Lab/part%20A/sum.ys)
 - `rsum_list`函数的`Y86`汇编 - [github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP-Lab/4.%20Arch%20Lab/part%20A/rsum.ys)
@@ -596,8 +596,8 @@
     (cd ../ptest; make SIM=../seq/ssim TFLAGS=-i)
     ```
   
-  `iaddq`指令测试成功的截图如下
-  ![Wrong](img/csapp-lab-writeup/seq_test.png)
+  `iaddq`指令测试成功的截图如下  
+  ![Wrong](img/csapp-lab-writeup/seq_test.png)  
 
 - 编译过程中可能会出现一些错误，例如未找到头文件`tk.h`、某个结构体中没有成员`result`、程序链接失败等等。其解决方法如下：
   - 首先在执行`make`前，需要修改`makefile`中的部分内容
@@ -743,8 +743,8 @@
 
 ### 3) 测试
 
-- 使用`make && ./driver.py`命令进行测试。以下是笔者的测试结果。
-  ![Wrong](img/csapp-lab-writeup/cache_lab_partB.png)
+- 使用`make && ./driver.py`命令进行测试。以下是笔者的测试结果。  
+  ![Wrong](img/csapp-lab-writeup/cache_lab_partB.png)  
 
 ## 6. Shell Lab
 
@@ -1119,8 +1119,8 @@
 
 ### 4) 测试
 
-- 调试时，可以使用`curl -v <webAddr> --proxy <proxyAddr>`命令来调试，使用`-v`参数可以时curl输出发送的http内容与返回的http内容，便于调试。
-  ![Wrong](img/csapp-lab-writeup/proxy_curl.png)
+- 调试时，可以使用`curl -v <webAddr> --proxy <proxyAddr>`命令来调试，使用`-v`参数可以时curl输出发送的http内容与返回的http内容，便于调试。  
+  ![Wrong](img/csapp-lab-writeup/proxy_curl.png)  
 - 最终代码存放于[github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP-Lab/8.%20Proxy%20Lab/proxy.c)  
-  最后的评分如下  
-  ![Wrong](img/csapp-lab-writeup/proxy_grade.png)
+  最后的评分如下   
+  ![Wrong](img/csapp-lab-writeup/proxy_grade.png)  
