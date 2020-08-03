@@ -38,7 +38,7 @@
 ## 简介
 
 - 这里会存放一些CSAPP Lab的WriteUp，以及一点心得
-- 相关代码存放于 [github](https://github.com/Kiprey/Skr_Learning/tree/master/week9-12/CSAPP%20lab)
+- 相关代码存放于 [github](https://github.com/Kiprey/Skr_Learning/tree/master/week9-12/CSAPP-Lab)
 
 ## 1. Data Lab
 
@@ -47,7 +47,7 @@
 - 键入`./btest`以测试文件`bits.c`中的函数
 - 键入`./dlc bits.c`以检查文件`bits.c`中的函数是否使用了被限制的运算符。如果一切正常，则不输出任何信息。
 - 键入`./ishow <intNum>`或`./fshow <floatNum>`以查看传入十六进制的详细信息
-- 笔者实现的源码存放于[github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP%20lab/1.%20Data%20Lab/bits.c)
+- 笔者实现的源码存放于[github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP-Lab/1.%20Data%20Lab/bits.c)
   > Write Up全部以注释的形式写入代码中，方便阅读与理解
 
 ## 2. Bomb Lab
@@ -509,16 +509,16 @@
   执行效果如图所示
     ![Wrong](img/csapp-lab-writeup/y86_disp.png)
 
-- `sum_list`函数的`Y86`汇编 - [github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP%20lab/4.%20Arch%20Lab/part%20A/sum.ys)
-- `rsum_list`函数的`Y86`汇编 - [github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP%20lab/4.%20Arch%20Lab/part%20A/rsum.ys)
+- `sum_list`函数的`Y86`汇编 - [github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP-Lab/4.%20Arch%20Lab/part%20A/sum.ys)
+- `rsum_list`函数的`Y86`汇编 - [github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP-Lab/4.%20Arch%20Lab/part%20A/rsum.ys)
   > 注意递归调用函数时，需保存特定的寄存器到栈上，以便调用者使用。
-- `copy_block`函数的`Y86`汇编 - [github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP%20lab/4.%20Arch%20Lab/part%20A/copy.ys)
+- `copy_block`函数的`Y86`汇编 - [github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP-Lab/4.%20Arch%20Lab/part%20A/copy.ys)
 
 ### 2) Part B
 
 - 该部分内容主要是为SEQ处理器添加指令`iaddq`，所要修改的文件为`seq-full.hcl`，其工作目录为`arch-lab/sim/seq`
 - 由于`iaddq`指令既与运算操作相关，又与立即数处理相关，故该指令的功能添加可以参考`seq-full.hcl`中的`IOPQ`以及`IIRMOVQ`来编写。  
-  以下摘抄了修改过的内容，完整内容请进入[github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP%20lab/4.%20Arch%20Lab/part%20B/seq-full.hcl)，所有更改均以中文注释的形式写入其中。
+  以下摘抄了修改过的内容，完整内容请进入[github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP-Lab/4.%20Arch%20Lab/part%20B/seq-full.hcl)，所有更改均以中文注释的形式写入其中。
   > 注：编写HCL时，使用汇编高亮是个不错的选择。
   
     ```s
@@ -646,15 +646,15 @@
     > 此时CPE等于8.84，分数为33.1/60.0
   - 由于笔者只是简单的将循环展开，并没有推敲更深层次的优化。故最终分数为33.1
 
-- `pipe-full.hcl`由于其添加流程与part B类似，故不再赘述，代码存于[github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP%20lab/4.%20Arch%20Lab/part%20C/pipe-full.hcl)。  
-  `ncopy.ys`代码篇幅较大，存于[github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP%20lab/4.%20Arch%20Lab/part%20C/ncopy.ys)中
+- `pipe-full.hcl`由于其添加流程与part B类似，故不再赘述，代码存于[github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP-Lab/4.%20Arch%20Lab/part%20C/pipe-full.hcl)。  
+  `ncopy.ys`代码篇幅较大，存于[github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP-Lab/4.%20Arch%20Lab/part%20C/ncopy.ys)中
 
 ## 5. Cache Lab
 
 ### 1) Part A
 
 - 在Part A中，我们需要仿造`csim-ref`，编写一个cache模拟器，该模拟器可以模拟在一系列的数据访问中cache的命中、不命中与牺牲行的情况，其中，需要牺牲行时，用LRU替换策略进行替换。
-- 偷了个小懒，直接把csim-ref逆向出了源代码 - [github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP%20lab/5.%20Cache%20Lab/csim.c)
+- 偷了个小懒，直接把csim-ref逆向出了源代码 - [github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP-Lab/5.%20Cache%20Lab/csim.c)
 - Cache主体的数据结构如下
   
   ```cpp
@@ -739,7 +739,7 @@
   > 请注意，倘若按照4x4的大小来分割，则会浪费一半的cache空间，所以这并非64x64矩阵的最优解法，但这是笔者能想到的最优解法。
 - 至于61x67矩阵，由于测试程序放宽了miss数量的限制，故将大型矩阵切割为16x16即可满分。
 - Part B中限制了临时变量的个数，最多使用12个临时变量。要想进一步降低miss数量，最好单次将一整个缓存行里的数据全部读出到临时变量中，这样该缓存行内的数据一旦被驱逐，下次需要读取数据时就不必再次读入cache，减小miss数。
-- 笔者最终的代码实现 - [github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP%20lab/5.%20Cache%20Lab/trans.c)
+- 笔者最终的代码实现 - [github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP-Lab/5.%20Cache%20Lab/trans.c)
 
 ### 3) 测试
 
@@ -849,7 +849,7 @@
     - 子进程正常退出/终止(`WIFEXITED(status)`)
     - 子进程因为其他信号而异常退出，例如`SIGKILL`
 
-- 笔者将`tshref`的源代码（相似度高达98%)存于[github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP%20lab/6.%20Shell%20Lab/tsh.c)。
+- 笔者将`tshref`的源代码（相似度高达98%)存于[github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP-Lab/6.%20Shell%20Lab/tsh.c)。
   > 由于tsh只是一个较为简单的程序，故编写时仍然使用了一些不被推荐的函数(例如`sleep`、`printf`)以降低编写难度。
 
 ## 7. Malloc Lab
@@ -929,7 +929,7 @@
 
 ### 2) 思路
 
-> 笔者使用了分离适配原则，最终代码存放于[github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP%20lab/7.%20Malloc%20Lab/mm.c)，下面来简单讲讲思路
+> 笔者使用了分离适配原则，最终代码存放于[github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP-Lab/7.%20Malloc%20Lab/mm.c)，下面来简单讲讲思路
 
 - 首先，chunk的结构如下
 
@@ -1121,6 +1121,6 @@
 
 - 调试时，可以使用`curl -v <webAddr> --proxy <proxyAddr>`命令来调试，使用`-v`参数可以时curl输出发送的http内容与返回的http内容，便于调试。
   ![Wrong](img/csapp-lab-writeup/proxy_curl.png)
-- 最终代码存放于[github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP%20lab/8.%20Proxy%20Lab/proxy.c)  
+- 最终代码存放于[github](https://github.com/Kiprey/Skr_Learning/blob/master/week9-12/CSAPP-Lab/8.%20Proxy%20Lab/proxy.c)  
   最后的评分如下  
   ![Wrong](img/csapp-lab-writeup/proxy_grade.png)
