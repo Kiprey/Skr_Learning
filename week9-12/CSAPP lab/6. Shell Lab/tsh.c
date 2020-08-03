@@ -202,7 +202,7 @@ void eval(char *cmdline)
                 这确保bash前台进程组中只有一个进程，即tsh进程。
                 当您键入ctrl-c时，tsh应该捕获结果SIGINT，然后将其转发到适当的前台作业
             */
-        // 子进程的控制流开始
+            // 子进程的控制流开始
             if(sigprocmask(SIG_UNBLOCK, &set, NULL) < 0)
                 unix_error("sigprocmask error");
             if(setpgid(0, 0) < 0)
@@ -211,7 +211,7 @@ void eval(char *cmdline)
                 printf("%s: command not found\n", argv[0]);
                 exit(0);
             }
-        }cmdline
+        }
         // 将当前进程添加进job中，无论是前台进程还是后台进程
         addjob(jobs, pid, state, cmdline);
         // 恢复受阻塞的信号 SIGINT SIGTSTP SIGCHLD
