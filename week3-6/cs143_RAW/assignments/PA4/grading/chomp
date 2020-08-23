@@ -1,0 +1,12 @@
+#!/usr/bin/perl
+#
+
+while ($new = <STDIN>) {
+    if (($new eq "\n") && (defined($old)) && ($old eq $new))
+    {
+    } else {
+	print "$new";
+    }
+    
+    $old = $new;
+}

@@ -1,0 +1,2 @@
+signaturechange.test:9: Incompatible number of formal parameters in redefined method foo.
+Compilation halted due to static semantic errors.

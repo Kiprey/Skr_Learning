@@ -1,0 +1,73 @@
+#5
+_program
+  #5
+  _class
+    Foo
+    Object
+    "letparens.test"
+    (
+    #4
+    _method
+      bar
+      Int
+      #4
+      _block
+        #2
+        _let
+          a
+          Int
+          #2
+          _no_expr
+          : _no_type
+          #2
+          _plus
+            #2
+            _object
+              a
+            : _no_type
+            #2
+            _object
+              b
+            : _no_type
+          : _no_type
+        : _no_type
+        #3
+        _plus
+          #3
+          _let
+            a
+            Int
+            #3
+            _no_expr
+            : _no_type
+            #3
+            _object
+              a
+            : _no_type
+          : _no_type
+          #3
+          _object
+            b
+          : _no_type
+        : _no_type
+        #4
+        _let
+          a
+          Int
+          #4
+          _no_expr
+          : _no_type
+          #4
+          _plus
+            #4
+            _object
+              a
+            : _no_type
+            #4
+            _object
+              b
+            : _no_type
+          : _no_type
+        : _no_type
+      : _no_type
+    )

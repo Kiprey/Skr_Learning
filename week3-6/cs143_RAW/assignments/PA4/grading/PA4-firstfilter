@@ -1,0 +1,19 @@
+#!/usr/bin/perl
+
+$gotfirst = 0;
+
+while (<STDIN>)
+{
+    if (/.+:\d+:/)
+    {
+	if (!$gotfirst)
+	{
+	    $gotfirst = 1;
+	    print;
+	}
+    }
+    else
+    {
+	print;
+    }
+}

@@ -1,0 +1,34 @@
+
+_program
+
+  _class
+    Test
+    Object
+    filename
+    (
+
+    _attr
+      foo
+      Test
+
+      _no_expr
+      : _no_type
+
+    _method
+      bar
+      Int
+
+      _loop
+
+        _comp
+
+          _bool
+            0
+          : _no_type
+        : _no_type
+
+        _string
+          "Ooga booga"
+        : _no_type
+      : _no_type
+    )

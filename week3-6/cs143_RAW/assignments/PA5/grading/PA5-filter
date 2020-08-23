@@ -1,0 +1,9 @@
+#!/bin/sed -f
+s/^..*\.cl:[0-9]*//
+s/Garbage collecting \.\.\.//
+s/Major//
+s/Minor//
+s/Increasing heap\.\.\.//
+/^GenGC initialized.$/d
+/^$/d
+/^Stats --.*$/{N;d;}

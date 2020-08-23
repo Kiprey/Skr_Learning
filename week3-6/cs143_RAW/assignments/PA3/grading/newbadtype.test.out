@@ -1,0 +1,2 @@
+"newbadtype.test", line 7: syntax error at or near OBJECTID = a
+Compilation halted due to lex and parse errors

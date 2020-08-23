@@ -1,0 +1,104 @@
+#9
+_program
+  #1
+  _class
+    Main
+    Object
+    "scopes.test"
+    (
+    #1
+    _method
+      main
+      Int
+      #1
+      _int
+        0
+      : Int
+    )
+  #9
+  _class
+    A
+    Object
+    "scopes.test"
+    (
+    #4
+    _attr
+      x
+      Int
+      #4
+      _no_expr
+      : _no_type
+    #6
+    _method
+      f
+      #6
+      _formal
+        x
+        A
+      String
+      #6
+      _string
+        "ab"
+      : String
+    #7
+    _method
+      g
+      #7
+      _formal
+        x
+        Bool
+      A
+      #7
+      _object
+        self
+      : SELF_TYPE
+    #8
+    _method
+      h
+      Object
+      #8
+      _let
+        x
+        String
+        #8
+        _dispatch
+          #8
+          _object
+            self
+          : SELF_TYPE
+          f
+          (
+          #8
+          _let
+            x
+            Bool
+            #8
+            _no_expr
+            : _no_type
+            #8
+            _dispatch
+              #8
+              _object
+                self
+              : SELF_TYPE
+              g
+              (
+              #8
+              _object
+                x
+              : Bool
+              )
+            : A
+          : A
+          )
+        : String
+        #8
+        _assign
+          x
+          #8
+          _string
+            "ab"
+          : String
+        : String
+      : String
+    )

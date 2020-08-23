@@ -1,0 +1,2 @@
+letbadinit.test:4: Inferred type A of initialization of x does not conform to identifier's declared type B.
+Compilation halted due to static semantic errors.

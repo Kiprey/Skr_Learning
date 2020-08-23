@@ -1,0 +1,3 @@
+class Hello {
+   foo: Int;
+};

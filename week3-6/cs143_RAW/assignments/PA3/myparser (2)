@@ -1,0 +1,2 @@
+#!/bin/csh -f
+make parser && ./lexer $1 | ./parser  $*

@@ -1,0 +1,6 @@
+(* COMMENT, STRING, COMMENT, COMMENT *)
+
+--"--"--"
+"--"--"--
+--"--"--"
+

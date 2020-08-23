@@ -1,0 +1,2 @@
+missingclass.test:5: Class A inherits from an undefined class D.
+Compilation halted due to static semantic errors.

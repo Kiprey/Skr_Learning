@@ -1,0 +1,34 @@
+#4
+_program
+  #4
+  _class
+    Test
+    Object
+    "whileoneexpression.test"
+    (
+    #2
+    _attr
+      foo
+      Test
+      #2
+      _no_expr
+      : _no_type
+    #3
+    _method
+      bar
+      Int
+      #3
+      _loop
+        #3
+        _comp
+          #3
+          _bool
+            0
+          : _no_type
+        : _no_type
+        #3
+        _string
+          "Ooga booga"
+        : _no_type
+      : _no_type
+    )

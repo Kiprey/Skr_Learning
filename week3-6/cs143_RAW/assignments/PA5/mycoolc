@@ -1,0 +1,2 @@
+#!/bin/csh -f
+make cgen && ./lexer $* | ./parser $* | ./semant $* | ./cgen $* && echo "OK"

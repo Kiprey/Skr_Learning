@@ -1,0 +1,7 @@
+#name "s04.test.cool"
+#2 INT_CONST 0
+#4 INT_CONST 1
+#6 INT_CONST 2
+#8 INT_CONST 3
+#10 INT_CONST 4
+#12 INT_CONST 5

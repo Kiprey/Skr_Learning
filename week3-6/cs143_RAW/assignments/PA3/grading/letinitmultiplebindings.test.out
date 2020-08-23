@@ -1,0 +1,50 @@
+#4
+_program
+  #4
+  _class
+    Test
+    Object
+    "letinitmultiplebindings.test"
+    (
+    #2
+    _attr
+      foo
+      Test
+      #2
+      _no_expr
+      : _no_type
+    #3
+    _method
+      baz
+      String
+      #3
+      _let
+        x
+        Int
+        #3
+        _int
+          5
+        : _no_type
+        #3
+        _let
+          y
+          String
+          #3
+          _string
+            "biddle"
+          : _no_type
+          #3
+          _let
+            z
+            Int
+            #3
+            _no_expr
+            : _no_type
+            #3
+            _object
+              x
+            : _no_type
+          : _no_type
+        : _no_type
+      : _no_type
+    )

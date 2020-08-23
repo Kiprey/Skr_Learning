@@ -1,0 +1,48 @@
+#7
+_program
+  #1
+  _class
+    Main
+    Object
+    "basicclassestree.test"
+    (
+    #1
+    _method
+      main
+      Int
+      #1
+      _int
+        0
+      : Int
+    )
+  #7
+  _class
+    A
+    Object
+    "basicclassestree.test"
+    (
+    #4
+    _attr
+      a
+      Object
+      #4
+      _int
+        0
+      : Int
+    #5
+    _attr
+      b
+      Object
+      #5
+      _string
+        ""
+      : String
+    #6
+    _attr
+      c
+      Object
+      #6
+      _bool
+        1
+      : Bool
+    )

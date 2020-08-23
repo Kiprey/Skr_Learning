@@ -1,0 +1,7 @@
+#!/bin/csh -f
+if (-e ../Cgen.java) then
+  ../lexer $* | ../parser $* | ../semant $* | java -classpath /usr/class/cs143/cool/lib:..:/usr/java/lib/rt.jar Cgen $*
+else
+  ../lexer $* | ../parser $* | ../semant $* | ../cgen $*
+endif
+

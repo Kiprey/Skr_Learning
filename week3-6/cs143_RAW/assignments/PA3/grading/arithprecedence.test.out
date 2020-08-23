@@ -1,0 +1,232 @@
+#21
+_program
+  #21
+  _class
+    A
+    Object
+    "arithprecedence.test"
+    (
+    #20
+    _method
+      f
+      Int
+      #20
+      _block
+        #3
+        _sub
+          #3
+          _plus
+            #3
+            _object
+              a
+            : _no_type
+            #3
+            _object
+              b
+            : _no_type
+          : _no_type
+          #3
+          _object
+            c
+          : _no_type
+        : _no_type
+        #4
+        _plus
+          #4
+          _sub
+            #4
+            _object
+              a
+            : _no_type
+            #4
+            _object
+              b
+            : _no_type
+          : _no_type
+          #4
+          _object
+            c
+          : _no_type
+        : _no_type
+        #6
+        _plus
+          #6
+          _object
+            a
+          : _no_type
+          #6
+          _mul
+            #6
+            _object
+              b
+            : _no_type
+            #6
+            _object
+              c
+            : _no_type
+          : _no_type
+        : _no_type
+        #7
+        _plus
+          #7
+          _mul
+            #7
+            _object
+              a
+            : _no_type
+            #7
+            _object
+              b
+            : _no_type
+          : _no_type
+          #7
+          _object
+            c
+          : _no_type
+        : _no_type
+        #9
+        _plus
+          #9
+          _object
+            a
+          : _no_type
+          #9
+          _divide
+            #9
+            _object
+              b
+            : _no_type
+            #9
+            _object
+              c
+            : _no_type
+          : _no_type
+        : _no_type
+        #10
+        _plus
+          #10
+          _divide
+            #10
+            _object
+              a
+            : _no_type
+            #10
+            _object
+              b
+            : _no_type
+          : _no_type
+          #10
+          _object
+            c
+          : _no_type
+        : _no_type
+        #12
+        _sub
+          #12
+          _object
+            a
+          : _no_type
+          #12
+          _mul
+            #12
+            _object
+              b
+            : _no_type
+            #12
+            _object
+              c
+            : _no_type
+          : _no_type
+        : _no_type
+        #13
+        _sub
+          #13
+          _mul
+            #13
+            _object
+              a
+            : _no_type
+            #13
+            _object
+              b
+            : _no_type
+          : _no_type
+          #13
+          _object
+            c
+          : _no_type
+        : _no_type
+        #15
+        _sub
+          #15
+          _object
+            a
+          : _no_type
+          #15
+          _divide
+            #15
+            _object
+              b
+            : _no_type
+            #15
+            _object
+              c
+            : _no_type
+          : _no_type
+        : _no_type
+        #16
+        _sub
+          #16
+          _divide
+            #16
+            _object
+              a
+            : _no_type
+            #16
+            _object
+              b
+            : _no_type
+          : _no_type
+          #16
+          _object
+            c
+          : _no_type
+        : _no_type
+        #18
+        _divide
+          #18
+          _mul
+            #18
+            _object
+              a
+            : _no_type
+            #18
+            _object
+              b
+            : _no_type
+          : _no_type
+          #18
+          _object
+            c
+          : _no_type
+        : _no_type
+        #19
+        _mul
+          #19
+          _divide
+            #19
+            _object
+              a
+            : _no_type
+            #19
+            _object
+              b
+            : _no_type
+          : _no_type
+          #19
+          _object
+            c
+          : _no_type
+        : _no_type
+      : _no_type
+    )

@@ -1,0 +1,7 @@
+#!/bin/csh -f
+if (-e ../Semant.java) then
+  ../lexer $* | ../parser $* | java -classpath /usr/class/cs143/cool/lib:..:/usr/java/lib/rt.jar Semant $*
+else
+  ../lexer $* | ../parser $* | ../semant $*
+endif
+

@@ -1,0 +1,36 @@
+OPTIMIZER := licm.so
+OPT_PASSES := -loop-invariant-code-motion
+
+LLVM_VERSION ?= 9
+
+CXXFLAGS := $(shell llvm-config-$(LLVM_VERSION) --cxxflags) -I./include -fPIC
+
+OPT_OBJs := $(subst .cpp,.o,$(wildcard *.cpp))
+
+TEST_SRCs := $(basename $(notdir $(wildcard ./tests/*.c)))
+TEST_RAW_LLs := $(subst .c,.ll,$(wildcard ./tests/*.c))
+TEST_OPT_LLs := $(addprefix ./tests/,$(addsuffix -opt.ll,$(TEST_SRCs)))
+
+all: $(TEST_OPT_LLs) $(TEST_RAW_LLs) 
+
+./tests/%-opt.ll: ./tests/%-opt.bc
+	llvm-dis-$(LLVM_VERSION) $< -o=$@
+	
+./tests/%.ll: ./tests/%-preproc.bc
+	llvm-dis-$(LLVM_VERSION) $< -o=$@
+
+./tests/%-opt.bc: ./tests/%-preproc.bc $(OPTIMIZER)
+	env LD_LIBRARY_PATH=. opt-$(LLVM_VERSION) -load $(OPTIMIZER) ${OPT_PASSES} $< -o $@
+
+./tests/%-preproc.bc: ./tests/%.bc
+	opt-$(LLVM_VERSION) -mem2reg -loop-simplify $< -o $@
+
+./tests/%.bc: ./tests/%.c
+	clang -O0 -Xclang -disable-O0-optnone -emit-llvm -c $< -o $@
+
+$(OPTIMIZER): $(OPT_OBJs)
+	$(CXX) -dylib -fPIC -shared $^ -o $@
+
+.PHONY: clean
+clean:
+	$(RM) $(TEST_OPT_LLs) $(TEST_RAW_LLs) $(OPTIMIZER) $(OPT_OBJs)

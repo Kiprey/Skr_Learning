@@ -1,0 +1,323 @@
+#52
+_program
+  #10
+  _class
+    Main
+    IO
+    "complex.test"
+    (
+    #9
+    _method
+      main
+      SELF_TYPE
+      #8
+      _let
+        c
+        Complex
+        #3
+        _dispatch
+          #3
+          _new
+            Complex
+          : _no_type
+          init
+          (
+          #3
+          _int
+            1
+          : _no_type
+          #3
+          _int
+            1
+          : _no_type
+          )
+        : _no_type
+        #7
+        _cond
+          #5
+          _eq
+            #4
+            _dispatch
+              #4
+              _dispatch
+                #4
+                _object
+                  c
+                : _no_type
+                reflect_X
+                (
+                )
+              : _no_type
+              reflect_Y
+              (
+              )
+            : _no_type
+            #4
+            _dispatch
+              #4
+              _object
+                c
+              : _no_type
+              reflect_0
+              (
+              )
+            : _no_type
+          : _no_type
+          #5
+          _dispatch
+            #5
+            _object
+              self
+            : _no_type
+            out_string
+            (
+            #5
+            _string
+              "=)\n"
+            : _no_type
+            )
+          : _no_type
+          #6
+          _dispatch
+            #6
+            _object
+              self
+            : _no_type
+            out_string
+            (
+            #6
+            _string
+              "=(\n"
+            : _no_type
+            )
+          : _no_type
+        : _no_type
+      : _no_type
+    )
+  #52
+  _class
+    Complex
+    IO
+    "complex.test"
+    (
+    #13
+    _attr
+      x
+      Int
+      #13
+      _no_expr
+      : _no_type
+    #14
+    _attr
+      y
+      Int
+      #14
+      _no_expr
+      : _no_type
+    #22
+    _method
+      init
+      #16
+      _formal
+        a
+        Int
+      #16
+      _formal
+        b
+        Int
+      Complex
+      #21
+      _block
+        #18
+        _eq
+          #18
+          _object
+            x
+          : _no_type
+          #18
+          _object
+            a
+          : _no_type
+        : _no_type
+        #19
+        _eq
+          #19
+          _object
+            y
+          : _no_type
+          #19
+          _object
+            b
+          : _no_type
+        : _no_type
+        #20
+        _object
+          self
+        : _no_type
+      : _no_type
+    #29
+    _method
+      print
+      Object
+      #28
+      _cond
+        #26
+        _eq
+          #25
+          _object
+            y
+          : _no_type
+          #25
+          _int
+            0
+          : _no_type
+        : _no_type
+        #26
+        _dispatch
+          #26
+          _object
+            self
+          : _no_type
+          out_int
+          (
+          #26
+          _object
+            x
+          : _no_type
+          )
+        : _no_type
+        #27
+        _dispatch
+          #27
+          _dispatch
+            #27
+            _dispatch
+              #27
+              _dispatch
+                #27
+                _object
+                  self
+                : _no_type
+                out_int
+                (
+                #27
+                _object
+                  x
+                : _no_type
+                )
+              : _no_type
+              out_string
+              (
+              #27
+              _string
+                "+"
+              : _no_type
+              )
+            : _no_type
+            out_int
+            (
+            #27
+            _object
+              y
+            : _no_type
+            )
+          : _no_type
+          out_string
+          (
+          #27
+          _string
+            "I"
+          : _no_type
+          )
+        : _no_type
+      : _no_type
+    #37
+    _method
+      reflect_0
+      Complex
+      #36
+      _block
+        #33
+        _eq
+          #33
+          _object
+            x
+          : _no_type
+          #33
+          _neg
+            #33
+            _object
+              x
+            : _no_type
+          : _no_type
+        : _no_type
+        #34
+        _eq
+          #34
+          _object
+            y
+          : _no_type
+          #34
+          _neg
+            #34
+            _object
+              y
+            : _no_type
+          : _no_type
+        : _no_type
+        #35
+        _object
+          self
+        : _no_type
+      : _no_type
+    #44
+    _method
+      reflect_X
+      Complex
+      #43
+      _block
+        #41
+        _eq
+          #41
+          _object
+            y
+          : _no_type
+          #41
+          _neg
+            #41
+            _object
+              y
+            : _no_type
+          : _no_type
+        : _no_type
+        #42
+        _object
+          self
+        : _no_type
+      : _no_type
+    #51
+    _method
+      reflect_Y
+      Complex
+      #50
+      _block
+        #48
+        _eq
+          #48
+          _object
+            x
+          : _no_type
+          #48
+          _neg
+            #48
+            _object
+              x
+            : _no_type
+          : _no_type
+        : _no_type
+        #49
+        _object
+          self
+        : _no_type
+      : _no_type
+    )

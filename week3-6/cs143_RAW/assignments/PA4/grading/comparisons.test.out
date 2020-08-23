@@ -1,0 +1,64 @@
+#5
+_program
+  #4
+  _class
+    A
+    Object
+    "comparisons.test"
+    (
+    #2
+    _method
+      foo
+      #2
+      _formal
+        a
+        A
+      Bool
+      #2
+      _block
+        #2
+        _lt
+          #2
+          _int
+            6
+          : Int
+          #2
+          _int
+            7
+          : Int
+        : Bool
+        #2
+        _leq
+          #2
+          _int
+            6
+          : Int
+          #2
+          _int
+            7
+          : Int
+        : Bool
+        #2
+        _comp
+          #2
+          _bool
+            1
+          : Bool
+        : Bool
+      : Bool
+    )
+  #5
+  _class
+    Main
+    Object
+    "comparisons.test"
+    (
+    #5
+    _method
+      main
+      Int
+      #5
+      _int
+        6
+      : Int
+    )

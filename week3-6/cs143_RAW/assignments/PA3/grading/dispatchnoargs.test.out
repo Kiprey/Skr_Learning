@@ -1,0 +1,30 @@
+#4
+_program
+  #4
+  _class
+    Test
+    Object
+    "dispatchnoargs.test"
+    (
+    #2
+    _attr
+      foo
+      Test
+      #2
+      _no_expr
+      : _no_type
+    #3
+    _method
+      bar
+      Object
+      #3
+      _dispatch
+        #3
+        _object
+          foo
+        : _no_type
+        bar
+        (
+        )
+      : _no_type
+    )

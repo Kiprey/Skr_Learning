@@ -1,0 +1,58 @@
+#7
+_program
+  #7
+  _class
+    Main
+    Object
+    "stringtest.test"
+    (
+    #6
+    _method
+      main
+      Object
+      #6
+      _block
+        #3
+        _dispatch
+          #3
+          _string
+            "test"
+          : String
+          length
+          (
+          )
+        : Int
+        #4
+        _dispatch
+          #4
+          _string
+            "test"
+          : String
+          substr
+          (
+          #4
+          _int
+            0
+          : Int
+          #4
+          _int
+            1
+          : Int
+          )
+        : String
+        #5
+        _dispatch
+          #5
+          _string
+            "test"
+          : String
+          concat
+          (
+          #5
+          _string
+            " me"
+          : String
+          )
+        : String
+      : String
+    )

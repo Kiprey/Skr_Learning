@@ -1,0 +1,2 @@
+selftypebadreturn.test:4: Inferred return type A of method foo does not conform to declared return type SELF_TYPE.
+Compilation halted due to static semantic errors.

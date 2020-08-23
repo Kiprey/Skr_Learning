@@ -1,0 +1,104 @@
+SPIM Version 6.5 of January 4, 2003
+Copyright 1990-2003 by James R. Larus (larus@cs.wisc.edu).
+All Rights Reserved.
+See the file README for a full copyright notice.
+Loaded: /usr/class/cs143/cool/lib/trap.handler
+2 is trivially prime.
+3 is prime.
+5 is prime.
+7 is prime.
+11 is prime.
+13 is prime.
+17 is prime.
+19 is prime.
+23 is prime.
+29 is prime.
+31 is prime.
+37 is prime.
+41 is prime.
+43 is prime.
+47 is prime.
+53 is prime.
+59 is prime.
+61 is prime.
+67 is prime.
+71 is prime.
+73 is prime.
+79 is prime.
+83 is prime.
+89 is prime.
+97 is prime.
+101 is prime.
+103 is prime.
+107 is prime.
+109 is prime.
+113 is prime.
+127 is prime.
+131 is prime.
+137 is prime.
+139 is prime.
+149 is prime.
+151 is prime.
+157 is prime.
+163 is prime.
+167 is prime.
+173 is prime.
+179 is prime.
+181 is prime.
+Increasing heap...
+191 is prime.
+193 is prime.
+197 is prime.
+199 is prime.
+211 is prime.
+223 is prime.
+227 is prime.
+229 is prime.
+233 is prime.
+239 is prime.
+241 is prime.
+251 is prime.
+257 is prime.
+263 is prime.
+269 is prime.
+271 is prime.
+277 is prime.
+281 is prime.
+283 is prime.
+293 is prime.
+307 is prime.
+311 is prime.
+313 is prime.
+317 is prime.
+Increasing heap...
+331 is prime.
+337 is prime.
+347 is prime.
+349 is prime.
+353 is prime.
+359 is prime.
+367 is prime.
+373 is prime.
+379 is prime.
+383 is prime.
+389 is prime.
+397 is prime.
+401 is prime.
+409 is prime.
+419 is prime.
+421 is prime.
+431 is prime.
+433 is prime.
+439 is prime.
+443 is prime.
+Increasing heap...
+449 is prime.
+457 is prime.
+461 is prime.
+463 is prime.
+467 is prime.
+479 is prime.
+487 is prime.
+491 is prime.
+499 is prime.
+Abort called from class String

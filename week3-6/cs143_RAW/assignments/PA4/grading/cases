@@ -1,0 +1,76 @@
+maxscore = 74 
+
+anattributenamedself.test; 1; An attribute named self
+assignment.test; 1; Valid assignments
+assignnoconform.test; 1; Assignment with non conforming expression
+attrbadinit.test; 1; Init attribute with undefined expression
+attroverride.test; 1; Attempt to override parent's attribute
+badargs1.test; 1; Non-conforming parameter type in dispatch
+badarith.test; 1; Addition with non-int argument
+baddispatch.test; 1; Method only in child class, attempted dispatch from parent class
+badequalitytest.test; 1; Int compared to String
+badequalitytest2.test; 1; Int compared to Bool
+badmethodcallsitself.test; 1; Method called with itself as parameter (wrong type)
+badredefineint.test; 1; Redefinition of Int
+badstaticdispatch.test; 1; Bad static dispatch
+badwhilebody.test; 1; While body has error
+badwhilecond.test; 1; While test has error
+basic.test; 1; Simple program with a sequence of expressions
+basicclassestree.test; 1; Test of inheritance tree (Object as ansestor of everything)
+caseidenticalbranch.test; 1; Duplicate branch in a case expr
+cells.cl.test; 1; Complex program
+classes.test; 1; Various classes with inheritance and overriding (legal)
+compare.test; 1; Legal equality comparison
+comparisons.test; 1; Legal < and <= comparisons
+cycleinmethods.test; 1; Methods call each other in a cycle (legal)
+dispatch.test; 1; Simple dispatches
+dupformals.test; 1; Duplicate name in formal param list
+expressionblock.test; 1; Simple expression block (i.e. list)
+forwardinherits.test; 1; Forward declaration in inherits clause (legal)
+hairyscary.cl.test; 1; Messy legal Cool program
+if.test; 1; If statement
+inheritsObject.test; 1; Class explicitly inherits Object (legal)
+inheritsbool.test; 1; Class inherits Bool (illegal)
+inheritsselftype.test; 1; Class inherits SELF_TYPE (illegal)
+inheritsstring.test; 1; Class inherits String (illegal)
+initwithself.test; 1; Attribute initialized with self (legal)
+io.test; 1; IO methods
+isvoid.test; 1; isvoid expressions
+letinit.test; 1; Let with initialization (legal)
+letnoinit.test; 1; Let without initialization (legal)
+letself.test; 1; Let with self in binding (illegal)
+letselftype.test; 1; Let with SELF_TYPE variables (legal)
+letshadows.test; 1; Let with a variable shadowing one in an outer scope
+letbadinit.test; 1; Let initization with nonconforming type
+list.cl.test; 1; List program
+lubtest.test; 1; LUB test using if statements
+methodcallsitself.test; 1; Method calls itself legally
+methodnameclash.test; 1; Two children define a function differently (allowed)
+missingclass.test; 1; Inheritance from an undefined class
+neg.test; 1; Negation of integer values
+newselftype.test; 1; Using a new SELF_TYPE expression (legal)
+nomain.test; 1; Missing Main class
+objectdispatchabort.test; 1; Calling abort() method on an object
+outofscope.test; 1; Using a name that exists but is out of scope
+overridingmethod.test; 1; Overriding parent class's method
+overridingmethod2.test; 1; Another method override example
+overridingmethod3.test; 1; Method override example with SELF_TYPE
+overriderenamearg.test; 1; Overriding parent's method with new param names (legal)
+overridingmethod4.test; 1; Illegal method override - different param types
+signaturechange.test; 1; Method override with different number of params
+redefinedclass.test; 1; Redefinition of a class (illegal)
+redefinedobject.test; 1; Redefinition of basic class Object (illegal)
+returntypenoexist.test; 1; Undefined return type
+scopes.test; 1; Scope test (legal)
+self-assignment.test; 1; Assignment to self (illegal)
+selfinformalparameter.test; 1; Self as name of a formal parameter (illegal)
+selftypebadreturn.test; 1; Non-conforming return type when SELF_TYPE is declared return type
+selftypeparameterposition.test; 1; SELF_TYPE given as a parameter type (illegal)
+selftyperedeclared.test; 1; SELF_TYPE redeclared (used a class name)
+simplearith.test; 1; Some simple arithmetic exprs
+simplecase.test; 1; A simple case expr
+staticdispatch.test; 1; Simple static dispatch
+stringtest.test; 1; String methods
+subtypemethodreturn.test; 1; Returning a subtype of the declared return type (legal)
+trickyatdispatch.test; 1; Tricky (legal) static dispatch
+trickyatdispatch2.test; 1; Tricky (illegal) static dispatch

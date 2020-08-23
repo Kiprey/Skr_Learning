@@ -1,0 +1,4 @@
+#name "backslash.cool"
+#1 STR_CONST "012\\0\\1\\2\t\f\b\nra\bcde\fg"
+#3 STR_CONST "\"this is still inside the string"
+#6 STR_CONST "I'm about to excape a newline \n"

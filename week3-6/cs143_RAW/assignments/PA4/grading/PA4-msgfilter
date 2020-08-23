@@ -1,0 +1,6 @@
+#!/bin/sed -f
+s/^[\t ]*#[0-9][0-9]*//
+s/"[^"]*\.test"/filename/
+s/..*\.test:\([0-9][0-9]*\):.*/filename:line/
+s/parse error/syntax error/g
+s/^Compilation.*/Compilation halted due to static semantic errors./

@@ -1,0 +1,2 @@
+"attrcapitalname.test", line 3: syntax error at or near TYPEID = Foo
+Compilation halted due to lex and parse errors

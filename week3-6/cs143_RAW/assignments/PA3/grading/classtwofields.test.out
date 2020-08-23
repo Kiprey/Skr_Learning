@@ -1,0 +1,23 @@
+#4
+_program
+  #4
+  _class
+    Hello
+    Object
+    "classtwofields.test"
+    (
+    #2
+    _attr
+      foo
+      Int
+      #2
+      _no_expr
+      : _no_type
+    #3
+    _attr
+      bar
+      String
+      #3
+      _no_expr
+      : _no_type
+    )

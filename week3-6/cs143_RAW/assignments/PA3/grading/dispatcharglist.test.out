@@ -1,0 +1,54 @@
+#4
+_program
+  #4
+  _class
+    Test
+    Object
+    "dispatcharglist.test"
+    (
+    #2
+    _attr
+      foo
+      Test
+      #2
+      _no_expr
+      : _no_type
+    #3
+    _method
+      bar
+      #3
+      _formal
+        x
+        Int
+      #3
+      _formal
+        y
+        Int
+      #3
+      _formal
+        z
+        Int
+      Object
+      #3
+      _dispatch
+        #3
+        _object
+          foo
+        : _no_type
+        bar
+        (
+        #3
+        _object
+          x
+        : _no_type
+        #3
+        _object
+          y
+        : _no_type
+        #3
+        _object
+          z
+        : _no_type
+        )
+      : _no_type
+    )

@@ -1,0 +1,85 @@
+#!/bin/bash
+arch='i686'
+
+PRG=$0
+#progname=`/bin/basename $0`
+
+progname=`basename $0`
+
+# Resolve symlinks, so that the pathname computations below find the
+# directory structure they expect.
+while [ -h "$PRG" ]; do
+	# Get the target of the symlink.  N.B.:  We assume that neither the
+	# link's value nor the pathname leading to it contains "-> ".
+	ls=`/bin/ls -ld "$PRG"`
+	link=`/usr/bin/expr "$ls" : '.*-> \(.*\)$'`
+	# If the link is absolute, use it as is; otherwise, substitute it
+	# into the leafname part of $PRG.
+	case $link in 
+	    /*) PRG="$link";;
+	     *) PRG="`/usr/bin/dirname $PRG`/$link"
+	esac
+done
+
+#COOL_INST=`/usr/bin/dirname "$PRG"`/..
+COOL_INST=$(cd `dirname $0` && pwd)/..
+
+# set environment for spim/xspim
+DEFAULT_TRAP_HANDLER=$COOL_INST/lib/trap.handler
+export DEFAULT_TRAP_HANDLER
+
+
+
+# function to substitute an absolute path for a relative path
+function getabspath {
+    base=`basename "$1"`
+    dir=`dirname "$1"`
+
+    # use python if possible since i trust it more
+    if [ `type -P asdfpython` ]; then
+        abspath=`python -c 'import sys
+import os
+print os.path.abspath(sys.argv[1])' $1`
+    # make sure the directory exists
+    elif [ ! -d "$dir" ]; then
+        echo "ERROR"
+        exit 1
+    else
+        abspath=`cd "$dir"; pwd`/"$base"
+    fi
+    echo $abspath
+}
+
+# fix command line arguments to have relative paths rather than absolute paths
+# if $1 is not a flag we assume it is a file
+if [ ${1:0:1} != "-" ]; then
+    abspath=`getabspath "$1"`
+    if [ "$abspath" == "ERROR" ]; then
+        echo "$progname: $1: No such file or directory." >&2
+        exit 1
+    fi
+    set -- "$abspath" "${@:2}"
+fi
+for ((i=1; i<=$#; i++))  
+do
+    if [ "${!i}" == "-file" -o "${!i}" == "-execute" -o "${!i}" == "-trap_file" ]; then
+        next=$(($i+1))
+        nextnext=$(($i+2))
+        abspath=`getabspath "${!next}"`
+        if [ "$abspath" == "ERROR" ]; then
+            echo "$progname: ${!next}: No such file or directory." >&2
+            exit 1
+        fi
+        set -- "${@:1:$i}" "$abspath" "${@:$nextnext}"
+    fi
+done
+
+xname=$COOL_INST/bin/.$arch/spim
+
+cd $COOL_INST/bin
+
+if [ -x $xname ]; then
+  exec $xname "$@"
+else
+  echo spim is not compiled for $arch
+fi

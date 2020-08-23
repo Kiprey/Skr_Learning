@@ -1,0 +1,3 @@
+returntypenoexist.test:2: Undefined return type PinkElephant in method main.
+returntypenoexist.test:2: 'new' used with undefined class PinkElephant.
+Compilation halted due to static semantic errors.

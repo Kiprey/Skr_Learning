@@ -1,0 +1,53 @@
+#17
+_program
+  #9
+  _class
+    A
+    Object
+    "inheritsObject.test"
+    (
+    #3
+    _attr
+      foo
+      Int
+      #3
+      _no_expr
+      : _no_type
+    #7
+    _method
+      main
+      Int
+      #6
+      _int
+        6
+      : Int
+    )
+  #15
+  _class
+    B
+    Object
+    "inheritsObject.test"
+    (
+    #13
+    _attr
+      bar
+      Int
+      #13
+      _no_expr
+      : _no_type
+    )
+  #17
+  _class
+    Main
+    Object
+    "inheritsObject.test"
+    (
+    #17
+    _method
+      main
+      Int
+      #17
+      _int
+        6
+      : Int
+    )

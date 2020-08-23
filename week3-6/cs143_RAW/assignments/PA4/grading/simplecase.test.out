@@ -1,0 +1,69 @@
+#9
+_program
+  #1
+  _class
+    Main
+    Object
+    "simplecase.test"
+    (
+    #1
+    _method
+      main
+      Int
+      #1
+      _int
+        0
+      : Int
+    )
+  #9
+  _class
+    A
+    Object
+    "simplecase.test"
+    (
+    #4
+    _attr
+      moo
+      Object
+      #4
+      _no_expr
+      : _no_type
+    #8
+    _method
+      boo
+      Object
+      #8
+      _block
+        #8
+        _typcase
+          #5
+          _object
+            moo
+          : Object
+          #5
+          _branch
+            i
+            Int
+            #5
+            _object
+              i
+            : Int
+          #6
+          _branch
+            b
+            Bool
+            #6
+            _object
+              b
+            : Bool
+          #7
+          _branch
+            s
+            String
+            #7
+            _object
+              s
+            : String
+        : Object
+      : Object
+    )

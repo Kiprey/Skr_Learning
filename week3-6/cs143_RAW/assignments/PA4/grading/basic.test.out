@@ -1,0 +1,56 @@
+#4
+_program
+  #4
+  _class
+    Main
+    Object
+    "basic.test"
+    (
+    #3
+    _method
+      main
+      Object
+      #3
+      _block
+        #2
+        _dispatch
+          #2
+          _int
+            5
+          : Int
+          copy
+          (
+          )
+        : Int
+        #2
+        _dispatch
+          #2
+          _string
+            "test"
+          : String
+          copy
+          (
+          )
+        : String
+        #2
+        _dispatch
+          #2
+          _bool
+            1
+          : Bool
+          copy
+          (
+          )
+        : Bool
+        #3
+        _dispatch
+          #3
+          _string
+            "test"
+          : String
+          length
+          (
+          )
+        : Int
+      : Int
+    )

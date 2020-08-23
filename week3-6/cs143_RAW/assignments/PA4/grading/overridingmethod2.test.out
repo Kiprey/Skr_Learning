@@ -1,0 +1,86 @@
+#9
+_program
+  #1
+  _class
+    Main
+    Object
+    "overridingmethod2.test"
+    (
+    #1
+    _method
+      main
+      Int
+      #1
+      _int
+        0
+      : Int
+    )
+  #5
+  _class
+    A
+    Object
+    "overridingmethod2.test"
+    (
+    #4
+    _method
+      inky
+      #4
+      _formal
+        a
+        Int
+      #4
+      _formal
+        b
+        String
+      #4
+      _formal
+        c
+        A
+      #4
+      _formal
+        d
+        Bool
+      Int
+      #4
+      _object
+        a
+      : Int
+    )
+  #9
+  _class
+    B
+    A
+    "overridingmethod2.test"
+    (
+    #8
+    _method
+      inky
+      #8
+      _formal
+        a
+        Int
+      #8
+      _formal
+        b
+        String
+      #8
+      _formal
+        c
+        A
+      #8
+      _formal
+        d
+        Bool
+      Int
+      #8
+      _plus
+        #8
+        _object
+          a
+        : Int
+        #8
+        _int
+          1
+        : Int
+      : Int
+    )

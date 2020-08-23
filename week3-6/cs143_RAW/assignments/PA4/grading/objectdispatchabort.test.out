@@ -1,0 +1,38 @@
+#6
+_program
+  #5
+  _class
+    A
+    Object
+    "objectdispatchabort.test"
+    (
+    #3
+    _method
+      foo
+      Object
+      #3
+      _dispatch
+        #3
+        _new
+          Object
+        : Object
+        abort
+        (
+        )
+      : Object
+    )
+  #6
+  _class
+    Main
+    Object
+    "objectdispatchabort.test"
+    (
+    #6
+    _method
+      main
+      Int
+      #6
+      _int
+        6
+      : Int
+    )

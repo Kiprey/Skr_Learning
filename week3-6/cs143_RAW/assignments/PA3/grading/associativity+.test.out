@@ -1,0 +1,61 @@
+#8
+_program
+  #8
+  _class
+    Hello
+    Object
+    "associativity+.test"
+    (
+    #2
+    _attr
+      foo
+      Int
+      #2
+      _no_expr
+      : _no_type
+    #6
+    _method
+      moo2
+      #4
+      _formal
+        a
+        String
+      #4
+      _formal
+        b
+        Int
+      #4
+      _formal
+        c
+        Int
+      #4
+      _formal
+        d
+        Int
+      Hello
+      #6
+      _plus
+        #5
+        _plus
+          #5
+          _plus
+            #5
+            _object
+              a
+            : _no_type
+            #5
+            _object
+              b
+            : _no_type
+          : _no_type
+          #5
+          _object
+            c
+          : _no_type
+        : _no_type
+        #6
+        _object
+          d
+        : _no_type
+      : _no_type
+    )

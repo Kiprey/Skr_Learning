@@ -1,0 +1,74 @@
+#6
+_program
+  #1
+  _class
+    A
+    Object
+    "methodnameclash.test"
+    (
+    #1
+    _attr
+      x
+      Int
+      #1
+      _no_expr
+      : _no_type
+    #1
+    _attr
+      y
+      String
+      #1
+      _no_expr
+      : _no_type
+    )
+  #3
+  _class
+    L
+    A
+    "methodnameclash.test"
+    (
+    #3
+    _method
+      foo
+      Int
+      #3
+      _object
+        x
+      : Int
+    )
+  #4
+  _class
+    R
+    A
+    "methodnameclash.test"
+    (
+    #4
+    _method
+      foo
+      String
+      #4
+      _object
+        y
+      : String
+    )
+  #6
+  _class
+    Main
+    Object
+    "methodnameclash.test"
+    (
+    #6
+    _method
+      main
+      Int
+      #6
+      _dispatch
+        #6
+        _new
+          L
+        : L
+        foo
+        (
+        )
+      : Int
+    )

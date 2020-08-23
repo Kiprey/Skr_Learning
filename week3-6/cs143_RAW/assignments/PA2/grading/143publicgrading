@@ -1,0 +1,35 @@
+#!/bin/bash
+
+ADMIN_DIR=.
+COMMENTS_FILE="RESULTS"
+SCORE_FILE="SCORE"
+MAX_SCORE=63
+
+if [ $# != 1 ]; then
+    echo "Usage: $0 assignment_name"
+    exit 1
+fi
+
+# don't cd - script is run from grading directory
+
+rm -f $COMMENTS_FILE $SCORE_FILE
+
+$ADMIN_DIR/143gradesingle $1 ..
+if [ $? != 0 ]; then
+    echo "The tests could not be run. Make sure your code compiles before trying to compute your grade."
+    exit 1
+fi
+
+GRADE=`cat $SCORE_FILE | tr -d '\n'`
+
+# Please note that we are well aware that it is easy to fake a submission code.
+# We are not interested in trying to make the grading process difficult to
+# break; rather, we hope that you are doing these assignments to learn and not
+# to get the certificate at the end of the course.  We only have the hash to
+# prevent students who are generally honest from being tempted to just type in
+# a higher grade on Coursera.
+HASH=`echo -n $GRADE | md5sum | sed 's/ .*//'`
+
+echo -e "You got a score of $GRADE out of $MAX_SCORE.\n"
+echo -e "Submit code: \n$GRADE:$HASH\n"
+

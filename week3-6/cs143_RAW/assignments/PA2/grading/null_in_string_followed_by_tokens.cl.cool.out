@@ -1,0 +1,4 @@
+#name "null_in_string_followed_by_tokens.cl.cool"
+#2 ERROR "String contains null character."
+#2 OBJECTID a
+#2 '+'

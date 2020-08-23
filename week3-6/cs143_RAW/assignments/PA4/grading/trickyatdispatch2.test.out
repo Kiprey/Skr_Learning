@@ -1,0 +1,3 @@
+trickyatdispatch2.test:10: Expression type A does not conform to declared static dispatch type B.
+trickyatdispatch2.test:10: Inferred return type Object of method binky does not conform to declared return type Int.
+Compilation halted due to static semantic errors.

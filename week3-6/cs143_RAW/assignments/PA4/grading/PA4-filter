@@ -1,0 +1,6 @@
+#!/bin/sh
+
+MY_PATH="`dirname \"$0\"`"
+
+$MY_PATH/PA4-firstfilter | $MY_PATH/PA4-msgfilter
+

@@ -1,0 +1,85 @@
+# cases file format:
+#
+# filename; points; comment; I/N; filtername;
+#
+# the trailing semicolon is optional.  no newlines are allowed in the comment.
+# test may be commented out using a '#' (sh/perl style comments).
+#
+# I tests are Interactive, while N tests are Not.
+# I/N and filtername may be omitted, and if they are, the test is 
+# non-interactive and uses the filter PA#-filter
+# 
+# at some point in the file, a line of the format:
+#
+# maxscore = #
+#
+# must exist in the file.  this line specifies the maximum possible score 
+# on the assignment.
+#
+
+maxscore = 63
+
+all_else_true.cl.cool; 1; lowercase and uppercase combinations
+arith.cool; 1;  arith example
+atoi.cool; 1; atoi example
+backslash.cool; 1; various backslashes in strings
+backslash2.cool; 1; more backslashes in strings
+badidentifiers.cool; 1; bad identifiers
+badkeywords.cool; 1; bad keywords
+book_list.cl.cool; 1; sample program
+bothcomments.cool; 1; mixing the two types of comments
+comment_in_string.cl.cool; 1; comment in string
+endcomment.cool; 1; the end comment token by itself
+eofstring.cool; 1;  eof in a string
+escaped_chars_in_comment.cl.cool; 1; escaped chars in comment
+escapedeof.cool; 1; escaped eof in a string
+escapednull.cool; 1; escaped null char in a string
+escapedquote.cool; 1; escaped quote
+escapedunprintables.cool; 1; escaped nonprinting chars
+hairyscary.cool; 1; hairyscary example
+integers2.cool; 1; less typical integers
+invalidcharacters.cool; 1; characters not in the cool language
+invalidinvisible.cool; 1; unprintable characters not allowed in cool
+io.cool; 1; io example
+keywords.cool; 1; all of the keywords
+life.cool; 1; the life program
+lineno2.cool; 1; line number test 2; N; PA2-simplefilter
+lineno3.cool; 1; line number test 3; N; PA2-simplefilter
+longcomment.cool; 1; a long comment test
+longstring_escapedbackslashes.cool; 1; long strings with escaped characters
+multilinecomment.cool; 1; simple test of a multiline comment
+nestedcomment.cool; 1; nested comment
+new_complex.cool; 1; a short program
+null_in_code.cl.cool; 1; null char in code
+null_in_string.cl.cool; 1; null char in string
+null_in_string_followed_by_tokens.cl.cool; 1; null char in string, then tokens
+null_in_string_unescaped_newline.cl.cool; 1; null and unescaped newline in string
+objectid.test.cool; 1; objectids
+opencomment.cool; 1; no matching closing comment
+operators.cool; 1; some operators
+palindrome.cool; 1; palindrome example
+pathologicalstrings.cool; 1; some pathological strings
+s03.test.cool; 1; EOF in single-line comment
+s04.test.cool; 1; different types of whitespaces
+s05.test.cool; 1; whitespaces in string
+s14.test.cool; 1; comment **)
+s16.test.cool; 1; big integers
+s19.test.cool; 1; unescaped newline
+s25.test.cool; 1; object and type id
+s26.test.cool; 1; number and object id
+s31.test.cool; 1; leading underscore
+s32.test.cool; 1; end of comment without start
+s33.test.cool; 1; unterminated comment
+s34.test.cool; 1; unterminated string
+simplestrings.cool; 1; simple strings 
+sort_list.cl.cool; 1; sample program
+stringcomment.cool; 1; strings and comments
+stringwithescapes.cool; 1; a long string with escaped characters
+twice_512_nested_comments.cl.cool; 1; many nested comments
+validcharacters.cool; 1; a bunch of characters in the cool language 
+weirdcharcomment.cool; 1; various binary characters in a comment
+wq0607-c1.cool; 1; sequences of one line comments and strings
+wq0607-c2.cool; 1; sequences of block comments and strings
+wq0607-c3.cool; 1; sequence of quotes and backslashes
+wq0607-c4.cool; 1; sequence of quotes, backslashes, and double-dash comment symbols
+

@@ -1,0 +1,3 @@
+"badfeaturenames.test", line 2: syntax error at or near TYPEID = F
+"badfeaturenames.test", line 8: syntax error at or near TYPEID = Y
+Compilation halted due to lex and parse errors

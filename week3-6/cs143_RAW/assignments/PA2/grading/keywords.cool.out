@@ -1,0 +1,20 @@
+#name "keywords.cool"
+#1 CASE
+#2 CLASS
+#3 ELSE
+#4 ESAC
+#5 BOOL_CONST false
+#6 BOOL_CONST true
+#7 FI
+#8 IF
+#9 IN
+#10 INHERITS
+#11 ISVOID
+#12 LET
+#13 LOOP
+#14 NEW
+#15 NOT
+#16 OF
+#17 POOL
+#18 THEN
+#19 WHILE

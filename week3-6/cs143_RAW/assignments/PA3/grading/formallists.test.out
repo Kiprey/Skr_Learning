@@ -1,0 +1,79 @@
+#14
+_program
+  #14
+  _class
+    A
+    Object
+    "formallists.test"
+    (
+    #4
+    _method
+      f
+      Int
+      #3
+      _int
+        5
+      : _no_type
+    #7
+    _method
+      g
+      #5
+      _formal
+        x
+        Bool
+      IO
+      #7
+      _object
+        self
+      : _no_type
+    #10
+    _method
+      h
+      #8
+      _formal
+        y
+        SELF_TYPE
+      #8
+      _formal
+        z
+        Int
+      SELF_TYPE
+      #10
+      _object
+        x
+      : _no_type
+    #13
+    _method
+      f
+      #11
+      _formal
+        a
+        Int
+      #11
+      _formal
+        b
+        Bool
+      #11
+      _formal
+        c
+        Object
+      Object
+      #13
+      _plus
+        #12
+        _plus
+          #12
+          _object
+            a
+          : _no_type
+          #12
+          _object
+            b
+          : _no_type
+        : _no_type
+        #13
+        _object
+          c
+        : _no_type
+      : _no_type
+    )

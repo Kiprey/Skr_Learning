@@ -1,0 +1,52 @@
+#10
+_program
+  #10
+  _class
+    A
+    Object
+    "multipleattributes.test"
+    (
+    #2
+    _attr
+      x
+      Int
+      #2
+      _no_expr
+      : _no_type
+    #3
+    _attr
+      y
+      Bool
+      #3
+      _no_expr
+      : _no_type
+    #4
+    _attr
+      z
+      Object
+      #4
+      _no_expr
+      : _no_type
+    #7
+    _method
+      f
+      Bool
+      #6
+      _bool
+        1
+      : _no_type
+    #8
+    _attr
+      a
+      String
+      #8
+      _no_expr
+      : _no_type
+    #9
+    _attr
+      a
+      IO
+      #9
+      _no_expr
+      : _no_type
+    )

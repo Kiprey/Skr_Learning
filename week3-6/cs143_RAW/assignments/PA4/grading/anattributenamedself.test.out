@@ -1,0 +1,2 @@
+anattributenamedself.test:4: 'self' cannot be the name of an attribute.
+Compilation halted due to static semantic errors.

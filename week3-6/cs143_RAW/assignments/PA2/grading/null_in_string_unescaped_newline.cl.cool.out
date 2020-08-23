@@ -1,0 +1,4 @@
+#name "null_in_string_unescaped_newline.cl.cool"
+#2 ERROR "String contains null character."
+#3 OBJECTID a
+#3 '+'

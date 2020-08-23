@@ -1,0 +1,40 @@
+#3
+_program
+  #3
+  _class
+    Foo
+    Object
+    "addedlet.test"
+    (
+    #2
+    _method
+      bar
+      Int
+      #2
+      _let
+        a
+        Int
+        #2
+        _no_expr
+        : _no_type
+        #2
+        _plus
+          #2
+          _object
+            a
+          : _no_type
+          #2
+          _let
+            b
+            String
+            #2
+            _no_expr
+            : _no_type
+            #2
+            _object
+              b
+            : _no_type
+          : _no_type
+        : _no_type
+      : _no_type
+    )

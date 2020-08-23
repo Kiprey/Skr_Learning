@@ -1,0 +1,2 @@
+overridingmethod4.test:12: In redefined method inky, parameter type C is different from original type B
+Compilation halted due to static semantic errors.

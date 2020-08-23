@@ -1,0 +1,2 @@
+selfinformalparameter.test:5: 'self' cannot be the name of a formal parameter.
+Compilation halted due to static semantic errors.

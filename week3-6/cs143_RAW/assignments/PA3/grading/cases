@@ -1,0 +1,72 @@
+maxscore = 70
+
+addedlet.test; 1; some addition with multiple lets
+arithprecedence.test; 1; arithmetic expressions to test precedence
+assigngetstype.test; 1; assigning a type to a variable
+assignment.test; 1; assignment expression
+associativity+.test; 1; testing associativity of +
+associativity-.test; 1; testing associativity of -
+associativity-times.test; 1; testing associativity of *
+associativitydiv.test; 1; testing associativity of /
+atoi.test; 1; the atoi program
+attrcapitalname.test; 1; an attribute with a capital name
+badblock.test; 1; a block with multiple errors
+baddispatch1.test; 1; bad dispatch syntax
+baddispatch2.test; 1; bad dispatch syntax
+baddispatch3.test; 1; bad dispatch syntax
+baddispatch4.test; 1; bad dispatch syntax
+badexprlist.test; 1; bad expr lists 
+badfeaturenames.test; 1; method and attribute names capitalized
+badfeatures.test; 1; multiple errors in features in a class
+casemultiplebranch.test; 1; a case with multiple branches
+casenoexpr.test; 1; case with no expr
+classbadinherits.test; 1; inherit from non-type
+classbadname.test; 1; class with incorrect name format (object not type)
+classmethodonearg.test; 1; simple class method
+classnoname.test; 1; class without a name
+classonefield.test; 1; simple class with one field
+classtwofields.test; 1; simple class with two fields
+comparisons-assoc.test; 1; testing associativity of comparisons
+assignseq.test; 1; sequential assignments
+complex.test; 1; a short program
+dispatcharglist.test; 1; dispatch with several arguments
+dispatchnoargs.test; 1; dispatch with no arguments
+dispatchonearg.test; 1; dispatch with one argument
+emptyassign.test; 1; an assignment with an empty right-hand side
+emptymethodbody.test; 1; an empty method body
+emptyprogram.test; 1; an empty program
+emptystaticdispatch.test; 1; a static dispatch with no type name
+equalsassociativity.test; 1; testing associativity of equals
+extrasemicolonblock.test; 1; a block that starts with a semicolon
+firstbindingerrored.test; 1; error recovery after a binding error
+firstclasserrored.test; 1; error recovery after a bad class declaration
+formallists.test; 1; methods with different numbers of formal parameters
+ifexpressionblock.test; 1; if expression with a block
+ifnested.test; 1; nested ifs
+ifnoelse.test; 1; if expression without else
+ifnoelsebranch.test; 1; if expression with no else expression
+ifnofi.test; 1; if expression with no fi
+ifnothenbranch.test; 1; if expression with no then branch
+isvoidbadtype.test; 1; isvoid called on a type
+letassociativity.test; 1; testing let associativity
+letinit.test; 1; let expression with an initialization
+letinitmultiplebindings.test; 1; let expression with multiple bindings
+letnoinit.test; 1; let expression with no initiatlization
+letparens.test; 1; some lets with various parens
+lteassociativity.test; 1; testing associativity of <=
+multipleatdispatches.test; 1; at dispatches with differing numbers of arguments
+multipleattributes.test; 1; a class with multiple attributes
+multipleclasses.test; 1; multiple classes in a file
+multipledispatches.test; 1; dispatches with differing numbers of arguments
+multiplemethoderrors.test; 1; a class with multiple methods and errors 
+nestedblocks.test; 1; nested expression blocks
+nestedlet.test; 1; nested let expressions with different numbers of bindings
+newbadtype.test; 1; new called on a bad type
+returntypebad.test; 1; return type with a lower-case name
+secondbindingerrored.test; 1; second binding of a let has an error
+staticdispatchnoargs.test; 1; static dispatch with no args
+unaryassociativity.test; 1; tests associativity of unary operators
+while.test; 1; valid and invalid while loops
+whileexpressionblock.test; 1; a while with an expression block
+whilenoloop.test; 1; a while without a loop
+whileoneexpression.test; 1; simple while with one expression

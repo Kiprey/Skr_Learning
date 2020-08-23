@@ -1,0 +1,36 @@
+#!/bin/sh
+arch='i686'
+
+PRG=$0
+#progname=`/bin/basename $0`
+progname=`basename $0`
+
+# Resolve symlinks, so that the pathname computations below find the
+# directory structure they expect.
+while [ -h "$PRG" ]; do
+	# Get the target of the symlink.  N.B.:  We assume that neither the
+	# link's value nor the pathname leading to it contains "-> ".
+	ls=`/bin/ls -ld "$PRG"`
+	link=`/usr/bin/expr "$ls" : '.*-> \(.*\)$'`
+	# If the link is absolute, use it as is; otherwise, substitute it
+	# into the leafname part of $PRG.
+	case $link in 
+	    /*) PRG="$link";;
+	     *) PRG="`/usr/bin/dirname $PRG`/$link"
+	esac
+done
+
+COOL_INST=`/usr/bin/dirname "$PRG"`/..
+
+# set environment for spim/xspim
+DEFAULT_TRAP_HANDLER=$COOL_INST/lib/trap.handler
+export DEFAULT_TRAP_HANDLER
+
+
+xname=$COOL_INST/bin/.$arch/cgen
+
+if [ -x $xname ]; then
+  exec $xname $*
+else
+  echo coolc is not compiled for $arch
+fi

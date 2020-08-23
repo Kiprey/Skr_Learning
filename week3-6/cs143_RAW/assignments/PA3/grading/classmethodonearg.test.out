@@ -1,0 +1,21 @@
+#7
+_program
+  #7
+  _class
+    Hello
+    Object
+    "classmethodonearg.test"
+    (
+    #5
+    _method
+      cow
+      #3
+      _formal
+        a
+        Int
+      SELF_TYPE
+      #5
+      _object
+        self
+      : _no_type
+    )

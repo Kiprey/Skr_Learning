@@ -1,0 +1,47 @@
+    .pos 0
+    irmovq stack, %rsp  # 设置栈指针
+    call main           # 执行main函数
+    halt                # 程序停止
+
+    .align 8            # 八字节对齐
+src:
+    .quad 0x1122333
+    .quad 0x4455666
+    .quad 0x7788999
+    .quad 0xaabbccc
+    .quad 0xddeefff
+dest:
+    .quad 0x123
+    .quad 0x456
+    .quad 0x789
+    .quad 0xabc
+    .quad 0xdef
+
+main:
+    irmovq src, %rdi    # arg1
+    irmovq dest, %rsi   # arg2
+    irmovq $5, %rdx     # arg3
+    call copy_block     # call
+    pushq %rax          # 将返回值存储至栈上
+    ret
+
+copy_block:             # src: %rdi   dest: %rsi   len: %rdx
+    irmovq $0, %rax     # result = 0
+    irmovq $8, %r8
+    irmovq $1, %r9
+    jmp condition
+loop:
+    mrmovq (%rdi), %rbx   # val: %rbx     long val = *src
+    addq %r8, %rdi        # src++
+    rmmovq %rbx, (%rsi)   # *dest = val
+    addq %r8, %rsi        # dest++
+    xorq %rbx, %rax       # result ^= val
+    subq %r9, %rdx        # len--
+condition:
+    andq %rdx, %rdx     # 设置标志位，判断len是否大于0
+    jg loop
+    ret
+
+# 设置初始栈的地址
+    .pos 0x200
+stack:

@@ -1,0 +1,383 @@
+#138
+_program
+  #53
+  _class
+    List
+    Object
+    "list.cl.test"
+    (
+    #29
+    _method
+      isNil
+      Bool
+      #29
+      _bool
+        1
+      : Bool
+    #35
+    _method
+      head
+      Int
+      #35
+      _block
+        #35
+        _dispatch
+          #35
+          _object
+            self
+          : SELF_TYPE
+          abort
+          (
+          )
+        : Object
+        #35
+        _int
+          0
+        : Int
+      : Int
+    #40
+    _method
+      tail
+      List
+      #40
+      _block
+        #40
+        _dispatch
+          #40
+          _object
+            self
+          : SELF_TYPE
+          abort
+          (
+          )
+        : Object
+        #40
+        _object
+          self
+        : SELF_TYPE
+      : SELF_TYPE
+    #51
+    _method
+      cons
+      #49
+      _formal
+        i
+        Int
+      List
+      #50
+      _dispatch
+        #50
+        _new
+          Cons
+        : Cons
+        init
+        (
+        #50
+        _object
+          i
+        : Int
+        #50
+        _object
+          self
+        : SELF_TYPE
+        )
+      : List
+    )
+  #90
+  _class
+    Cons
+    List
+    "list.cl.test"
+    (
+    #72
+    _attr
+      car
+      Int
+      #72
+      _no_expr
+      : _no_type
+    #74
+    _attr
+      cdr
+      List
+      #74
+      _no_expr
+      : _no_type
+    #76
+    _method
+      isNil
+      Bool
+      #76
+      _bool
+        0
+      : Bool
+    #78
+    _method
+      head
+      Int
+      #78
+      _object
+        car
+      : Int
+    #80
+    _method
+      tail
+      List
+      #80
+      _object
+        cdr
+      : List
+    #88
+    _method
+      init
+      #82
+      _formal
+        i
+        Int
+      #82
+      _formal
+        rest
+        List
+      List
+      #87
+      _block
+        #84
+        _assign
+          car
+          #84
+          _object
+            i
+          : Int
+        : Int
+        #85
+        _assign
+          cdr
+          #85
+          _object
+            rest
+          : List
+        : List
+        #86
+        _object
+          self
+        : SELF_TYPE
+      : SELF_TYPE
+    )
+  #138
+  _class
+    Main
+    IO
+    "list.cl.test"
+    (
+    #102
+    _attr
+      mylist
+      List
+      #102
+      _no_expr
+      : _no_type
+    #115
+    _method
+      print_list
+      #107
+      _formal
+        l
+        List
+      Object
+      #114
+      _cond
+        #108
+        _dispatch
+          #108
+          _object
+            l
+          : List
+          isNil
+          (
+          )
+        : Bool
+        #108
+        _dispatch
+          #108
+          _object
+            self
+          : SELF_TYPE
+          out_string
+          (
+          #108
+          _string
+            "\n"
+          : String
+          )
+        : SELF_TYPE
+        #113
+        _block
+          #110
+          _dispatch
+            #110
+            _object
+              self
+            : SELF_TYPE
+            out_int
+            (
+            #110
+            _dispatch
+              #110
+              _object
+                l
+              : List
+              head
+              (
+              )
+            : Int
+            )
+          : SELF_TYPE
+          #111
+          _dispatch
+            #111
+            _object
+              self
+            : SELF_TYPE
+            out_string
+            (
+            #111
+            _string
+              " "
+            : String
+            )
+          : SELF_TYPE
+          #112
+          _dispatch
+            #112
+            _object
+              self
+            : SELF_TYPE
+            print_list
+            (
+            #112
+            _dispatch
+              #112
+              _object
+                l
+              : List
+              tail
+              (
+              )
+            : List
+            )
+          : Object
+        : Object
+      : Object
+    #136
+    _method
+      main
+      Object
+      #135
+      _block
+        #128
+        _assign
+          mylist
+          #128
+          _dispatch
+            #128
+            _dispatch
+              #128
+              _dispatch
+                #128
+                _dispatch
+                  #128
+                  _dispatch
+                    #128
+                    _new
+                      List
+                    : List
+                    cons
+                    (
+                    #128
+                    _int
+                      1
+                    : Int
+                    )
+                  : List
+                  cons
+                  (
+                  #128
+                  _int
+                    2
+                  : Int
+                  )
+                : List
+                cons
+                (
+                #128
+                _int
+                  3
+                : Int
+                )
+              : List
+              cons
+              (
+              #128
+              _int
+                4
+              : Int
+              )
+            : List
+            cons
+            (
+            #128
+            _int
+              5
+            : Int
+            )
+          : List
+        : List
+        #134
+        _loop
+          #129
+          _comp
+            #129
+            _dispatch
+              #129
+              _object
+                mylist
+              : List
+              isNil
+              (
+              )
+            : Bool
+          : Bool
+          #133
+          _block
+            #131
+            _dispatch
+              #131
+              _object
+                self
+              : SELF_TYPE
+              print_list
+              (
+              #131
+              _object
+                mylist
+              : List
+              )
+            : Object
+            #132
+            _assign
+              mylist
+              #132
+              _dispatch
+                #132
+                _object
+                  mylist
+                : List
+                tail
+                (
+                )
+              : List
+            : List
+          : List
+        : Object
+      : Object
+    )

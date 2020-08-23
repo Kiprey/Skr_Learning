@@ -1,0 +1,3 @@
+"casenoexpr.test", line 9: syntax error at or near DARROW
+"casenoexpr.test", line 10: syntax error at or near ESAC
+Compilation halted due to lex and parse errors

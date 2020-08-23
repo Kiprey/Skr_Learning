@@ -1,0 +1,2 @@
+"classbadname.test", line 1: syntax error at or near OBJECTID = test
+Compilation halted due to lex and parse errors

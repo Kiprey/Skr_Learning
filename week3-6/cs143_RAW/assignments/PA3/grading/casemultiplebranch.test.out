@@ -1,0 +1,57 @@
+#6
+_program
+  #6
+  _class
+    Test
+    Object
+    "casemultiplebranch.test"
+    (
+    #2
+    _attr
+      foo
+      Test
+      #2
+      _no_expr
+      : _no_type
+    #5
+    _method
+      bar
+      Int
+      #5
+      _typcase
+        #3
+        _dispatch
+          #3
+          _object
+            foo
+          : _no_type
+          bar
+          (
+          )
+        : _no_type
+        #3
+        _branch
+          y
+          Int
+          #3
+          _int
+            3
+          : _no_type
+        #4
+        _branch
+          z
+          String
+          #4
+          _int
+            4
+          : _no_type
+        #5
+        _branch
+          x
+          Test
+          #5
+          _int
+            5
+          : _no_type
+      : _no_type
+    )

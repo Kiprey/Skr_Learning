@@ -1,0 +1,86 @@
+#9
+_program
+  #9
+  _class
+    A
+    Object
+    "nestedlet.test"
+    (
+    #8
+    _method
+      f
+      #2
+      _formal
+        x
+        Int
+      Object
+      #8
+      _let
+        x
+        Int
+        #3
+        _int
+          3
+        : _no_type
+        #8
+        _let
+          y
+          Bool
+          #4
+          _no_expr
+          : _no_type
+          #8
+          _let
+            z
+            Object
+            #4
+            _no_expr
+            : _no_type
+            #8
+            _let
+              a
+              Object
+              #5
+              _no_expr
+              : _no_type
+              #8
+              _let
+                b
+                Object
+                #5
+                _no_expr
+                : _no_type
+                #8
+                _let
+                  c
+                  Object
+                  #5
+                  _no_expr
+                  : _no_type
+                  #8
+                  _let
+                    d
+                    Int
+                    #6
+                    _int
+                      6
+                    : _no_type
+                    #8
+                    _plus
+                      #7
+                      _object
+                        d
+                      : _no_type
+                      #7
+                      _int
+                        5
+                      : _no_type
+                    : _no_type
+                  : _no_type
+                : _no_type
+              : _no_type
+            : _no_type
+          : _no_type
+        : _no_type
+      : _no_type
+    )

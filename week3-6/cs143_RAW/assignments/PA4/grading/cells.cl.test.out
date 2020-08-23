@@ -1,0 +1,606 @@
+#97
+_program
+  #76
+  _class
+    CellularAutomaton
+    IO
+    "cells.cl.test"
+    (
+    #6
+    _attr
+      population_map
+      String
+      #6
+      _no_expr
+      : _no_type
+    #13
+    _method
+      init
+      #8
+      _formal
+        map
+        String
+      SELF_TYPE
+      #12
+      _block
+        #10
+        _assign
+          population_map
+          #10
+          _object
+            map
+          : String
+        : String
+        #11
+        _object
+          self
+        : SELF_TYPE
+      : SELF_TYPE
+    #20
+    _method
+      print
+      SELF_TYPE
+      #19
+      _block
+        #17
+        _dispatch
+          #17
+          _object
+            self
+          : SELF_TYPE
+          out_string
+          (
+          #17
+          _dispatch
+            #17
+            _object
+              population_map
+            : String
+            concat
+            (
+            #17
+            _string
+              "\n"
+            : String
+            )
+          : String
+          )
+        : SELF_TYPE
+        #18
+        _object
+          self
+        : SELF_TYPE
+      : SELF_TYPE
+    #24
+    _method
+      num_cells
+      Int
+      #23
+      _dispatch
+        #23
+        _object
+          population_map
+        : String
+        length
+        (
+        )
+      : Int
+    #28
+    _method
+      cell
+      #26
+      _formal
+        position
+        Int
+      String
+      #27
+      _dispatch
+        #27
+        _object
+          population_map
+        : String
+        substr
+        (
+        #27
+        _object
+          position
+        : Int
+        #27
+        _int
+          1
+        : Int
+        )
+      : String
+    #36
+    _method
+      cell_left_neighbor
+      #30
+      _formal
+        position
+        Int
+      String
+      #35
+      _cond
+        #31
+        _eq
+          #31
+          _object
+            position
+          : Int
+          #31
+          _int
+            0
+          : Int
+        : Bool
+        #32
+        _dispatch
+          #32
+          _object
+            self
+          : SELF_TYPE
+          cell
+          (
+          #32
+          _sub
+            #32
+            _dispatch
+              #32
+              _object
+                self
+              : SELF_TYPE
+              num_cells
+              (
+              )
+            : Int
+            #32
+            _int
+              1
+            : Int
+          : Int
+          )
+        : String
+        #34
+        _dispatch
+          #34
+          _object
+            self
+          : SELF_TYPE
+          cell
+          (
+          #34
+          _sub
+            #34
+            _object
+              position
+            : Int
+            #34
+            _int
+              1
+            : Int
+          : Int
+          )
+        : String
+      : String
+    #44
+    _method
+      cell_right_neighbor
+      #38
+      _formal
+        position
+        Int
+      String
+      #43
+      _cond
+        #39
+        _eq
+          #39
+          _object
+            position
+          : Int
+          #39
+          _sub
+            #39
+            _dispatch
+              #39
+              _object
+                self
+              : SELF_TYPE
+              num_cells
+              (
+              )
+            : Int
+            #39
+            _int
+              1
+            : Int
+          : Int
+        : Bool
+        #40
+        _dispatch
+          #40
+          _object
+            self
+          : SELF_TYPE
+          cell
+          (
+          #40
+          _int
+            0
+          : Int
+          )
+        : String
+        #42
+        _dispatch
+          #42
+          _object
+            self
+          : SELF_TYPE
+          cell
+          (
+          #42
+          _plus
+            #42
+            _object
+              position
+            : Int
+            #42
+            _int
+              1
+            : Int
+          : Int
+          )
+        : String
+      : String
+    #58
+    _method
+      cell_at_next_evolution
+      #48
+      _formal
+        position
+        Int
+      String
+      #57
+      _cond
+        #52
+        _eq
+          #52
+          _plus
+            #51
+            _plus
+              #49
+              _cond
+                #49
+                _eq
+                  #49
+                  _dispatch
+                    #49
+                    _object
+                      self
+                    : SELF_TYPE
+                    cell
+                    (
+                    #49
+                    _object
+                      position
+                    : Int
+                    )
+                  : String
+                  #49
+                  _string
+                    "X"
+                  : String
+                : Bool
+                #49
+                _int
+                  1
+                : Int
+                #49
+                _int
+                  0
+                : Int
+              : Int
+              #50
+              _cond
+                #50
+                _eq
+                  #50
+                  _dispatch
+                    #50
+                    _object
+                      self
+                    : SELF_TYPE
+                    cell_left_neighbor
+                    (
+                    #50
+                    _object
+                      position
+                    : Int
+                    )
+                  : String
+                  #50
+                  _string
+                    "X"
+                  : String
+                : Bool
+                #50
+                _int
+                  1
+                : Int
+                #50
+                _int
+                  0
+                : Int
+              : Int
+            : Int
+            #51
+            _cond
+              #51
+              _eq
+                #51
+                _dispatch
+                  #51
+                  _object
+                    self
+                  : SELF_TYPE
+                  cell_right_neighbor
+                  (
+                  #51
+                  _object
+                    position
+                  : Int
+                  )
+                : String
+                #51
+                _string
+                  "X"
+                : String
+              : Bool
+              #51
+              _int
+                1
+              : Int
+              #51
+              _int
+                0
+              : Int
+            : Int
+          : Int
+          #52
+          _int
+            1
+          : Int
+        : Bool
+        #54
+        _string
+          "X"
+        : String
+        #56
+        _string
+          "."
+        : String
+      : String
+    #75
+    _method
+      evolve
+      SELF_TYPE
+      #74
+      _let
+        position
+        Int
+        #61
+        _no_expr
+        : _no_type
+        #74
+        _let
+          num
+          Int
+          #62
+          _dispatch
+            #62
+            _object
+              self
+            : SELF_TYPE
+            num_cells
+            (
+            )
+          : Int
+          #74
+          _let
+            temp
+            String
+            #63
+            _no_expr
+            : _no_type
+            #73
+            _block
+              #70
+              _loop
+                #65
+                _lt
+                  #65
+                  _object
+                    position
+                  : Int
+                  #65
+                  _object
+                    num
+                  : Int
+                : Bool
+                #69
+                _block
+                  #67
+                  _assign
+                    temp
+                    #67
+                    _dispatch
+                      #67
+                      _object
+                        temp
+                      : String
+                      concat
+                      (
+                      #67
+                      _dispatch
+                        #67
+                        _object
+                          self
+                        : SELF_TYPE
+                        cell_at_next_evolution
+                        (
+                        #67
+                        _object
+                          position
+                        : Int
+                        )
+                      : String
+                      )
+                    : String
+                  : String
+                  #68
+                  _assign
+                    position
+                    #68
+                    _plus
+                      #68
+                      _object
+                        position
+                      : Int
+                      #68
+                      _int
+                        1
+                      : Int
+                    : Int
+                  : Int
+                : Int
+              : Object
+              #71
+              _assign
+                population_map
+                #71
+                _object
+                  temp
+                : String
+              : String
+              #72
+              _object
+                self
+              : SELF_TYPE
+            : SELF_TYPE
+          : SELF_TYPE
+        : SELF_TYPE
+      : SELF_TYPE
+    )
+  #97
+  _class
+    Main
+    Object
+    "cells.cl.test"
+    (
+    #79
+    _attr
+      cells
+      CellularAutomaton
+      #79
+      _no_expr
+      : _no_type
+    #96
+    _method
+      main
+      SELF_TYPE
+      #95
+      _block
+        #83
+        _assign
+          cells
+          #83
+          _dispatch
+            #83
+            _new
+              CellularAutomaton
+            : CellularAutomaton
+            init
+            (
+            #83
+            _string
+              "         X         "
+            : String
+            )
+          : CellularAutomaton
+        : CellularAutomaton
+        #84
+        _dispatch
+          #84
+          _object
+            cells
+          : CellularAutomaton
+          print
+          (
+          )
+        : CellularAutomaton
+        #93
+        _let
+          countdown
+          Int
+          #85
+          _int
+            20
+          : Int
+          #92
+          _loop
+            #86
+            _lt
+              #86
+              _int
+                0
+              : Int
+              #86
+              _object
+                countdown
+              : Int
+            : Bool
+            #91
+            _block
+              #88
+              _dispatch
+                #88
+                _object
+                  cells
+                : CellularAutomaton
+                evolve
+                (
+                )
+              : CellularAutomaton
+              #89
+              _dispatch
+                #89
+                _object
+                  cells
+                : CellularAutomaton
+                print
+                (
+                )
+              : CellularAutomaton
+              #90
+              _assign
+                countdown
+                #90
+                _sub
+                  #90
+                  _object
+                    countdown
+                  : Int
+                  #90
+                  _int
+                    1
+                  : Int
+                : Int
+              : Int
+            : Int
+          : Object
+        : Object
+        #94
+        _object
+          self
+        : SELF_TYPE
+      : SELF_TYPE
+    )

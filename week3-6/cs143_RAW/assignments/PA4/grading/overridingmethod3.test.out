@@ -1,0 +1,47 @@
+#9
+_program
+  #1
+  _class
+    Main
+    Object
+    "overridingmethod3.test"
+    (
+    #1
+    _method
+      main
+      Int
+      #1
+      _int
+        0
+      : Int
+    )
+  #5
+  _class
+    A
+    Object
+    "overridingmethod3.test"
+    (
+    #4
+    _method
+      inky
+      SELF_TYPE
+      #4
+      _object
+        self
+      : SELF_TYPE
+    )
+  #9
+  _class
+    B
+    A
+    "overridingmethod3.test"
+    (
+    #8
+    _method
+      inky
+      SELF_TYPE
+      #8
+      _new
+        SELF_TYPE
+      : SELF_TYPE
+    )

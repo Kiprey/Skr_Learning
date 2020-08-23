@@ -1,0 +1,3 @@
+dupformals.test:3: Formal parameter x is multiply defined.
+dupformals.test:3: Formal parameter x is multiply defined.
+Compilation halted due to static semantic errors.

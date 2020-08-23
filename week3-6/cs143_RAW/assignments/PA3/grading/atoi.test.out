@@ -1,0 +1,910 @@
+#108
+_program
+  #108
+  _class
+    A2I
+    Object
+    "atoi.test"
+    (
+    #28
+    _method
+      c2i
+      #15
+      _formal
+        char
+        String
+      Int
+      #27
+      _cond
+        #16
+        _eq
+          #16
+          _object
+            char
+          : _no_type
+          #16
+          _string
+            "0"
+          : _no_type
+        : _no_type
+        #16
+        _int
+          0
+        : _no_type
+        #27
+        _cond
+          #17
+          _eq
+            #17
+            _object
+              char
+            : _no_type
+            #17
+            _string
+              "1"
+            : _no_type
+          : _no_type
+          #17
+          _int
+            1
+          : _no_type
+          #27
+          _cond
+            #18
+            _eq
+              #18
+              _object
+                char
+              : _no_type
+              #18
+              _string
+                "2"
+              : _no_type
+            : _no_type
+            #18
+            _int
+              2
+            : _no_type
+            #27
+            _cond
+              #19
+              _eq
+                #19
+                _object
+                  char
+                : _no_type
+                #19
+                _string
+                  "3"
+                : _no_type
+              : _no_type
+              #19
+              _int
+                3
+              : _no_type
+              #27
+              _cond
+                #20
+                _eq
+                  #20
+                  _object
+                    char
+                  : _no_type
+                  #20
+                  _string
+                    "4"
+                  : _no_type
+                : _no_type
+                #20
+                _int
+                  4
+                : _no_type
+                #27
+                _cond
+                  #21
+                  _eq
+                    #21
+                    _object
+                      char
+                    : _no_type
+                    #21
+                    _string
+                      "5"
+                    : _no_type
+                  : _no_type
+                  #21
+                  _int
+                    5
+                  : _no_type
+                  #27
+                  _cond
+                    #22
+                    _eq
+                      #22
+                      _object
+                        char
+                      : _no_type
+                      #22
+                      _string
+                        "6"
+                      : _no_type
+                    : _no_type
+                    #22
+                    _int
+                      6
+                    : _no_type
+                    #27
+                    _cond
+                      #23
+                      _eq
+                        #23
+                        _object
+                          char
+                        : _no_type
+                        #23
+                        _string
+                          "7"
+                        : _no_type
+                      : _no_type
+                      #23
+                      _int
+                        7
+                      : _no_type
+                      #27
+                      _cond
+                        #24
+                        _eq
+                          #24
+                          _object
+                            char
+                          : _no_type
+                          #24
+                          _string
+                            "8"
+                          : _no_type
+                        : _no_type
+                        #24
+                        _int
+                          8
+                        : _no_type
+                        #27
+                        _cond
+                          #25
+                          _eq
+                            #25
+                            _object
+                              char
+                            : _no_type
+                            #25
+                            _string
+                              "9"
+                            : _no_type
+                          : _no_type
+                          #25
+                          _int
+                            9
+                          : _no_type
+                          #26
+                          _block
+                            #26
+                            _dispatch
+                              #26
+                              _object
+                                self
+                              : _no_type
+                              abort
+                              (
+                              )
+                            : _no_type
+                            #26
+                            _int
+                              0
+                            : _no_type
+                          : _no_type
+                        : _no_type
+                      : _no_type
+                    : _no_type
+                  : _no_type
+                : _no_type
+              : _no_type
+            : _no_type
+          : _no_type
+        : _no_type
+      : _no_type
+    #46
+    _method
+      i2c
+      #33
+      _formal
+        i
+        Int
+      String
+      #45
+      _cond
+        #34
+        _eq
+          #34
+          _object
+            i
+          : _no_type
+          #34
+          _int
+            0
+          : _no_type
+        : _no_type
+        #34
+        _string
+          "0"
+        : _no_type
+        #45
+        _cond
+          #35
+          _eq
+            #35
+            _object
+              i
+            : _no_type
+            #35
+            _int
+              1
+            : _no_type
+          : _no_type
+          #35
+          _string
+            "1"
+          : _no_type
+          #45
+          _cond
+            #36
+            _eq
+              #36
+              _object
+                i
+              : _no_type
+              #36
+              _int
+                2
+              : _no_type
+            : _no_type
+            #36
+            _string
+              "2"
+            : _no_type
+            #45
+            _cond
+              #37
+              _eq
+                #37
+                _object
+                  i
+                : _no_type
+                #37
+                _int
+                  3
+                : _no_type
+              : _no_type
+              #37
+              _string
+                "3"
+              : _no_type
+              #45
+              _cond
+                #38
+                _eq
+                  #38
+                  _object
+                    i
+                  : _no_type
+                  #38
+                  _int
+                    4
+                  : _no_type
+                : _no_type
+                #38
+                _string
+                  "4"
+                : _no_type
+                #45
+                _cond
+                  #39
+                  _eq
+                    #39
+                    _object
+                      i
+                    : _no_type
+                    #39
+                    _int
+                      5
+                    : _no_type
+                  : _no_type
+                  #39
+                  _string
+                    "5"
+                  : _no_type
+                  #45
+                  _cond
+                    #40
+                    _eq
+                      #40
+                      _object
+                        i
+                      : _no_type
+                      #40
+                      _int
+                        6
+                      : _no_type
+                    : _no_type
+                    #40
+                    _string
+                      "6"
+                    : _no_type
+                    #45
+                    _cond
+                      #41
+                      _eq
+                        #41
+                        _object
+                          i
+                        : _no_type
+                        #41
+                        _int
+                          7
+                        : _no_type
+                      : _no_type
+                      #41
+                      _string
+                        "7"
+                      : _no_type
+                      #45
+                      _cond
+                        #42
+                        _eq
+                          #42
+                          _object
+                            i
+                          : _no_type
+                          #42
+                          _int
+                            8
+                          : _no_type
+                        : _no_type
+                        #42
+                        _string
+                          "8"
+                        : _no_type
+                        #45
+                        _cond
+                          #43
+                          _eq
+                            #43
+                            _object
+                              i
+                            : _no_type
+                            #43
+                            _int
+                              9
+                            : _no_type
+                          : _no_type
+                          #43
+                          _string
+                            "9"
+                          : _no_type
+                          #44
+                          _block
+                            #44
+                            _dispatch
+                              #44
+                              _object
+                                self
+                              : _no_type
+                              abort
+                              (
+                              )
+                            : _no_type
+                            #44
+                            _string
+                              ""
+                            : _no_type
+                          : _no_type
+                        : _no_type
+                      : _no_type
+                    : _no_type
+                  : _no_type
+                : _no_type
+              : _no_type
+            : _no_type
+          : _no_type
+        : _no_type
+      : _no_type
+    #62
+    _method
+      a2i
+      #56
+      _formal
+        s
+        String
+      Int
+      #61
+      _cond
+        #57
+        _eq
+          #57
+          _dispatch
+            #57
+            _object
+              s
+            : _no_type
+            length
+            (
+            )
+          : _no_type
+          #57
+          _int
+            0
+          : _no_type
+        : _no_type
+        #57
+        _int
+          0
+        : _no_type
+        #61
+        _cond
+          #58
+          _eq
+            #58
+            _dispatch
+              #58
+              _object
+                s
+              : _no_type
+              substr
+              (
+              #58
+              _int
+                0
+              : _no_type
+              #58
+              _int
+                1
+              : _no_type
+              )
+            : _no_type
+            #58
+            _string
+              "-"
+            : _no_type
+          : _no_type
+          #58
+          _neg
+            #58
+            _dispatch
+              #58
+              _object
+                self
+              : _no_type
+              a2i_aux
+              (
+              #58
+              _dispatch
+                #58
+                _object
+                  s
+                : _no_type
+                substr
+                (
+                #58
+                _int
+                  1
+                : _no_type
+                #58
+                _sub
+                  #58
+                  _dispatch
+                    #58
+                    _object
+                      s
+                    : _no_type
+                    length
+                    (
+                    )
+                  : _no_type
+                  #58
+                  _int
+                    1
+                  : _no_type
+                : _no_type
+                )
+              : _no_type
+              )
+            : _no_type
+          : _no_type
+          #61
+          _cond
+            #59
+            _eq
+              #59
+              _dispatch
+                #59
+                _object
+                  s
+                : _no_type
+                substr
+                (
+                #59
+                _int
+                  0
+                : _no_type
+                #59
+                _int
+                  1
+                : _no_type
+                )
+              : _no_type
+              #59
+              _string
+                "+"
+              : _no_type
+            : _no_type
+            #59
+            _dispatch
+              #59
+              _object
+                self
+              : _no_type
+              a2i_aux
+              (
+              #59
+              _dispatch
+                #59
+                _object
+                  s
+                : _no_type
+                substr
+                (
+                #59
+                _int
+                  1
+                : _no_type
+                #59
+                _sub
+                  #59
+                  _dispatch
+                    #59
+                    _object
+                      s
+                    : _no_type
+                    length
+                    (
+                    )
+                  : _no_type
+                  #59
+                  _int
+                    1
+                  : _no_type
+                : _no_type
+                )
+              : _no_type
+              )
+            : _no_type
+            #60
+            _dispatch
+              #60
+              _object
+                self
+              : _no_type
+              a2i_aux
+              (
+              #60
+              _object
+                s
+              : _no_type
+              )
+            : _no_type
+          : _no_type
+        : _no_type
+      : _no_type
+    #84
+    _method
+      a2i_aux
+      #68
+      _formal
+        s
+        String
+      Int
+      #83
+      _let
+        int
+        Int
+        #69
+        _int
+          0
+        : _no_type
+        #82
+        _block
+          #80
+          _let
+            j
+            Int
+            #71
+            _dispatch
+              #71
+              _object
+                s
+              : _no_type
+              length
+              (
+              )
+            : _no_type
+            #79
+            _let
+              i
+              Int
+              #72
+              _int
+                0
+              : _no_type
+              #78
+              _loop
+                #73
+                _lt
+                  #73
+                  _object
+                    i
+                  : _no_type
+                  #73
+                  _object
+                    j
+                  : _no_type
+                : _no_type
+                #77
+                _block
+                  #75
+                  _assign
+                    int
+                    #75
+                    _plus
+                      #75
+                      _mul
+                        #75
+                        _object
+                          int
+                        : _no_type
+                        #75
+                        _int
+                          10
+                        : _no_type
+                      : _no_type
+                      #75
+                      _dispatch
+                        #75
+                        _object
+                          self
+                        : _no_type
+                        c2i
+                        (
+                        #75
+                        _dispatch
+                          #75
+                          _object
+                            s
+                          : _no_type
+                          substr
+                          (
+                          #75
+                          _object
+                            i
+                          : _no_type
+                          #75
+                          _int
+                            1
+                          : _no_type
+                          )
+                        : _no_type
+                        )
+                      : _no_type
+                    : _no_type
+                  : _no_type
+                  #76
+                  _assign
+                    i
+                    #76
+                    _plus
+                      #76
+                      _object
+                        i
+                      : _no_type
+                      #76
+                      _int
+                        1
+                      : _no_type
+                    : _no_type
+                  : _no_type
+                : _no_type
+              : _no_type
+            : _no_type
+          : _no_type
+          #81
+          _object
+            int
+          : _no_type
+        : _no_type
+      : _no_type
+    #95
+    _method
+      i2a
+      #90
+      _formal
+        i
+        Int
+      String
+      #94
+      _cond
+        #91
+        _eq
+          #91
+          _object
+            i
+          : _no_type
+          #91
+          _int
+            0
+          : _no_type
+        : _no_type
+        #91
+        _string
+          "0"
+        : _no_type
+        #94
+        _cond
+          #92
+          _lt
+            #92
+            _int
+              0
+            : _no_type
+            #92
+            _object
+              i
+            : _no_type
+          : _no_type
+          #92
+          _dispatch
+            #92
+            _object
+              self
+            : _no_type
+            i2a_aux
+            (
+            #92
+            _object
+              i
+            : _no_type
+            )
+          : _no_type
+          #93
+          _dispatch
+            #93
+            _string
+              "-"
+            : _no_type
+            concat
+            (
+            #93
+            _dispatch
+              #93
+              _object
+                self
+              : _no_type
+              i2a_aux
+              (
+              #93
+              _mul
+                #93
+                _object
+                  i
+                : _no_type
+                #93
+                _neg
+                  #93
+                  _int
+                    1
+                  : _no_type
+                : _no_type
+              : _no_type
+              )
+            : _no_type
+            )
+          : _no_type
+        : _no_type
+      : _no_type
+    #106
+    _method
+      i2a_aux
+      #100
+      _formal
+        i
+        Int
+      String
+      #105
+      _cond
+        #101
+        _eq
+          #101
+          _object
+            i
+          : _no_type
+          #101
+          _int
+            0
+          : _no_type
+        : _no_type
+        #101
+        _string
+          ""
+        : _no_type
+        #104
+        _let
+          next
+          Int
+          #102
+          _divide
+            #102
+            _object
+              i
+            : _no_type
+            #102
+            _int
+              10
+            : _no_type
+          : _no_type
+          #103
+          _dispatch
+            #103
+            _dispatch
+              #103
+              _object
+                self
+              : _no_type
+              i2a_aux
+              (
+              #103
+              _object
+                next
+              : _no_type
+              )
+            : _no_type
+            concat
+            (
+            #103
+            _dispatch
+              #103
+              _object
+                self
+              : _no_type
+              i2c
+              (
+              #103
+              _sub
+                #103
+                _object
+                  i
+                : _no_type
+                #103
+                _mul
+                  #103
+                  _object
+                    next
+                  : _no_type
+                  #103
+                  _int
+                    10
+                  : _no_type
+                : _no_type
+              : _no_type
+              )
+            : _no_type
+            )
+          : _no_type
+        : _no_type
+      : _no_type
+    )

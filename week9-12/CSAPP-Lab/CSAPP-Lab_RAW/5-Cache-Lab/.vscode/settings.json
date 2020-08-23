@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "stdio.h": "c",
+        "error.h": "c",
+        "cachelab.h": "c"
+    }
+}

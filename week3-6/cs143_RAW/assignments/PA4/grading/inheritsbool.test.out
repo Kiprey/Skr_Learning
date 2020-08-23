@@ -1,0 +1,2 @@
+inheritsbool.test:9: Class B cannot inherit class Bool.
+Compilation halted due to static semantic errors.

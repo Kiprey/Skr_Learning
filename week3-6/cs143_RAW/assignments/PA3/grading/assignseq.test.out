@@ -1,0 +1,45 @@
+#5
+_program
+  #5
+  _class
+    Main
+    Object
+    "assignseq.test"
+    (
+    #2
+    _attr
+      x
+      Int
+      #2
+      _no_expr
+      : _no_type
+    #3
+    _attr
+      y
+      Int
+      #3
+      _no_expr
+      : _no_type
+    #4
+    _method
+      main
+      Object
+      #4
+      _block
+        #4
+        _assign
+          x
+          #4
+          _assign
+            y
+            #4
+            _neg
+              #4
+              _int
+                5
+              : _no_type
+            : _no_type
+          : _no_type
+        : _no_type
+      : _no_type
+    )

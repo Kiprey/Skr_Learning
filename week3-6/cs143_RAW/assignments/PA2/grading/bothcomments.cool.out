@@ -1,0 +1,12 @@
+#name "bothcomments.cool"
+#2 OBJECTID what
+#2 OBJECTID the
+#2 OBJECTID programmer
+#2 OBJECTID thought
+#2 OBJECTID it
+#2 OBJECTID was
+#2 ERROR "Unmatched *)"
+#3 '.'
+#4 IF
+#4 INT_CONST 5
+#4 THEN

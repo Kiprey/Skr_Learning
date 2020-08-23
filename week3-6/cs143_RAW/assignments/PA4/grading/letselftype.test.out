@@ -1,0 +1,37 @@
+#7
+_program
+  #7
+  _class
+    Main
+    IO
+    "letselftype.test"
+    (
+    #6
+    _method
+      main
+      Object
+      #6
+      _block
+        #5
+        _let
+          y
+          SELF_TYPE
+          #4
+          _let
+            x
+            SELF_TYPE
+            #4
+            _no_expr
+            : _no_type
+            #4
+            _object
+              x
+            : SELF_TYPE
+          : SELF_TYPE
+          #5
+          _object
+            y
+          : SELF_TYPE
+        : SELF_TYPE
+      : SELF_TYPE
+    )

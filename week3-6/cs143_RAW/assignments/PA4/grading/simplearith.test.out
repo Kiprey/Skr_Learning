@@ -1,0 +1,60 @@
+#3
+_program
+  #3
+  _class
+    Main
+    Object
+    "simplearith.test"
+    (
+    #2
+    _method
+      main
+      Object
+      #2
+      _block
+        #2
+        _plus
+          #2
+          _int
+            5
+          : Int
+          #2
+          _int
+            4
+          : Int
+        : Int
+        #2
+        _sub
+          #2
+          _int
+            5
+          : Int
+          #2
+          _int
+            4
+          : Int
+        : Int
+        #2
+        _mul
+          #2
+          _int
+            3
+          : Int
+          #2
+          _int
+            2
+          : Int
+        : Int
+        #2
+        _divide
+          #2
+          _int
+            3
+          : Int
+          #2
+          _int
+            2
+          : Int
+        : Int
+      : Int
+    )

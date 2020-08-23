@@ -1,0 +1,94 @@
+#18
+_program
+  #3
+  _class
+    Main
+    Object
+    "dispatch.test"
+    (
+    #2
+    _method
+      main
+      Object
+      #2
+      _int
+        42
+      : Int
+    )
+  #10
+  _class
+    A
+    Object
+    "dispatch.test"
+    (
+    #8
+    _method
+      foo
+      #6
+      _formal
+        a
+        Int
+      #6
+      _formal
+        b
+        B
+      #6
+      _formal
+        c
+        A
+      #6
+      _formal
+        d
+        B
+      A
+      #8
+      _object
+        self
+      : SELF_TYPE
+    )
+  #18
+  _class
+    B
+    A
+    "dispatch.test"
+    (
+    #17
+    _method
+      moo
+      A
+      #17
+      _let
+        b
+        B
+        #15
+        _new
+          B
+        : B
+        #16
+        _dispatch
+          #16
+          _object
+            self
+          : SELF_TYPE
+          foo
+          (
+          #16
+          _int
+            4
+          : Int
+          #16
+          _object
+            b
+          : B
+          #16
+          _object
+            b
+          : B
+          #16
+          _object
+            b
+          : B
+          )
+        : A
+      : A
+    )

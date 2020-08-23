@@ -1,0 +1,6 @@
+SPIM Version 6.5 of January 4, 2003
+Copyright 1990-2003 by James R. Larus (larus@cs.wisc.edu).
+All Rights Reserved.
+See the file README for a full copyright notice.
+Loaded: /usr/class/cs143/cool/lib/trap.handler
+/usr/class/cs143/tests/fa05/PA5/dispatch-void-static.cl:14: Dispatch to void.

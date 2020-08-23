@@ -1,0 +1,3 @@
+#name "stringcomment.cool"
+#1 STR_CONST "This is a string--and it's still a string"
+#4 STR_CONST "(* not a comment *)"

@@ -1,0 +1,2 @@
+#!/bin/csh -f
+make semant && ./lexer $1 | ./parser $1 | ./semant $* 

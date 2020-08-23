@@ -1,0 +1,36 @@
+#8
+_program
+  #8
+  _class
+    Goodbye
+    Object
+    "letassociativity.test"
+    (
+    #6
+    _method
+      help
+      #3
+      _formal
+        a
+        Int
+      Int
+      #6
+      _let
+        a
+        Int
+        #4
+        _no_expr
+        : _no_type
+        #6
+        _plus
+          #5
+          _int
+            6
+          : _no_type
+          #5
+          _int
+            7
+          : _no_type
+        : _no_type
+      : _no_type
+    )

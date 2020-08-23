@@ -1,0 +1,67 @@
+#12
+_program
+  #1
+  _class
+    Main
+    Object
+    "compare.test"
+    (
+    #1
+    _method
+      main
+      Int
+      #1
+      _int
+        0
+      : Int
+    )
+  #3
+  _class
+    A
+    Object
+    "compare.test"
+    (
+    )
+  #4
+  _class
+    B
+    Object
+    "compare.test"
+    (
+    )
+  #12
+  _class
+    C
+    Object
+    "compare.test"
+    (
+    #6
+    _attr
+      a
+      A
+      #6
+      _no_expr
+      : _no_type
+    #7
+    _attr
+      b
+      B
+      #7
+      _no_expr
+      : _no_type
+    #11
+    _method
+      compare
+      Bool
+      #11
+      _eq
+        #10
+        _object
+          a
+        : A
+        #11
+        _object
+          b
+        : B
+      : Bool
+    )

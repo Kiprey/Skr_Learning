@@ -1,0 +1,53 @@
+#4
+_program
+  #4
+  _class
+    Test
+    Object
+    "ifexpressionblock.test"
+    (
+    #2
+    _attr
+      foo
+      Test
+      #2
+      _no_expr
+      : _no_type
+    #3
+    _method
+      bar
+      Int
+      #3
+      _cond
+        #3
+        _eq
+          #3
+          _object
+            x
+          : _no_type
+          #3
+          _int
+            3
+          : _no_type
+        : _no_type
+        #3
+        _block
+          #3
+          _int
+            1
+          : _no_type
+          #3
+          _int
+            2
+          : _no_type
+          #3
+          _bool
+            1
+          : _no_type
+        : _no_type
+        #3
+        _bool
+          0
+        : _no_type
+      : _no_type
+    )

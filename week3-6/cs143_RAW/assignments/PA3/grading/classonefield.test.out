@@ -1,0 +1,16 @@
+#3
+_program
+  #3
+  _class
+    Hello
+    Object
+    "classonefield.test"
+    (
+    #2
+    _attr
+      foo
+      Int
+      #2
+      _no_expr
+      : _no_type
+    )

@@ -1,0 +1,75 @@
+# cases file format:
+#
+# filename; points; comment; I/N; filtername;
+#
+# the trailing semicolon is optional.  no newlines are allowed in the comment.
+# test may be commented out using a '#' (sh/perl style comments).
+#
+# I tests are Interactive, while N tests are Not.
+# I/N and filtername may be omitted, and if they are, the test is 
+# non-interactive and uses the filter PA#-filter
+# 
+# at some point in the file, a line of the format:
+#
+# maxscore = #
+#
+# must exist in the file.  this line specifies the maximum possible score 
+# on the assignment.
+#
+maxscore = 63
+
+abort.cl; 1; Calling abort() method
+assignment-val.cl; 1; Evaluating assignment expressions
+basic-init.cl; 1; Default initial values of baisc classes 
+basicequality.cl; 1; Simple equality tests
+bigexpr.cl; 1; A large arithmetic expression
+bool.cl; 1; Boolean objects
+calls.cl; 1; Method calls
+cells.cl; 1; Cellular automaton program from examples directory
+case-none.cl; 1; Case with no matching branch
+case-order.cl; 1; Simple case expression 
+casevoid.cl; 1; Attempt to use void for case test expr 
+copy-self-dispatch.cl; 1; Dispatching on a copy of an object created with copy()
+dispatch-override-dynamic.cl; 1; Dispatch on an overridden method
+dispatch-override-static.cl; 1; Static dispatch on an overridden method
+dispatch-void-dynamic.cl; 1; Dispatch on a void object (runtime error)
+dispatch-void-static.cl; 1; Static dispatch on a void object (runtime error)
+dispatchvoidlet.cl; 1; Dispatch on a void object created with let (runtime error)
+eval-order-args.cl; 1; Checking evaluation order of function args on dispatch
+eval-order-arith.cl; 1; Checking evaluation order of arithmetic expressions
+exp.cl; 1; An exponent function
+fact.cl; 1; A factorial function
+fibo.cl; 1; A Fibonacci function
+hairyscary.cl; 1; hairy-scary program from examples directory
+init-default.cl; 1; Initialization of arguments for a "new"d object
+init-order-self.cl; 1; Evaluation order of attribute initializers
+init-order-super.cl; 1; Evaluation order of superclass vs subclass attribute initializers
+let-nested.cl; 1; Nested lets
+letinit.cl; 1; Let using default initial values
+many_objects_on_heap.cl; 1; Allocating many objects on the heap
+mod-param.cl; 1; Method that modifies a parameter
+multiple-dispatch.cl; 1; Nested function dispatches
+multiple-static-dispatch.cl; 1; Nested static dispatches
+new-self-dispatch.cl; 1; Dispatch on a "new"d object
+new-self-init.cl; 1; Checking evaluation of attribute initialization exprs on a "new"d object
+new-st.cl; 1; New SELF_TYPE behavior
+newbasic.cl; 1; Use of new with basic classes
+not.cl; 1; "not" operator
+objectequality.cl; 1; Object equality tests
+override.cl; 1; Dispatch of overridden functions
+primes.cl; 1; prime number program from examples directory
+scoping.cl; 1; Scoping test
+selftypeattribute.cl; 1; Attribute of type SELF_TYPE
+sequence.cl; 1; Expression sequence (altering objects repetedly)
+shadow-attr-case.cl; 1; Case bound variable shadows a same-named attribute
+shadow-attr-formal.cl; 1; Formal parameter shadows a same-named attribute
+shadow-attr-let.cl; 1; Let bound variable shadows a same-named attribute
+shadow-case-let.cl; 1; Let bound variable shadows a same-named case-bound variable
+shadow-formal-case.cl; 1; Case bound variable shadows a formal parameter
+shadow-formal-let.cl; 1; Let bound variable shadows a formal parameter
+shadow-let-case.cl; 1; Case bound variable shadows a let bound variable
+shadow-let-let.cl; 1; Let bound variable shadows a same-named let bound variable
+string-methods.cl; 1; Dispatch of string methods
+typename.cl; 1; Object.type_name should return string representation of the dynamic type dispatched
+lam-gc.cl; 5; Lambda example with garbage collection
+simple-gc.cl; 5; Simple examine with garbage collection

@@ -1,0 +1,4 @@
+#!/bin/sed -f
+/^#name ".*"$/d
+s/^#[0-9][0-9]* //
+s/^ERROR ".\{2,\}"/LONGERROR/

@@ -1,0 +1,8 @@
+#name "backslash2.cool"
+#2 ERROR "Unterminated string constant"
+#3 ERROR "Unterminated string constant"
+#5 ERROR "Unterminated string constant"
+#6 ERROR "Unterminated string constant"
+#8 STR_CONST "This is, though \\\n"
+#10 STR_CONST "\\"
+#12 STR_CONST "It's fine to have this: \n in a string"

@@ -1,0 +1,42 @@
+#6
+_program
+  #6
+  _class
+    Main
+    IO
+    "letshadows.test"
+    (
+    #2
+    _attr
+      x
+      Int
+      #2
+      _no_expr
+      : _no_type
+    #5
+    _method
+      main
+      Object
+      #5
+      _block
+        #4
+        _let
+          x
+          String
+          #4
+          _string
+            "test"
+          : String
+          #4
+          _dispatch
+            #4
+            _object
+              x
+            : String
+            length
+            (
+            )
+          : Int
+        : Int
+      : Int
+    )

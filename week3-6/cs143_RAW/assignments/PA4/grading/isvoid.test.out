@@ -1,0 +1,44 @@
+#6
+_program
+  #6
+  _class
+    Main
+    IO
+    "isvoid.test"
+    (
+    #2
+    _attr
+      x
+      Bool
+      #2
+      _no_expr
+      : _no_type
+    #5
+    _method
+      main
+      Object
+      #5
+      _block
+        #4
+        _isvoid
+          #4
+          _bool
+            1
+          : Bool
+        : Bool
+        #4
+        _isvoid
+          #4
+          _bool
+            0
+          : Bool
+        : Bool
+        #4
+        _isvoid
+          #4
+          _object
+            x
+          : Bool
+        : Bool
+      : Bool
+    )

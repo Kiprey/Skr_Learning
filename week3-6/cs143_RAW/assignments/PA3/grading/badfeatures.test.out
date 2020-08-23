@@ -1,0 +1,4 @@
+"badfeatures.test", line 2: syntax error at or near OBJECTID = int
+"badfeatures.test", line 4: syntax error at or near ';'
+"badfeatures.test", line 6: syntax error at or near OBJECTID = y
+Compilation halted due to lex and parse errors

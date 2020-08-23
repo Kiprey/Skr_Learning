@@ -1,0 +1,4 @@
+#name "s19.test.cool"
+#3 ERROR "Unterminated string constant"
+#3 OBJECTID d
+#4 ERROR "Unterminated string constant"

@@ -1,0 +1,57 @@
+#8
+_program
+  #7
+  _class
+    A
+    Object
+    "newselftype.test"
+    (
+    #3
+    _attr
+      bar
+      Int
+      #3
+      _dispatch
+        #3
+        _object
+          self
+        : SELF_TYPE
+        foo
+        (
+        #3
+        _new
+          SELF_TYPE
+        : SELF_TYPE
+        )
+      : Int
+    #5
+    _method
+      foo
+      #5
+      _formal
+        a
+        A
+      Int
+      #5
+      _neg
+        #5
+        _int
+          7
+        : Int
+      : Int
+    )
+  #8
+  _class
+    Main
+    Object
+    "newselftype.test"
+    (
+    #8
+    _method
+      main
+      Int
+      #8
+      _int
+        6
+      : Int
+    )

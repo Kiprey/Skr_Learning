@@ -1,0 +1,76 @@
+#14
+_program
+  #1
+  _class
+    Main
+    Object
+    "trickyatdispatch.test"
+    (
+    #1
+    _method
+      main
+      Int
+      #1
+      _int
+        0
+      : Int
+    )
+  #5
+  _class
+    A
+    Object
+    "trickyatdispatch.test"
+    (
+    #4
+    _method
+      inky
+      Int
+      #4
+      _int
+        1
+      : Int
+    )
+  #9
+  _class
+    B
+    A
+    "trickyatdispatch.test"
+    (
+    #8
+    _method
+      binky
+      String
+      #8
+      _string
+        "hello"
+      : String
+    )
+  #14
+  _class
+    C
+    Object
+    "trickyatdispatch.test"
+    (
+    #12
+    _attr
+      b
+      B
+      #12
+      _no_expr
+      : _no_type
+    #13
+    _method
+      winky
+      Int
+      #13
+      _static_dispatch
+        #13
+        _object
+          b
+        : B
+        B
+        inky
+        (
+        )
+      : Int
+    )

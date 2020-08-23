@@ -1,0 +1,6 @@
+#name "simplestrings.cool"
+#1 STR_CONST "this is a string"
+#1 STR_CONST "so is this"
+#2 STR_CONST "one more string"
+#4 STR_CONST "strings can have keywords inside: if else case"
+#5 STR_CONST "!@#$%^&*()_+1234567890-=\tjustanother string   "

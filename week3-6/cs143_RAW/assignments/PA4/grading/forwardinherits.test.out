@@ -1,0 +1,45 @@
+#12
+_program
+  #5
+  _class
+    A
+    B
+    "forwardinherits.test"
+    (
+    #3
+    _attr
+      foo
+      Int
+      #3
+      _no_expr
+      : _no_type
+    )
+  #11
+  _class
+    B
+    Object
+    "forwardinherits.test"
+    (
+    #9
+    _attr
+      bar
+      Int
+      #9
+      _no_expr
+      : _no_type
+    )
+  #12
+  _class
+    Main
+    Object
+    "forwardinherits.test"
+    (
+    #12
+    _method
+      main
+      Int
+      #12
+      _int
+        6
+      : Int
+    )

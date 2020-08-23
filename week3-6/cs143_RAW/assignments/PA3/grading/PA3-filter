@@ -1,0 +1,6 @@
+#!/bin/sed -f
+s/^[\t ]*#[0-9][0-9]*//
+s/"[^"]*\.test"/filename/
+s/at or near .*/at or near LOCATION/
+s/parse error/syntax error/g
+

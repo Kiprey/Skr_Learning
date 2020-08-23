@@ -1,0 +1,51 @@
+#7
+_program
+  #7
+  _class
+    Main
+    IO
+    "neg.test"
+    (
+    #2
+    _attr
+      x
+      Bool
+      #2
+      _no_expr
+      : _no_type
+    #5
+    _method
+      main
+      Object
+      #5
+      _block
+        #4
+        _neg
+          #4
+          _int
+            7
+          : Int
+        : Int
+        #4
+        _neg
+          #4
+          _dispatch
+            #4
+            _object
+              self
+            : SELF_TYPE
+            foo
+            (
+            )
+          : Int
+        : Int
+      : Int
+    #6
+    _method
+      foo
+      Int
+      #6
+      _int
+        4
+      : Int
+    )

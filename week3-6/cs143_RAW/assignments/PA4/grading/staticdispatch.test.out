@@ -1,0 +1,110 @@
+#18
+_program
+  #4
+  _class
+    Main
+    Object
+    "staticdispatch.test"
+    (
+    #2
+    _attr
+      b
+      B
+      #2
+      _new
+        B
+      : B
+    #3
+    _method
+      main
+      Object
+      #3
+      _static_dispatch
+        #3
+        _object
+          b
+        : B
+        A
+        foo
+        (
+        #3
+        _int
+          5
+        : Int
+        #3
+        _object
+          b
+        : B
+        #3
+        _object
+          b
+        : B
+        #3
+        _object
+          b
+        : B
+        )
+      : Int
+    )
+  #11
+  _class
+    A
+    Object
+    "staticdispatch.test"
+    (
+    #9
+    _method
+      foo
+      #7
+      _formal
+        a
+        Int
+      #7
+      _formal
+        b
+        B
+      #7
+      _formal
+        c
+        A
+      #7
+      _formal
+        d
+        B
+      Int
+      #8
+      _int
+        5
+      : Int
+    )
+  #18
+  _class
+    B
+    A
+    "staticdispatch.test"
+    (
+    #17
+    _method
+      foo
+      #15
+      _formal
+        a
+        Int
+      #15
+      _formal
+        b
+        B
+      #15
+      _formal
+        c
+        A
+      #15
+      _formal
+        d
+        B
+      Int
+      #16
+      _int
+        6
+      : Int
+    )

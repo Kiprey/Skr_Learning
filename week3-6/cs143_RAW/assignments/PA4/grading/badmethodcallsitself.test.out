@@ -1,0 +1,2 @@
+badmethodcallsitself.test:4: In call of method f, type Object of parameter a does not conform to declared type Int.
+Compilation halted due to static semantic errors.

@@ -1,0 +1,29 @@
+#5
+_program
+  #5
+  _class
+    Main
+    IO
+    "letinit.test"
+    (
+    #4
+    _method
+      main
+      Object
+      #4
+      _block
+        #3
+        _let
+          x
+          Int
+          #3
+          _int
+            5
+          : Int
+          #3
+          _object
+            x
+          : Int
+        : Int
+      : Int
+    )

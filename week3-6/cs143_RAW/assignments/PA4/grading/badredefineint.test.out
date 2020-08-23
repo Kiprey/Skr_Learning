@@ -1,0 +1,2 @@
+badredefineint.test:4: Redefinition of basic class Int.
+Compilation halted due to static semantic errors.
