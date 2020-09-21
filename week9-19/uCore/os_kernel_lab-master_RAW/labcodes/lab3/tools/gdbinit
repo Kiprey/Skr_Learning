@@ -1,0 +1,10 @@
+file bin/kernel
+target remote :1234
+define stop-hook
+x/i $pc
+end
+tui enable
+tui reg general
+
+break _extend_clock_swap_out_victim
+continue 

@@ -1,0 +1,12 @@
+file bin/kernel
+set architecture i8086
+target remote :1234
+tui reg general
+define hook-stop
+x/i $eip
+end
+
+b kern_init
+b lab1_switch_to_user
+b lab1_switch_to_kernel
+

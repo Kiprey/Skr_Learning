@@ -1,0 +1,7 @@
+file bin/kernel
+target remote :1234
+tui reg general
+break check_pgfault
+break vmm.c:346
+break do_pgfault
+continue

@@ -1,0 +1,10 @@
+
+target remote :1234
+define stop-hook
+x/i $pc
+end
+tui reg general
+file bin/kernel
+
+b buddySystem_pmm.c:261
+continue

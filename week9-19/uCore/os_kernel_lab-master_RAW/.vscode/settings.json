@@ -1,0 +1,17 @@
+{
+    "files.associations": {
+        "defs.h": "c",
+        "elf.h": "c",
+        "x86.h": "c",
+        "pmm.h": "c",
+        "*.tcc": "c",
+        "memlayout.h": "c",
+        "mmu.h": "c",
+        "assert.h": "c",
+        "swap_extend_clock.h": "c",
+        "default_pmm.h": "c",
+        "intr.h": "c",
+        "default_sched_stride_c": "c",
+        "default_sched.h": "c"
+    }
+}

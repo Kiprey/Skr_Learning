@@ -1,0 +1,5 @@
+file bin/kernel
+target remote :1234
+tui reg general
+break init.c:42
+continue
