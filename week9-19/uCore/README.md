@@ -6,6 +6,5 @@
 - [Lab4](doc/uCore-4.md)  涉及进程/线程管理等
 - [Lab5](doc/uCore-5.md)  涉及`fork/exec/wait/exit`机制的具体实现等
 - [Lab6](doc/uCore-6.md)  涉及处理机调度的一些相关实现
-- [Lab7](doc/uCore-7.md)  正在完成......
-
+- [Lab7](doc/uCore-7.md)  涉及信号、管程、死锁和进程通信的一些相关实现
 - [Lab8](doc/uCore-8.md)  正在完成......
