@@ -12,6 +12,10 @@
         "default_pmm.h": "c",
         "intr.h": "c",
         "default_sched_stride_c": "c",
-        "default_sched.h": "c"
+        "default_sched.h": "c",
+        "inode.h": "c",
+        "unistd.h": "c",
+        "stdio.h": "c",
+        "ulib.h": "c"
     }
 }

@@ -1,3 +1,5 @@
 file bin/kernel
 target remote :1234
-break kern_init
+tui reg general
+break phi_take_forks_condvar
+continue

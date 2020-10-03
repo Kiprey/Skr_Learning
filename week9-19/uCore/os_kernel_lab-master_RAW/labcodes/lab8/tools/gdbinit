@@ -1,3 +1,6 @@
 file bin/kernel
 target remote :1234
-break kern_init
+tui reg general
+file obj/__user_ls.out
+break proc.c:740
+continue

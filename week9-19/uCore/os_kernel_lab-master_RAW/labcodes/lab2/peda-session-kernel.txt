@@ -1,3 +1,0 @@
-break buddySystem_pmm.c:259
-break /usr/class/os_kernel_lab-master/labcodes/lab2/kern/mm/buddySystem_pmm.c:152
-

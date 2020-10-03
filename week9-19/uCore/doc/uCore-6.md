@@ -1,5 +1,33 @@
 # uCore实验 - Lab6
+<!-- TOC -->
 
+- [uCore实验 - Lab6](#ucore实验---lab6)
+  - [简介](#简介)
+  - [知识点](#知识点)
+    - [1. CPU资源的时分复用](#1-cpu资源的时分复用)
+    - [2. 调度准则](#2-调度准则)
+    - [3. 调度算法](#3-调度算法)
+      - [a. 先来先服务算法（First Come First Served, FCFS）](#a-先来先服务算法first-come-first-served-fcfs)
+      - [b. 短进程优先算法（SPN）](#b-短进程优先算法spn)
+      - [c. 最高响应比优先算法（HRRN）](#c-最高响应比优先算法hrrn)
+      - [d. 时间片轮转算法（RR，Round-Robin）](#d-时间片轮转算法rrround-robin)
+      - [e. 多级队列调度算法（MQ）](#e-多级队列调度算法mq)
+      - [f. 多级反馈队列算法（MLFQ）](#f-多级反馈队列算法mlfq)
+      - [g. 公平共享调度（FSS, Fair Share Scheduling）](#g-公平共享调度fss-fair-share-scheduling)
+    - [4. 实时操作系统](#4-实时操作系统)
+    - [5. 多处理器调度](#5-多处理器调度)
+    - [6. 优先级反置](#6-优先级反置)
+  - [练习解答](#练习解答)
+    - [0) 练习0](#0-练习0)
+    - [1) 练习1](#1-练习1)
+    - [2) 练习2](#2-练习2)
+      - [a. Stride调度算法的相关介绍](#a-stride调度算法的相关介绍)
+      - [b. 具体实现](#b-具体实现)
+    - [3) 扩展练习](#3-扩展练习)
+      - [1. Challenge 1](#1-challenge-1)
+      - [2. Challenge 2](#2-challenge-2)
+
+<!-- /TOC -->
 ## 简介
 
 - 这里是笔者在完成`uCore` Lab 6时写下的一些笔记
