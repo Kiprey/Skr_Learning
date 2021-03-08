@@ -85,9 +85,16 @@
   
   - 第34-36周（2021.1.4-2021.1.24）：期末复习+考试；完成V8 turboFan的学习。
   
-  - （doing）第37-41周（2021.1.25-2021.2.28）：
+  - 第37-41周（2021.1.25-2021.2.28）：
   
-    - 静态编译器研发实习（关于静态指针分析方向）
+    - 静态编译器研发实习（关于静态指针分析方向 之 FlowSensitive）
     - 完成CVE-2021-3156 sudo 提权漏洞分析。
-    - 学习 V8 Gabage Collection
+    - 了解了点 V8 的 Gabage Collection
     - 学习 V8 历史漏洞
+      - CVE-2019-13764 TypeInductionVariablePhi in v8 JIT分析
+      - V8 CVE-2019-5755 MinusZero类型缺失漏洞 in turboFan
+    
+  - 第42周（2021.3.1-2021.3.7）
+  
+    - 分析了 CVE-2018-16065 in V8 EmitBigTypedArrayElementStore 
+    - 做了个针对 BurpSuite v2.0 beta 的 exploit
