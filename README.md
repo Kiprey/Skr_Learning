@@ -87,7 +87,7 @@
   
   - 第37-41周（2021.1.25-2021.2.28）：
   
-    - 静态编译器研发实习（关于静态指针分析方向 之 FlowSensitive）
+    - 静态编译器研发实习（关于静态指针分析方向 之 FlowSensitive，以及学习构建控制依赖图算法 CDG）
     - 完成CVE-2021-3156 sudo 提权漏洞分析。
     - 了解了点 V8 的 Gabage Collection
     - 学习 V8 历史漏洞
@@ -98,3 +98,12 @@
   
     - 分析了 CVE-2018-16065 in V8 EmitBigTypedArrayElementStore 
     - 做了个针对 BurpSuite v2.0 beta 的 exploit
+    
+  - 第43周（2021.3.8-2021.3.14）
+  
+    - 做了个针对 BurpSuite pro v2020.2 的内置 chromium 的 exploit（由于开启沙箱因此最终无法利用），学习了一下 v8 指针压缩的漏洞利用
+    - 学习 IDAPython 插件的编写，学习 ida 指令回溯的算法实现，完善firmeye 插件在 x86 架构下的实现。
+    
+  - 第44周（2021.3.15-2021.3.21）
+  
+    - 学习 IDAPython 插件的编写，完成Analysis以及输出部分，更加便于使用。
