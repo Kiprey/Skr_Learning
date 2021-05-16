@@ -238,6 +238,6 @@
 
 - WebServer-1.0版本完结（[CommitID:6473f5 - github](https://github.com/Kiprey/WebServer/tree/6473f5d512097f235ab209b13b53e28d7946a0f6)）。1.0版本的 ~~技术文档~~ 笔记已上传至[blog](https://kiprey.github.io/2021/05/WebServer-1/).
 
-- epoll 多并发，看了一点点。
+- epoll 多并发，把 epoll 模型以及三个相关函数细致的了解了一下，看了几个使用 epoll 的例子。
 
   > 争取在接下来**最多两周**内，完成 epoll 相关多并发的学习，整一个 **WebServer-1.1 & 笔记**出来，尽量结束掉**网络编程**该部分的学习，开始整新花样。
