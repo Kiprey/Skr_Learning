@@ -293,3 +293,26 @@ AST-Fuzz
 - 阅读DIE源码，寻求优秀项目的变异方式。
 
 > 类型分析可真难写呀......
+
+## 第57周（2021.6.14-2021.6.20）
+
+AST-Fuzz
+
+- 讨论类型系统变异方式
+- 将JavaScript Builtin类型添加进类型系统中
+- 扩展VarType，额外处理类型为 Object | Constructor 的情况。
+- 重新测试并修复类型系统的bugs。
+
+> 2021.6.19-2021.6.29 HNU 期末周，复习+考试
+
+## TODO List
+
+- Top Priority
+  - AST-Fuzz 开发
+- High Priority
+  - Web Server bug fix && document
+- Medium Priority
+  - Garbage Collection Study
+  - Address Sanitizer LLVM 分析
+- Low Priority
+  - 阅读《计算机网络》
