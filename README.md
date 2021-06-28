@@ -305,14 +305,28 @@ AST-Fuzz
 
 > 2021.6.19-2021.6.29 HNU 期末周，复习+考试
 
+## 第58周（2021.6.21-2021.6.27）
+
+- HNU 期末周， 复习 && 考试
+- AST-Fuzz
+  - 设置 VarType 获取 FunctionSignature 时，对于 Builtin 类型返回 nullptr
+  - 完善 MethodDefinition 以及 getRandVar 接口
+  - 完善 TypeSystem 的接口
+  - 完善 codegen 中NewExpr, CallExpr以及 MemberExpr的generator
+  - 完善 NewExpr, CallExpr以及 MemberExpr的 mutate
+  - 编写 mutate 测试套件（多线程）
+  - 修复若干 Nullptr Dereference bugs、 UAF bugs
+  - 修复 CallExpr && NewExpr 获取 ArgType 时的越界 bug。
+
+  > 最近写了 N 多 security bug，还是太菜了，裂开......
+
 ## TODO List
 
 - Top Priority
   - AST-Fuzz 开发
 - High Priority
   - Web Server bug fix && document
+  - CS144 Computer Network Lab + 《计算机网络》
 - Medium Priority
   - Garbage Collection Study
   - Address Sanitizer LLVM 分析
-- Low Priority
-  - 阅读《计算机网络》
