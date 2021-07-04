@@ -320,6 +320,24 @@ AST-Fuzz
 
   > 最近写了 N 多 security bug，还是太菜了，裂开......
 
+## 第59周（2021.6.28-2021.7.4）
+
+- HNU期末周
+- AST-Fuzz
+  - 修复 mutate 套件中多线程的互斥锁bug，以及 python exit 函数的误用bug
+
+    > 鬼知道 python 中的 exit 函数只会退出单个线程......整个程序退出用 `os._exit(1)`
+
+  - 依旧是修复了大量 Null Pointer Dereference + Use After Free bugs
+  - 依旧对mutate进行了大批量测试
+  - 将 AST 套件与 AFL 组合
+  - 对 AST 套件添加异常处理逻辑，而不再是原先的 assert，以提高debug效率。
+  - 在AFL中编写语料正确率统计代码
+  - 初步完善 Node 结点 Trim 过程
+  - 完善 Readme 中 运行说明以及测试套件使用说明
+  - 删除废弃的 AST 代码，并完善CMakelist至最新的代码路径
+  - 编写类型系统的文档
+
 ## TODO List
 
 - Top Priority
