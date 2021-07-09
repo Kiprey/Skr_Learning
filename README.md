@@ -265,78 +265,35 @@ WebServer-1.1到目前位置还没有彻底完成，但这个任务从下周开�
 ## 第54周（2021.5.24-2021.5.30）
 
 - 计算机网络 完成网络层的学习
-- 合作开发 AST-Fuzz
-  - 学习 Fuzzilli 的部分思路
-  - 完成 AST 转 AST Json 的 dump 操作。
-  - 完成 parse 和 dump 功能的批量单元测试功能，并对该功能进行了大量数据集的测试。
+- 合作开发 AST-Fuzz - dump & parse + 测试套件
 
 ## 第55周（2021.5.31-2021.6.6）
 
-继续开发 AST-Fuzz
-
-- 学习了点 DIE 的部分思路。
-- 完成 print 的批量测试。
-- 讨论
-  - 了解fuzz种子的清洗方式
-  - 了解fuzz种子的评估方式
-  - 明确fuzz的整体分析与变异架构
-  - 确定了接下来的开发方向与思路
-- 初步完成 analyze 模块。
+继续开发 AST-Fuzz - print & analyze + 测试套件
 
 ## 第56周（2021.6.7-2021.6.13）
 
-AST-Fuzz
-
-- 学习讨论类型系统 Type System 的实现
-- 完成类型系统的设计，并在原先设计的基础之上，考虑套娃的情况，完成类型系统的闭环。
-- 完成类型系统+类型分析的实现，通过大规模测试。
-- 阅读DIE源码，寻求优秀项目的变异方式。
-
-> 类型分析可真难写呀......
+AST-Fuzz - type system & analyze
 
 ## 第57周（2021.6.14-2021.6.20）
 
-AST-Fuzz
-
-- 讨论类型系统变异方式
-- 将JavaScript Builtin类型添加进类型系统中
-- 扩展VarType，额外处理类型为 Object | Constructor 的情况。
-- 重新测试并修复类型系统的bugs。
+AST-Fuzz - 扩展类型系统
 
 > 2021.6.19-2021.6.29 HNU 期末周，复习+考试
 
 ## 第58周（2021.6.21-2021.6.27）
 
 - HNU 期末周， 复习 && 考试
-- AST-Fuzz
-  - 设置 VarType 获取 FunctionSignature 时，对于 Builtin 类型返回 nullptr
-  - 完善 MethodDefinition 以及 getRandVar 接口
-  - 完善 TypeSystem 的接口
-  - 完善 codegen 中NewExpr, CallExpr以及 MemberExpr的generator
-  - 完善 NewExpr, CallExpr以及 MemberExpr的 mutate
-  - 编写 mutate 测试套件（多线程）
-  - 修复若干 Nullptr Dereference bugs、 UAF bugs
-  - 修复 CallExpr && NewExpr 获取 ArgType 时的越界 bug。
-
+- AST-Fuzz - 完善类型系统 + 测试套件 + 零碎 mutate
   > 最近写了 N 多 security bug，还是太菜了，裂开......
 
 ## 第59周（2021.6.28-2021.7.4）
 
 - HNU期末周
-- AST-Fuzz
-  - 修复 mutate 套件中多线程的互斥锁bug，以及 python exit 函数的误用bug
-
-    > 鬼知道 python 中的 exit 函数只会退出单个线程......整个程序退出用 `os._exit(1)`
-
-  - 依旧是修复了大量 Null Pointer Dereference + Use After Free bugs
-  - 依旧对mutate进行了大批量测试
-  - 将 AST 套件与 AFL 组合
-  - 对 AST 套件添加异常处理逻辑，而不再是原先的 assert，以提高debug效率。
-  - 在AFL中编写语料正确率统计代码
-  - 初步完善 Node 结点 Trim 过程
-  - 完善 Readme 中 运行说明以及测试套件使用说明
-  - 删除废弃的 AST 代码，并完善CMakelist至最新的代码路径
-  - 编写类型系统的文档
+- AST-Fuzz - AST
+  - many many many bugs fixed
+  - port to AFL
+  - docs
 
 ## TODO List
 
