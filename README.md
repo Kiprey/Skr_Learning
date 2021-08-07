@@ -317,15 +317,24 @@ AST-Fuzz - 扩展类型系统
 ## 第62-63周（2021.7.19-2021.8.1）
 
 - 腾讯玄武实验室-生态安全组-客户端安全 快乐实习
-- AST-fuzz 
+- AST-fuzz
   - 重构 shit mountain
-  - 完善 builtin 
+  - 完善 builtin
   - ......
+
+## 第64周（2021.8.2-2021.8.8）
+
+- 还是快乐实习
+- AST-fuzz v1.0 封版
+
+  > 整了2.5个月，大火花和巨轮都聊出来了，真不容易......
+
+> 接下来趁着实习期间难得可以摸到 iMac，好好学一手 MacOS。
 
 ## TODO List
 
 - Top Priority
-  - AST-Fuzz 开发
+  - MacOS 学习
 - High Priority
   - Web Server bug fix && document
   - CS144 Computer Network Lab + 《计算机网络》
