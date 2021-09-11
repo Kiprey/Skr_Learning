@@ -338,13 +338,15 @@ AST-Fuzz - 扩展类型系统
 
   > 起飞
 
-## TODO List
+## 第66-68周（2021.8.16-2021.9.5）
 
-- Top Priority
-  - MacOS 学习
-- High Priority
-  - Web Server bug fix && document
-  - CS144 Computer Network Lab + 《计算机网络》
-- Medium Priority
-  - Garbage Collection Study
-  - Address Sanitizer LLVM 分析
+- 快乐实习 plus plus
+- 分析 crash，报了两个fuzz出来品相比较 lj 的洞
+- 实习结束，准备返校
+
+## 第69周（2021.9.6-2021.9.12）
+
+- HNU 夏季实训（3/4）
+- 写了一些零碎的脚本
+- 继续学习 fuzz，简单看了一下 IR Fuzz，同时正在学习 HITBSecConf 上的一个有趣 fuzz 议题
+- 练练 pwn 题，太久没写题了，0解选手
