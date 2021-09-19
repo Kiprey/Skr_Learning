@@ -350,3 +350,25 @@ AST-Fuzz - 扩展类型系统
 - 写了一些零碎的脚本
 - 继续学习 fuzz，简单看了一下 IR Fuzz，同时正在学习 HITBSecConf 上的一个有趣 fuzz 议题
 - 练练 pwn 题，太久没写题了，0解选手
+
+## 第70周（2021.9.13-2021.9.19）
+
+- HNU 夏季实训（4/4）
+
+- 学习 Trapfuzz 的思路，理解其代码，并与教练一起搭建起一个 fuzz 环境，跑出一个 adobe 空指针漏洞。
+
+- 修复 IR fuzz 中关于 Python 深拷贝浅拷贝的一个巨坑，该巨坑让我们丢失了一个 crash 样本（简直痛心）
+
+  >Python 函数默认参数**千万别是可变对象**。
+
+- 学习 TrapFuzz 中 Linux 部分相关的内容，包括 gdb 脚本以及 gdb patch 的方式。
+
+  > gdb python 接口：https://sourceware.org/gdb/onlinedocs/gdb/Python.html#Python
+
+- 对 IR fuzz 添加**构造畸形 unicode 字符串**功能
+
+  > 这里有两种方式构造畸形 unicode 字符串，一种是直接在代码中放上已经构造好的畸形unicode，但这样会使得 IR fuzz 在处理 string 时容易产生错误。
+  >
+  > 再一种就是生成诸如 **'\xXX'** 这样的字符。这种字符将在 JS 代码层面展示的很好，而具体的字符串将在 adobe 解析所构造的 JS 代码时动态产生 unicode 字符。
+
+- 理了理关于 CS 架构程序的 fuzz 思路。
