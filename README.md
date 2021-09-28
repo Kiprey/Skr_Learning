@@ -372,3 +372,31 @@ AST-Fuzz - 扩展类型系统
   > 再一种就是生成诸如 **'\xXX'** 这样的字符。这种字符将在 JS 代码层面展示的很好，而具体的字符串将在 adobe 解析所构造的 JS 代码时动态产生 unicode 字符。
 
 - 理了理关于 CS 架构程序的 fuzz 思路。
+
+## 第71周（2021.9.20-2021.9.26）
+
+> 突然发现很久没有写博客了。以后除了研究比较大块的内容以外，其他的一点点笔记或思路就直接记录在 learn list 里。
+>
+> 不然一小点笔记就开一篇新博文感觉有点浪费（逃）
+
+- **Favocado [论文](https://www.ndss-symposium.org/ndss-paper/favocado-fuzzing-the-binding-code-of-javascript-engines-using-semantically-correct-test-cases/)与[源代码](https://github.com/favocado/Favocado)学习**。
+
+  整体上分为两部分，分别是
+
+  - 生成语法和语义正确的测试用例
+  - 减少fuzz时的输入空间
+
+  对于第一部分，
+
+  1. Favocado解析 API 信息。获取 binding code 的完整语义信息，包括但不限于方法参数与返回值类型、个数等等
+  2. 之后在预定义的语句格式中随机选择 JS 语句格式，并利用当前的binding code 语义信息以及所维护的上下文类型信息等等进行填空，以尽量满足语法语义的正确性。
+
+  对于第二部分：根据 API 的关联性，构建不同的 binding code 以及各类 native API 之间的关联性，并划分等价类。之后的变异就基于等价类来变异，这样可以降低无关类型的输入，大幅度降低输入空间。
+
+  如果不想啃论文可以直接看看这个简约版 - [白泽带你读论文 | Favocado - 知乎](https://zhuanlan.zhihu.com/p/378952042)
+
+- 简单瞄了几种 hook 技术，只是看了看没写代码
+
+  > inline hook 有点有趣，想找个机会研究一下。
+  
+- 打算看看 fuzz 的 [结构感知](https://github.com/google/fuzzing/blob/master/docs/structure-aware-fuzzing.md)，试着写写 CTF 菜单题的 fuzz 模板  
