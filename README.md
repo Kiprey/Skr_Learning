@@ -397,6 +397,30 @@ AST-Fuzz - 扩展类型系统
 
 - 简单瞄了几种 hook 技术，只是看了看没写代码
 
-  > inline hook 有点有趣，想找个机会研究一下。
+  > inline hook 有点有趣，想找个机会研究一下，可惜最近有点忙。
   
 - 打算看看 fuzz 的 [结构感知](https://github.com/google/fuzzing/blob/master/docs/structure-aware-fuzzing.md)，试着写写 CTF 菜单题的 fuzz 模板  
+
+## 第72周（2021.9.27-2021.10.3）
+
+- 接上面，使用 protobuf 搭配 AFL++ (qemu mode & QASAN）做了个简易 CTF fuzz。
+
+  因为只是抱着研究学习的目的来做它，所以实际上用起来可能会比较难用（笑）
+
+- 报了一个 Debug 模式下才会触发的 SQLite UAF，被谷歌毙了（哭泣）。
+
+- 简单读了读 [Coming : a Tool for Mining Change Pattern Instances from Git Commits](https://arxiv.org/pdf/1810.08532.pdf) 论文。这篇论文大体上介绍了一个从 Git 仓库历史提交信息中**获取指定代码模式信息**的工具。
+
+  它可以：
+
+  1. 遍历所有历史 commit 信息
+  2. 分析相邻 commit  的细粒度 diff 更改
+  3. 在这些 diff 更改中检测 change pattern instance
+  4. 计算代码更改频率
+  5. 将分析结果用 JSON 格式输出等等
+  
+  该论文所对应的项目代码在这里： [SpoonLabs/coming：A tool for mining commits from Git repositories and diffs to automatically extract code change pattern instances and features with ast analysis](https://github.com/SpoonLabs/coming)。
+
+- 在课程上花费的时间有亿点点多，而且这周状态也不太好，自我检讨一下。
+
+- Kernel pwn CTF 入门，配环境踩坑配了两天；同时也在阅读 *Linux Device Drivers* 这本书。
