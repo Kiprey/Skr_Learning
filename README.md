@@ -424,3 +424,20 @@ AST-Fuzz - 扩展类型系统
 - 在课程上花费的时间有亿点点多，而且这周状态也不太好，自我检讨一下。
 
 - Kernel pwn CTF 入门，配环境踩坑配了两天；同时也在阅读 *Linux Device Drivers* 这本书。
+
+## 第73周（2021.10.4-2021.10.10）
+
+- 接上面，Kernel Pwn CTF 简单入了个小门，写了点记录但还没写完，还差一点 ROP 利用，先不传了。
+- 这周摸了，没怎么学技术，在写一堆红色材料，写不完了......
+
+  > 生活就像是操作系统，总会有事情会抢占掉当前运行的进程。
+
+- 之前报的一个 facebook OOB read vulnerability 准备发 bounty 了。
+  虽然不多，但毕竟是第一笔 bug bounty，感觉相当不错。
+
+## 第74周（2021.10.11-2021.10.17）
+
+- 完善了剩下的 Kernel Pwn CTF 入门笔记 - [传送门](https://kiprey.github.io/2021/10/kernel_pwn_introduction/)
+- 继续写红色材料......
+- 简单练了几题算法题
+- 阅读一个有趣的论文 [FUZZIFICATION: Anti-Fuzzing Techniques](https://www.usenix.org/system/files/sec19fall_jung_prepub.pdf)
