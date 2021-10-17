@@ -438,6 +438,42 @@ AST-Fuzz - 扩展类型系统
 ## 第74周（2021.10.11-2021.10.17）
 
 - 完善了剩下的 Kernel Pwn CTF 入门笔记 - [传送门](https://kiprey.github.io/2021/10/kernel_pwn_introduction/)
+
 - 继续写红色材料......
+
 - 简单练了几题算法题
+
 - 阅读一个有趣的论文 [FUZZIFICATION: Anti-Fuzzing Techniques](https://www.usenix.org/system/files/sec19fall_jung_prepub.pdf)
+
+  - 三方面来降低 fuzz 效率
+
+    - speedbump:
+
+      - 首先使用给定 testcase 来识别 cold path(正常执行很少或几乎不访问的路径)，并在 code path 中**插入 delay 语句**以较大幅度提高程序运行时间
+
+        > 注：大部分情况下，普通用户几乎很少会进入 cold path，但 fuzz 就是为了探测 cold path 中的 bug，因此会经常进入。
+
+      - 插入 delay 语句后与先前定义的执行开销进行对比。如果低于预定开销则继续注入 delay 语句，高于则减少注入的 delay 语句
+
+      - 抗分析：为了防止被简单的 patch 掉，这里使用 CSmith 生成动态算术运算代码，而不是常规的 sleep。
+
+        同时为了防止被 deadcode elimination 优化掉，这里还修改 CSmith 以生成**具有数据依赖和原始代码依赖**的代码，具体一点就是涉及到了**全局变量的修改**。
+
+    - branchtrap:
+
+      - 根据 ROP 思维实现的代码重用，在大量函数内部插入**输入敏感**的跳转，显著改变执行路径，诱导基于coverage的fuzz更多关注无 bug 路径（因为发现了**“新”**路径）
+      - 在 cold path 里引入大量**确定性分支**，迅速占满 fuzz 的 coverage bitmap，使得 fuzz 大量产生 hash 冲突，影响或减缓发现新路径的过程。
+
+    - antihybrid：
+
+      - 使用特定模板引入**隐式数据流依赖**，提高数据流污点分析的开销与难度
+
+        例如简单的 int 赋值操作，硬是要拿个循环跑。
+
+      - 插入大量假符号以触发符号执行中的路径爆炸
+
+        例如将 if 条件判断中的简单判断语句，替换成**两个操作数进行 CRC 校验后的值的比较语句**，额外引入了 CRC 校验代码，即大量假符号
+
+      - 缺点：容易被攻击者使用**代码模式检测方式**检测出来，因为模板是不变的
+
+  - 这里有个别人整理的总结可以简单看看(比我这里写的详细不少) - [《fuzzification》论文阅读 - CSDN](https://blog.csdn.net/qq_40398985/article/details/103586567)
