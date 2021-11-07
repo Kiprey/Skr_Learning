@@ -477,3 +477,95 @@ AST-Fuzz - 扩展类型系统
       - 缺点：容易被攻击者使用**代码模式检测方式**检测出来，因为模板是不变的
 
   - 这里有个别人整理的总结可以简单看看(比我这里写的详细不少) - [《fuzzification》论文阅读 - CSDN](https://blog.csdn.net/qq_40398985/article/details/103586567)
+
+## 第75周（2021.10.18-2021.10.24）
+
+- 准备校级评优材料
+
+- 将 IR-Fuzz 融合进 AFL，同时也融合进 AST-fuzz 中以提高 fuzz 质量
+
+- 最近新报的一个漏洞被 facebook 毙了，可惜。不过最早报的那个漏洞流程快走完了，快乐。
+
+- 重启 WebServer，几乎修复所有已知错误，并完善了连接爆满的错误处理，完善了日志输出的方式。
+
+  > 就差最后一个 bug 还没调通：一个多进程x多线程的条件竞争漏洞，怎么调也调不出来，有点难顶。
+
+## 第76周（2021.10.25-2021.10.31）
+
+- WebServer 最后一个 bug 终于调通了，**并非**条件竞争漏洞。
+
+  > 珍爱生命，请对每个创建文件描述符的地方使用 O_CLOEXEC
+
+  至此，WebServer 彻底结项。
+
+- 阅读了 [MemFix: Static Analysis-Based Repair of Memory Deallocation Errors for C](http://prl.korea.ac.kr/~junhee/papers/FSE18.pdf) 论文，感觉有之前大二寒假实习中，学习流敏感指针分析的味道了......
+
+  同时也尝试复现并跑通上面这篇论文里的所有测试与实验。
+
+- 阅读论文 [Low-Tech Steganography for Covert Operations](https://www.researchgate.net/publication/330243139_Low-Tech_Steganography_for_Covert_Operations)，主要讲解了一个使用低级隐写技术（即无需任何高速计算机就可完成的隐写技术）来巧妙隐藏一些秘密文本。
+
+  > 这个就不写笔记了，论文很简单，读起来非常快。
+
+- 阅读论文 [AddressSanitizer: A Fast Address Sanity Checker](https://www.usenix.org/system/files/conference/atc12/atc12-final39.pdf) 论文，了解了早期 Asan 技术的相关设计方式。
+
+## 第77周（2021.11.1-2021.11.7）
+
+- 写了一个 fuzz crash 分类工具，思路是通过 ptrace 将 crash 时的栈帧 hash 成一条哈希值，相同哈希值的 crash 被分为同一类 crash（[ptrace version src](https://github.com/Kiprey/CrashUniquer)）
+
+  > 该思路源于 trapfuzz。
+
+- 阅读 Address Sanitizer LLVM 3.1 最早期的源代码。
+
+  - Asan 使用 8 字节映射至 1字节的粗粒度内存映射。每块虚拟内存都会对应一块 shadow memory。
+
+    > 8字节的粗粒度，是因为 malloc 返回地址会对齐8字节。
+
+    其中 shadow byte 上的值表示 origin memory 中前 n 个字节是可访问的。
+
+  - Asan 会在 LLVM pass 过程的末尾，对所有的内存读写操作进行插桩，检查当前访问的内存地址所对应的 shadow byte 的值是否说明当前地址可访问。如果不可访问则直接abort。
+
+  - 对于溢出检测，asan 会在用户内存的**左右**两边分别加上一块大小固定的 redzone，其中 redzone 所对应的 shadow memory 将会被加毒。这样当访问到 redzone 时将触发 asan。
+
+    > 加毒（poison) 指的是将某块用户内存所对应的 shadow memory 标记为不可访问。
+
+  - 对于栈内存来说，它会先分配一块 **原始栈大小 + (等待被 redzone 检测的变量个数 + 1) * redzone 大小**的内存，然后修改那些目标变量的 alloc 指令的偏移量。（poisonStackInFunction 函数）
+
+    之后，将一些栈上的信息放入当前栈帧最左边的 redzone里。
+
+    在函数头部，插入给当前栈帧 redzone 加毒的操作；并在所有 ret 语句之前插入 redzone 解毒的操作。
+
+    对于当前函数，若当前函数执行了一些 noret 的函数（例如 exit、execve），则在执行这些 noret 函数之前，必须对其解毒，防止误报。处理 no ret call 是为了防止有不返回的函数调用导致调用后栈上的 poison 信息没有被处理。
+
+  - 但需要注意的是，asan 只会在**全局变量**的**右边**加 redzone。 （insertGlobalRedzones 函数）
+
+    同时，虽然全局变量的 redzone 的添加操作是以插桩的形式加入程序中，但全局变量的加毒解毒操作是位于 runtime 中。
+
+  - Asan 会 hook memcpy 等内存处理或字符串处理的 lib 函数，以达到更好的效果。（InitializeAsanInterceptors 函数）
+
+  - asan 除了检测 内存越界读写以外，它同样检测 UAF 和 use after return。
+
+    - UAF
+
+      asan hook 掉了 malloc、free、realloc 等函数，创建了自己的内存管理机制，在分配内存时对内存解毒，在释放内存时加毒。
+
+      对于动态分配的内存，一共有三种主要状态，分别是：可分配、检疫、已分配。当某个内存块被释放时，该内存块将会被设置为**检疫**状态，并放置到检疫队列中。等到检疫队列数量超过阈值后，再将其中的检疫内存放回可分配内存池中。这样做的目的是为了**延长某块内存从被释放到被二次分配的过程**，延长检测 UAF 的窗口期。
+
+    - use after return
+
+      在替换栈帧上原始 alloc 为新 alloc 之前，asan 会先分配一块 fake stack, 然后在替换 alloc 指令时，将其地址替换为 fake stack。这样，带有 redzone 的局部变量就会 alloc 在 fake stack 上，而不是 origin stack。
+
+      在当前函数结束时，fake stack 会被重新加毒，注意此时**不会回收** fake stack。
+
+      那么 fake stack 在什么时候被回收呢？在分配 fake stack时。分配时会同步检测 fake stack 的调用栈，遍历调用栈中的每个 fake stack，判断当前 fake stack 所对应的 real_stack 地址是否大于当前的运行时栈。如果大于则说明该 fake stack 已经没有用处了，因此将会被释放。
+
+  - asan 第一版存在局限性，例如不会检测到**结构体成员之间内存对齐的那一小部分内存**的越界，以及不会检测这种越界到**另一块用户可读写内存**中的情况等等，不过总体上实现效果非常优秀。
+
+  > 这里感谢 sad 师傅分享的笔记。
+
+- 将一个新的 IR-Fuzz 融合进 ast-fuzz，同时修复一些遗留bug。
+
+- 进军 CS144 计算机网络实验，共Lab0- Lab7 八个实验，开始给自己充充电。
+
+  本周已完成 Lab0、Lab1。
+
+- 报了一堆不知道fb认不认的洞上去，坐等消息。
