@@ -587,3 +587,14 @@ AST-Fuzz - 扩展类型系统
   > 至此，CS144 计网实验彻底结项。
 
 - IR-Fuzz 启航
+
+## 第80周（2021.11.22-2021.11.28）
+
+- HNU 期中考试周（2/2）
+- syzkaller 入门使用
+- 阅读论文 [SHARD: Fine-Grained Kernel Specialization with Context-Aware Hardening](https://www.cs.purdue.edu/homes/pfonseca/papers/sec21-shard.pdf)
+
+- 重新实现了一个 Crash 分类工具，基于 gdb 和 trap-fuzz 原理 - [CrashUniquer](https://github.com/Kiprey/CrashUniquer)。
+- 修补 fuzz bug，调试语义
+
+> 最近期中周，课程作业有亿点点多....
