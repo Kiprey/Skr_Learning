@@ -598,3 +598,19 @@ AST-Fuzz - 扩展类型系统
 - 修补 fuzz bug，调试语义
 
 > 最近期中周，课程作业有亿点点多....
+
+- 整了一下 protobuf + libfuzzer
+  - 发现了AFL++的一个 bug
+  - 对 libprotobuf-mutator 项目完全研究了一下，了解了其具体变异实现
+  - 重新对先前的研究进行改进
+
+## 第81周（2021.11.29-2021.12.5）
+
+- 阅读论文 [HEALER: Relation Learning Guided Kernel Fuzzing](http://www.wingtecher.com/themes/WingTecherResearch/assets/papers/healer-sosp21.pdf)
+- 阅读论文 [VScape: Assessing and Escaping Virtual Call Protections](https://www.usenix.org/conference/usenixsecurity21/presentation/chen-kaixiang)
+- 阅读论文 [CollAFL: Path Sensitive Fuzzing](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8418631)
+- 阅读论文 [Counterfeit Object-oriented Programming](https://www.syssec.ruhr-uni-bochum.de/media/emma/veroeffentlichungen/2015/03/28/COOP-Oakland15.pdf)
+
+> 鉴于以后要读更多的论文，因此将在以后阅读论文时写点笔记，同时还在博客那块开一个[小模块](https://kiprey.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/)用于存放论文笔记。
+>
+> 上面阅读的这几篇论文，其笔记均上传至博客上。
