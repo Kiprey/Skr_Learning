@@ -610,7 +610,9 @@ AST-Fuzz - 扩展类型系统
 - 阅读论文 [VScape: Assessing and Escaping Virtual Call Protections](https://www.usenix.org/conference/usenixsecurity21/presentation/chen-kaixiang)
 - 阅读论文 [CollAFL: Path Sensitive Fuzzing](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8418631)
 - 阅读论文 [Counterfeit Object-oriented Programming](https://www.syssec.ruhr-uni-bochum.de/media/emma/veroeffentlichungen/2015/03/28/COOP-Oakland15.pdf)
+- 阅读论文[SoFi: Reflection-Augmented Fuzzing for JavaScript Engines](https://dl.acm.org/doi/10.1145/3460120.3484823)
 
 > 鉴于以后要读更多的论文，因此将在以后阅读论文时写点笔记，同时还在博客那块开一个[小模块](https://kiprey.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/)用于存放论文笔记。
 >
-> 上面阅读的这几篇论文，其笔记均上传至博客上。
+
+- 简单看了看 [上下文敏感的 AFL++ 插桩技术](https://github.com/AFLplusplus/AFLplusplus/blob/stable/instrumentation/README.ctx.md)
