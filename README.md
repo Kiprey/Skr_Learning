@@ -612,7 +612,43 @@ AST-Fuzz - 扩展类型系统
 - 阅读论文 [Counterfeit Object-oriented Programming](https://www.syssec.ruhr-uni-bochum.de/media/emma/veroeffentlichungen/2015/03/28/COOP-Oakland15.pdf)
 - 阅读论文[SoFi: Reflection-Augmented Fuzzing for JavaScript Engines](https://dl.acm.org/doi/10.1145/3460120.3484823)
 
-> 鉴于以后要读更多的论文，因此将在以后阅读论文时写点笔记，同时还在博客那块开一个[小模块](https://kiprey.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/)用于存放论文笔记。
->
-
 - 简单看了看 [上下文敏感的 AFL++ 插桩技术](https://github.com/AFLplusplus/AFLplusplus/blob/stable/instrumentation/README.ctx.md)
+- 粗略阅读 Linux-2.6.24 源码中关于共享内存、信号量的实现
+
+## 第82周（2021.12.6-2021.12.12）
+
+- 阅读论文 `VulDeeLocator: A Deep Learning-based Fine-grained Vulnerability Detector`
+- 刷了六题 reversing.kr 
+- 各类课程实验、大作业
+- 加入老师的课题组，参与寒假实习
+
+## 第83周（2021.12.13-2021.12.19）
+
+- 在 Windows VMware 上配置了一个 MacOS
+
+  > 真不容易......
+
+- 去深圳打 CCF CCSP 国赛，陪跑。
+
+  > 可惜了......
+  
+- 准备两项考试
+
+## 第84周（2021.12.20-2021.12.26）
+
+- 密码学课程设计
+  - 使用 OpenSSL 实现 DH 协议认证 + 消息完整性检测 + 来源验证
+  - 使用 OpenSSL 创建公钥私钥以及证书，实现了一个简易 SSL 层 Echo Server 交互
+  
+  > 密码学真有意思。
+  
+- 学习 MacOS 的 xpc
+
+  - 阅读 *OS Internal Vol II 中的 IPC 机制
+  - 学习 35c3ctf 中的 [pillow](https://github.com/saelo/35c3ctf/tree/master/pillow) ，尝试学习 xpc 机制
+
+  > MacOS相关的题目大体上都和 xpc 机制有关，这可能是因为 xpc 机制是 MacOS 所独有的。
+
+- 刷 pwn.colleage
+
+- 做了其他细碎的事情
