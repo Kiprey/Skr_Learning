@@ -642,13 +642,29 @@ AST-Fuzz - 扩展类型系统
   
   > 密码学真有意思。
   
-- 学习 MacOS 的 xpc
+- 学习 MacOS 的 Mach IPC
 
   - 阅读 *OS Internal Vol II 中的 IPC 机制
-  - 学习 35c3ctf 中的 [pillow](https://github.com/saelo/35c3ctf/tree/master/pillow) ，尝试学习 xpc 机制
+  - 尝试编写代码，深入理解 Mach API。
 
-  > MacOS相关的题目大体上都和 xpc 机制有关，这可能是因为 xpc 机制是 MacOS 所独有的。
-
-- 刷 pwn.colleage
+- 刷 pwn college
 
 - 做了其他细碎的事情
+
+## 第85周（2021.12.27-2022.1.2）
+
+- 继续阅读网上的博客和 *OS internal 学习 mach IPC。
+
+- 课程设计/课程报告
+
+- 刷了点 pwn college ，学到 ROP 了
+
+  > 带 JIT 的 yan85 可真有趣。
+
+- 元旦快乐！
+
+## 第86周（2021.1.3-2021.1.9）
+
+- HNU 期末考试周（1/2）
+- 简单入门了一下 MacOS XPC，看了点 MacOS Sandbox 基础知识
+- 正在学习 35c3ctf 中的 pillow 题，这一题是 MacOS IPC 相关的一道沙箱逃逸题目。
