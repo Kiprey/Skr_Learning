@@ -667,4 +667,10 @@ AST-Fuzz - 扩展类型系统
 
 - HNU 期末考试周（1/2）
 - 简单入门了一下 MacOS XPC，看了点 MacOS Sandbox 基础知识
-- 正在学习 35c3ctf 中的 pillow 题，这一题是 MacOS IPC 相关的一道沙箱逃逸题目。
+- 完成 35c3ctf 中 pillow 题的学习，这一题是 MacOS IPC 相关的一道沙箱逃逸题目
+- 简单了解一下 xpcspy，主要基于 frida hook 来获取目标进程的 XPC 消息（突然想起之前的腾讯面试题）
+
+## 第87周（2021.1.10-2021.1.16）
+
+- HNU 期末考试周（2/2）
+- 准备开始寒假实习科研，研究 macOS 内核漏洞挖掘
