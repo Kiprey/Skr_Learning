@@ -663,14 +663,35 @@ AST-Fuzz - 扩展类型系统
 
 - 元旦快乐！
 
-## 第86周（2021.1.3-2021.1.9）
+## 第86周（2022.1.3-2022.1.9）
 
 - HNU 期末考试周（1/2）
 - 简单入门了一下 MacOS XPC，看了点 MacOS Sandbox 基础知识
 - 完成 35c3ctf 中 pillow 题的学习，这一题是 MacOS IPC 相关的一道沙箱逃逸题目
 - 简单了解一下 xpcspy，主要基于 frida hook 来获取目标进程的 XPC 消息（突然想起之前的腾讯面试题）
 
-## 第87周（2021.1.10-2021.1.16）
+## 第87周（2022.1.10-2022.1.16）
 
 - HNU 期末考试周（2/2）
 - 准备开始寒假实习科研，研究 macOS 内核漏洞挖掘
+  - 阅读论文 《IMF: Inferred Model-based Fuzzer》
+  - 阅读论文《iDEA: Static Analysis on the Security of Apple Kernel Drivers》，学习了一些关于 IOKit 相关的结构与用法
+  - 阅读论文《SyzGen: Automated Generation of Syscall Specification of
+    Closed-Source macOS Drivers》
+- pwn college 继续
+
+## 第88周（2022.1.17-2022.1.23）
+
+- 复现 IMF 中的实验。受限于 MacOS 版本，复现实验时遇到了一些版本上的问题。同时完整梳理了一下 IMF 的内容，写了写笔记。还顺便给 IMF 修了个 Bug。
+- 做了一些 pwn college，快整完了
+- 玩玩 rwctf，只会最菜的 baby 题。等着赛后复盘。
+
+## 第89周（2022.1.24-2022.1.30）
+
+- 复盘 RWCTF 中的 Who Move My Block 以及 QLaas。学习使用 Codeql 对 nbd 进行审计。
+
+- IMF 实验抽空结束掉了，准备复现 SyzGen 的实验，又安装了一个 MacOS 10.15 的虚拟机。
+
+  > 1T 固态就这么快被各个虚拟机给吃完了......
+
+- 复盘 RWCTF 中的 FLAG 题。
