@@ -578,7 +578,7 @@ AST-Fuzz - 扩展类型系统
 
 - 漏洞被毙了，噩耗。不过又尝试开始新的挖洞方向。
 
-## 第79周 （2021.11.15-2021.11.21）
+## 第79周（2021.11.15-2021.11.21）
 
 - HNU 期中考试周（1/2）
 
@@ -694,4 +694,52 @@ AST-Fuzz - 扩展类型系统
 
   > 1T 固态就这么快被各个虚拟机给吃完了......
 
-- 复盘 RWCTF 中的 FLAG 题。
+- 完成 RWCTF 中的 FLAG 题的复盘。
+
+## 第90周（2022.1.31-2022.2.6）
+
+- 新年快乐！
+- 复盘 RWCTF 中的 hso 题，这题和 pj0 那个 iMessage 0-click RCE 有着高相关性（而且有亿点点难）。
+- 摸了，参加一些聚会和酒席
+
+## 第91周（2022.2.7-2022.2.13）
+
+- 完成 RWCTF hso 题的笔记编写
+
+- 开始做 Syzgen 实验的复现。复现到一半发现 Windows 机器下 VMware MacOS 不能网络调试另一台 VMWare MacOS，真是太折腾了...... 
+
+  找学姐借了一台 macbook pro 远程 teamviewer 控制来做实验......
+
+## 第92周（2022.2.14-2022.2.20）
+
+- 协助做 Fuzzing 论文的整理
+
+- 继续 SyzGen 实验的复现
+
+  - 基本跑通了 SyzGen 大部分的代码
+  - 因为 xcode 编译出的驱动不能在 VM 上跑折腾了好久......
+
+  周报实在水不下去了，这里简单记录一下 `xcode 编译出的驱动不能在 VM 上跑` 这个的~~踩坑~~解决过程：
+
+  - 初始时，kextload 时提示 `kext start fail(result: 0x5)`，查看 log 时发现在 kextutil 报错前有些语句：
+
+    ```log
+    2022-02-18 06:35:53.512950-0800 0x250 Default 0x0 0 0 kernel.development: (47E46FA4-9B3F-38FA-9600-4F71D76491E3) <compose failure [UUID]>)
+    ```
+
+    除此之外没有 hook_start（自定义 kext 的名称为 `hook`，其 start 函数为 hook_start） 函数中 print 出的 `[hook_start] start kext` 这种信息，因此**初步认为 kext 在执行 start 前就挂了**。
+
+  - 一系列踩坑暂且不表，包括但不限于重新装了一台 10.15.4 版本的 MacOS 等等。
+
+  - 后来 lldb 直接调试 XNU 中的 `OSKext::load` 方法，发现其实 hook_start 已经执行了，printf 函数也跑了，但是 log 就是没有正常的输出，包括 dmesg 里也没有信息，这就奇了怪了。
+
+  - 之后我在 kext start 里增加了个循环，循环调用 printf 50次，之后再跑一次。这下才知道，原来之前说的那个报错 `<compose failure [UUID]>` 就是对应于输出的日志，只是可能因为其他缘故所以不能正常输出; 
+
+    然后在 dmesg 里也能看到输入的日志了，这应该是因为日志相关的缓存机制吧。
+
+    > 太折腾了......
+
+现在卡在符号执行时会触发内存读取错误，也就是**相当于**（打个比方）应用层程序执行时触发了 SYGSEGV 一样，这个坑也没啥头绪。
+下周无论如何都得把 SyzGen 本体跑通，不然周报都水不了了.....
+
+调试时还看到 angr 的有趣之处：给 angr 加装个 lldb proxy，这样 angr 就可以通过这个 lldb proxy 访问 kernel 中的任何内存数据，等价于把整个 kernel 做个 memory snapshot 再打包给 angr 做符号执行。这个设计非常的有意思。
