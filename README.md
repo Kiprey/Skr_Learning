@@ -706,7 +706,7 @@ AST-Fuzz - 扩展类型系统
 
 - 完成 RWCTF hso 题的笔记编写
 
-- 开始做 Syzgen 实验的复现。复现到一半发现 Windows 机器下 VMware MacOS 不能网络调试另一台 VMWare MacOS，真是太折腾了...... 
+- 开始做 Syzgen 实验的复现。复现到一半发现 Windows 机器下 VMware MacOS 不能网络调试另一台 VMWare MacOS，真是太折腾了......
 
   找学姐借了一台 macbook pro 远程 teamviewer 控制来做实验......
 
@@ -714,32 +714,115 @@ AST-Fuzz - 扩展类型系统
 
 - 协助做 Fuzzing 论文的整理
 
-- 继续 SyzGen 实验的复现
+- 完成 SyzGen 实验的复现
 
-  - 基本跑通了 SyzGen 大部分的代码
+  - 基本跑通了 SyzGen的代码
   - 因为 xcode 编译出的驱动不能在 VM 上跑折腾了好久......
+  - 完成 SyzGen 复现论文的文档编写
 
-  周报实在水不下去了，这里简单记录一下 `xcode 编译出的驱动不能在 VM 上跑` 这个的~~踩坑~~解决过程：
+周报实在水不下去了，这里简单记录一下 `xcode 编译出的驱动不能在 VM 上跑` 这个的~~踩坑~~解决过程：
 
-  - 初始时，kextload 时提示 `kext start fail(result: 0x5)`，查看 log 时发现在 kextutil 报错前有些语句：
-
+- 初始时，kextload 时提示 `kext start fail(result: 0x5)`，查看 log 时发现在 kextutil 报错前有些语句：
+  
     ```log
     2022-02-18 06:35:53.512950-0800 0x250 Default 0x0 0 0 kernel.development: (47E46FA4-9B3F-38FA-9600-4F71D76491E3) <compose failure [UUID]>)
-    ```
-
-    除此之外没有 hook_start（自定义 kext 的名称为 `hook`，其 start 函数为 hook_start） 函数中 print 出的 `[hook_start] start kext` 这种信息，因此**初步认为 kext 在执行 start 前就挂了**。
-
-  - 一系列踩坑暂且不表，包括但不限于重新装了一台 10.15.4 版本的 MacOS 等等。
-
-  - 后来 lldb 直接调试 XNU 中的 `OSKext::load` 方法，发现其实 hook_start 已经执行了，printf 函数也跑了，但是 log 就是没有正常的输出，包括 dmesg 里也没有信息，这就奇了怪了。
-
-  - 之后我在 kext start 里增加了个循环，循环调用 printf 50次，之后再跑一次。这下才知道，原来之前说的那个报错 `<compose failure [UUID]>` 就是对应于输出的日志，只是可能因为其他缘故所以不能正常输出; 
-
-    然后在 dmesg 里也能看到输入的日志了，这应该是因为日志相关的缓存机制吧。
-
+  ```
+  
+  除此之外没有 hook_start（自定义 kext 的名称为 `hook`，其 start 函数为 hook_start） 函数中 print 出的 `[hook_start] start kext` 这种信息，因此**初步认为 kext 在执行 start 前就挂了**。
+  
+- 一系列踩坑暂且不表，包括但不限于重新装了一台 10.15.4 版本的 MacOS 等等。
+  
+- 后来 lldb 直接调试 XNU 中的 `OSKext::load` 方法，发现其实 hook_start 已经执行了，printf 函数也跑了，但是 log 就是没有正常的输出，包括 dmesg 里也没有信息，这就奇了怪了。
+  
+- 之后我在 kext start 里增加了个循环，循环调用 printf 50次，之后再跑一次。这下才知道，原来之前说的那个报错 `<compose failure [UUID]>` 就是对应于输出的日志，只是可能因为其他缘故所以不能正常输出; 
+  
+  然后在 dmesg 里也能看到输入的日志了，这应该是因为日志相关的缓存机制吧。
+  
     > 太折腾了......
 
-现在卡在符号执行时会触发内存读取错误，也就是**相当于**（打个比方）应用层程序执行时触发了 SYGSEGV 一样，这个坑也没啥头绪。
-下周无论如何都得把 SyzGen 本体跑通，不然周报都水不了了.....
-
 调试时还看到 angr 的有趣之处：给 angr 加装个 lldb proxy，这样 angr 就可以通过这个 lldb proxy 访问 kernel 中的任何内存数据，等价于把整个 kernel 做个 memory snapshot 再打包给 angr 做符号执行。这个设计非常的有意思。
+
+## 第93周（2022.2.21-2022.2.27）
+
+- 简单看了下 unicorefuzz。
+
+- 仔细研究了一下 e9patch 的论文，了解其内部机理，顺便写了下笔记留待以后分享。
+
+- 项目需求，机器学习入门。
+
+- 读了一下 HFL 和 MoonShine 的论文，了解了一下它们在 kernel fuzz 中是如何解决某一种问题的方案：
+
+  - `HFL: Hybrid Fuzzing on the Linux Kernl` 结合 fuzz 技术和符号执行技术，主要解决三个问题：
+
+    - 由 syscall 参数所决定的间接控制流改变，会使得符号执行效率低下。（主要是这种：
+
+      ![image-20220227202648534](README/image-20220227202648534.png)
+
+      - random fuzz 无法高效处理那些**函数指针表索引来自参数**的情况。
+      - 符号执行技术用一个 symbol 来索引函数表可能会导致符号解引用，而且还需要符号探索整个值空间
+
+      **解决方案**：基于 kernel src 做了一个**离线**转换器，用于在**编译时**将间接控制流转换成直接控制流：
+
+      ![image-20220227202903484](README/image-20220227202903484.png)
+
+    - 需要推断 syscall 调用序列和依赖关系，以便于控制和匹配内部系统状态，防止 fuzz 效率低效
+
+      解决方法：
+
+      1. 首先使用静态分析技术（占大头的应该是指针分析技术），在多个 syscall 中收集**对相同内存位置进行读写**的**内存读写对** 集合（candidates）。这种内存读写是分开的，即在一个 syscall 中 write，在另一个 syscall 中 read。
+
+      2. 之后在 runtime 中验证这些 candidates。因为静态分析会产生一些误报，因此需要在执行时检测某个内存读写对是否确实会访问相同的内存位置，如果是则说明遍历到的 candidate 是真正的依赖关系对。
+
+         同时写操作的 syscall 一定在读操作的前面，因为**只有先写才能读**。
+
+      3. 使用符号执行技术，确定 syscall 参数之间的依赖关系。例如 syscall2 中的参数等于 syscall1 中的某个参数，具体的看下面工作流程图可得知。
+
+      工作流程如下：
+
+      ![image-20220227203857407](README/image-20220227203857407.png)
+
+    - 推断用于调用 syscall 的嵌套参数类型。这里还是用的老一套方法，检测 copy_from_user 函数以检测 syscall 嵌套参数的情况。这个其实不用多说，一张图胜过千言万语。
+
+      ![image-20220227204307290](README/image-20220227204307290.png)
+
+    除了上面这三个问题以外，hybrid fuzz 中 fuzz 和 symbolic excution 切换的时机也很关键，其 fuzzer 内部**维持了一个频率表，用于统计每个分支的 true/false 评估数量**。我个人对这个设计还挺感兴趣，但是源码存放的网站已经被关闭，找不到源码了。
+
+  - `MoonShine: Optimizing OS Fuzzer Seed`。这篇论文主要说明如何从真实系统调用序列中提取 OS Fuzzer 种子（种子蒸馏），同时保留依赖关系。它给出了两个有意思的依赖关系定义：对于 syscall $C_i、C_j$ 来说，
+
+    - 显式依赖：若 $C_i$ 生成的值用做 $C_j$ 的参数输入时，则说明 $C_j$ 依赖 $C_i$ ，那么自然得先调用 $C_i$ 再调用 $C_j$。
+
+      ![image-20220227211315342](README/image-20220227211315342.png)
+
+    - 隐式依赖：若 $C_i$ 在执行过程中会**通过共享变量读写**来影响 $C_j$ 的执行，则说明 $C_j$ 依赖 $C_i$ 的执行。 
+
+      ![image-20220227211330243](README/image-20220227211330243.png)
+
+    MoonShine 建立依赖关系的流程是这样的：
+
+    - 对于**显式依赖**来说，MoonShine 主要构建依赖关系图，通过调用序列，将 syscall 返回值和对应的 syscall 参数相连接，来确定显式依赖。
+
+    - 对于**隐式依赖**来说，MoonShine 主要通过分析一对 syscall 之中的读写依赖项来确定依赖关系。即，若 $C_i$ 读取的全局变量集合与 $C_j$ 写入的全局变量集合之间存在交集，则说明这两个 syscall 之间存在隐式依赖关系。但需要注意的是，受限于静态分析的精度，其隐式依赖关系可能会被高估或者低估。
+
+    > 需要注意的是
+    >
+    > 1. 如果 $C_i$ **隐式**依赖与 $C_j$，而 $C_j$ **显式**依赖于 $C_k$，则可说明 $C_i$ **隐式**依赖于 $C_k$
+    > 2. 如果 $C_i$ **显式**依赖与 $C_j$，而 $C_j$ **隐式**依赖于 $C_k$，则可说明 $C_i$ **显式**依赖于 $C_k$
+
+    算法伪代码如下所示，伪代码还是比较好理解的：
+
+    ![image-20220227213931466](README/image-20220227213931466.png)
+
+    以下是整体的算法思路：
+
+    - 首先是根据 coverage 对 syscall 进行排序，优先处理 coverage 更高的 syscall。
+    - 之后遍历 syscall 序列，获取其隐式依赖和显式依赖，并将其添加进语料序列中。
+
+    ![image-20220227213945270](README/image-20220227213945270.png)
+
+- Codegate CTF 摸了会，对着题目学习如何编写 syzkaller template
+
+  有道题 `forgotten` 很有意思：
+
+  >kernel driver 为当前进程创建 vma 时，往 `vma->vm_private_data` 里塞了一个指向内核对象 entry 的指针。
+  >当进程 fork 一份时，新进程也会完整复制这个 vma，使得**有两个进程持有了指向 entry 的指针**。
+  >随后当新进程死亡时，entry 对象被释放。但是**另一个进程仍然持有指向 entry 的指针**，造成 kernel uaf。
