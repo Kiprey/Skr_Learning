@@ -514,53 +514,7 @@ AST-Fuzz - 扩展类型系统
 
   > 该思路源于 trapfuzz。
 
-- 阅读 Address Sanitizer LLVM 3.1 最早期的源代码。
-
-  - Asan 使用 8 字节映射至 1字节的粗粒度内存映射。每块虚拟内存都会对应一块 shadow memory。
-
-    > 8字节的粗粒度，是因为 malloc 返回地址会对齐8字节。
-
-    其中 shadow byte 上的值表示 origin memory 中前 n 个字节是可访问的。
-
-  - Asan 会在 LLVM pass 过程的末尾，对所有的内存读写操作进行插桩，检查当前访问的内存地址所对应的 shadow byte 的值是否说明当前地址可访问。如果不可访问则直接abort。
-
-  - 对于溢出检测，asan 会在用户内存的**左右**两边分别加上一块大小固定的 redzone，其中 redzone 所对应的 shadow memory 将会被加毒。这样当访问到 redzone 时将触发 asan。
-
-    > 加毒（poison) 指的是将某块用户内存所对应的 shadow memory 标记为不可访问。
-
-  - 对于栈内存来说，它会先分配一块 **原始栈大小 + (等待被 redzone 检测的变量个数 + 1) * redzone 大小**的内存，然后修改那些目标变量的 alloc 指令的偏移量。（poisonStackInFunction 函数）
-
-    之后，将一些栈上的信息放入当前栈帧最左边的 redzone里。
-
-    在函数头部，插入给当前栈帧 redzone 加毒的操作；并在所有 ret 语句之前插入 redzone 解毒的操作。
-
-    对于当前函数，若当前函数执行了一些 noret 的函数（例如 exit、execve），则在执行这些 noret 函数之前，必须对其解毒，防止误报。处理 no ret call 是为了防止有不返回的函数调用导致调用后栈上的 poison 信息没有被处理。
-
-  - 但需要注意的是，asan 只会在**全局变量**的**右边**加 redzone。 （insertGlobalRedzones 函数）
-
-    同时，虽然全局变量的 redzone 的添加操作是以插桩的形式加入程序中，但全局变量的加毒解毒操作是位于 runtime 中。
-
-  - Asan 会 hook memcpy 等内存处理或字符串处理的 lib 函数，以达到更好的效果。（InitializeAsanInterceptors 函数）
-
-  - asan 除了检测 内存越界读写以外，它同样检测 UAF 和 use after return。
-
-    - UAF
-
-      asan hook 掉了 malloc、free、realloc 等函数，创建了自己的内存管理机制，在分配内存时对内存解毒，在释放内存时加毒。
-
-      对于动态分配的内存，一共有三种主要状态，分别是：可分配、检疫、已分配。当某个内存块被释放时，该内存块将会被设置为**检疫**状态，并放置到检疫队列中。等到检疫队列数量超过阈值后，再将其中的检疫内存放回可分配内存池中。这样做的目的是为了**延长某块内存从被释放到被二次分配的过程**，延长检测 UAF 的窗口期。
-
-    - use after return
-
-      在替换栈帧上原始 alloc 为新 alloc 之前，asan 会先分配一块 fake stack, 然后在替换 alloc 指令时，将其地址替换为 fake stack。这样，带有 redzone 的局部变量就会 alloc 在 fake stack 上，而不是 origin stack。
-
-      在当前函数结束时，fake stack 会被重新加毒，注意此时**不会回收** fake stack。
-
-      那么 fake stack 在什么时候被回收呢？在分配 fake stack时。分配时会同步检测 fake stack 的调用栈，遍历调用栈中的每个 fake stack，判断当前 fake stack 所对应的 real_stack 地址是否大于当前的运行时栈。如果大于则说明该 fake stack 已经没有用处了，因此将会被释放。
-
-  - asan 第一版存在局限性，例如不会检测到**结构体成员之间内存对齐的那一小部分内存**的越界，以及不会检测这种越界到**另一块用户可读写内存**中的情况等等，不过总体上实现效果非常优秀。
-
-  > 这里感谢 sad 师傅分享的笔记。
+- 阅读 Address Sanitizer LLVM 3.1 最早期的源代码，笔记上传至博客上。
 
 - 将一个新的 IR-Fuzz 融合进 ast-fuzz，同时修复一些遗留bug。
 
@@ -750,74 +704,7 @@ AST-Fuzz - 扩展类型系统
 
 - 项目需求，机器学习入门。
 
-- 读了一下 HFL 和 MoonShine 的论文，了解了一下它们在 kernel fuzz 中是如何解决某一种问题的方案：
-
-  - `HFL: Hybrid Fuzzing on the Linux Kernl` 结合 fuzz 技术和符号执行技术，主要解决三个问题：
-
-    - 由 syscall 参数所决定的间接控制流改变，会使得符号执行效率低下。（主要是这种：
-
-      ![image-20220227202648534](README/image-20220227202648534.png)
-
-      - random fuzz 无法高效处理那些**函数指针表索引来自参数**的情况。
-      - 符号执行技术用一个 symbol 来索引函数表可能会导致符号解引用，而且还需要符号探索整个值空间
-
-      **解决方案**：基于 kernel src 做了一个**离线**转换器，用于在**编译时**将间接控制流转换成直接控制流：
-
-      ![image-20220227202903484](README/image-20220227202903484.png)
-
-    - 需要推断 syscall 调用序列和依赖关系，以便于控制和匹配内部系统状态，防止 fuzz 效率低效
-
-      解决方法：
-
-      1. 首先使用静态分析技术（占大头的应该是指针分析技术），在多个 syscall 中收集**对相同内存位置进行读写**的**内存读写对** 集合（candidates）。这种内存读写是分开的，即在一个 syscall 中 write，在另一个 syscall 中 read。
-
-      2. 之后在 runtime 中验证这些 candidates。因为静态分析会产生一些误报，因此需要在执行时检测某个内存读写对是否确实会访问相同的内存位置，如果是则说明遍历到的 candidate 是真正的依赖关系对。
-
-         同时写操作的 syscall 一定在读操作的前面，因为**只有先写才能读**。
-
-      3. 使用符号执行技术，确定 syscall 参数之间的依赖关系。例如 syscall2 中的参数等于 syscall1 中的某个参数，具体的看下面工作流程图可得知。
-
-      工作流程如下：
-
-      ![image-20220227203857407](README/image-20220227203857407.png)
-
-    - 推断用于调用 syscall 的嵌套参数类型。这里还是用的老一套方法，检测 copy_from_user 函数以检测 syscall 嵌套参数的情况。这个其实不用多说，一张图胜过千言万语。
-
-      ![image-20220227204307290](README/image-20220227204307290.png)
-
-    除了上面这三个问题以外，hybrid fuzz 中 fuzz 和 symbolic excution 切换的时机也很关键，其 fuzzer 内部**维持了一个频率表，用于统计每个分支的 true/false 评估数量**。我个人对这个设计还挺感兴趣，但是源码存放的网站已经被关闭，找不到源码了。
-
-  - `MoonShine: Optimizing OS Fuzzer Seed`。这篇论文主要说明如何从真实系统调用序列中提取 OS Fuzzer 种子（种子蒸馏），同时保留依赖关系。它给出了两个有意思的依赖关系定义：对于 syscall $C_i、C_j$ 来说，
-
-    - 显式依赖：若 $C_i$ 生成的值用做 $C_j$ 的参数输入时，则说明 $C_j$ 依赖 $C_i$ ，那么自然得先调用 $C_i$ 再调用 $C_j$。
-
-      ![image-20220227211315342](README/image-20220227211315342.png)
-
-    - 隐式依赖：若 $C_i$ 在执行过程中会**通过共享变量读写**来影响 $C_j$ 的执行，则说明 $C_j$ 依赖 $C_i$ 的执行。 
-
-      ![image-20220227211330243](README/image-20220227211330243.png)
-
-    MoonShine 建立依赖关系的流程是这样的：
-
-    - 对于**显式依赖**来说，MoonShine 主要构建依赖关系图，通过调用序列，将 syscall 返回值和对应的 syscall 参数相连接，来确定显式依赖。
-
-    - 对于**隐式依赖**来说，MoonShine 主要通过分析一对 syscall 之中的读写依赖项来确定依赖关系。即，若 $C_i$ 读取的全局变量集合与 $C_j$ 写入的全局变量集合之间存在交集，则说明这两个 syscall 之间存在隐式依赖关系。但需要注意的是，受限于静态分析的精度，其隐式依赖关系可能会被高估或者低估。
-
-    > 需要注意的是
-    >
-    > 1. 如果 $C_i$ **隐式**依赖与 $C_j$，而 $C_j$ **显式**依赖于 $C_k$，则可说明 $C_i$ **隐式**依赖于 $C_k$
-    > 2. 如果 $C_i$ **显式**依赖与 $C_j$，而 $C_j$ **隐式**依赖于 $C_k$，则可说明 $C_i$ **显式**依赖于 $C_k$
-
-    算法伪代码如下所示，伪代码还是比较好理解的：
-
-    ![image-20220227213931466](README/image-20220227213931466.png)
-
-    以下是整体的算法思路：
-
-    - 首先是根据 coverage 对 syscall 进行排序，优先处理 coverage 更高的 syscall。
-    - 之后遍历 syscall 序列，获取其隐式依赖和显式依赖，并将其添加进语料序列中。
-
-    ![image-20220227213945270](README/image-20220227213945270.png)
+- 读了一下 HFL 和 MoonShine 的论文，了解了一下它们在 kernel fuzz 中是如何解决某一种问题的方案。
 
 - Codegate CTF 摸了会，对着题目学习如何编写 syzkaller template
 
@@ -826,3 +713,35 @@ AST-Fuzz - 扩展类型系统
   >kernel driver 为当前进程创建 vma 时，往 `vma->vm_private_data` 里塞了一个指向内核对象 entry 的指针。
   >当进程 fork 一份时，新进程也会完整复制这个 vma，使得**有两个进程持有了指向 entry 的指针**。
   >随后当新进程死亡时，entry 对象被释放。但是**另一个进程仍然持有指向 entry 的指针**，造成 kernel uaf。
+
+## 第94周（2022.2.28-2022.3.6）
+
+- syzkaller 源码阅读。主要关注 syzkaller 如何解析 syzlang，以及其变异策略（一步一步来嘛）
+
+- 阅读论文 `NTFUZZ: Enabling Type-Aware Kernel Fuzzing on Windows with Static Binary Analysis`
+
+  这篇论文提出了一种方法：从那些 documented 的 API 函数，通过静态分析技术一步步往下推断出 undocumented 的 syscall API 参数类型，并对其进行 fuzz。
+
+  里面涉及的一些关于静态分析的东西还是有点模糊，不太能看懂。
+
+- 阅读论文 `Scalable Fuzzing of Program Binaries with E9AFL`。
+
+  e9afl 是一个可对无符号二进制程序插桩实现覆盖率反馈的工具，插桩后的程序可以直接用于 AFL 中进行 fuzz。相对于其他针对纯二进制文件进行 fuzz 的方法，它的优势在于插桩后的 overhead 还能保证在较低水平，同时还保证较高的精度。
+
+- 修复了一下 github page 无法更新的缘故，原来是自己上传的 md 中 yaml 格式出现了问题，导致 github 部署时解析错误。
+
+  这就使得我的博客处于薛定谔的状态，更了，但没完全更.....
+
+- 修复了先前复现 SyzGen 实验时没完全跑起来的覆盖率检测，被提供的文档给坑了。
+
+- Facebook CVE++
+
+- 尝试通过 SyzGen 测试一些驱动，看看带有 breakpoint coverage 和不带有时的 fuzz，其效率相差的如何。
+
+  > 测试的时候跑出了某驱动的一个空指针漏洞。（没想到还真能在复现时跑出漏洞.....）
+  
+  效率相差大概是将近 10x 左右，而且随着覆盖率的加大，带有 breakpoint coverage 的 syzkaller 执行速度会越来越慢。
+  
+  > 10x 算低的了，这还是因为 trace 的是单个驱动的覆盖率。
+  
+- 整理了一下周报，将一些较为大块的笔记挪到博客上了，使得周报更简洁一点。
