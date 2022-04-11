@@ -772,3 +772,16 @@ AST-Fuzz - 扩展类型系统
 - 看了点 syzkaller 代码，慢慢磨吧。然后还简单的做了一个 syzkaller 源码导读分享
 - 完善先前的 ast-fuzz。尝试从已有的 jackalope 项目中提取出一个独立的 AFL-fuzz，用来持续为 AST-fuzz 提供语料。
 - HNU 封校了，其余杂事只会更多......
+
+## 第98周（2022.3.28-2022.4.3）
+
+- 修复 afl-jackalope 里的内存泄露，和 Jackalope 作者简单交流了一下。
+- 逆向开源 IOKit driver 接口，尝试用 syzgen 干跑来复现这些接口。
+- 尝试复现 linux dirty pipe 漏洞。
+- 课程实验、信安国赛暂且不表（最花时间的地方）
+
+## 第99周（2022.4.4-2022.4.10）
+
+- 逆向 IOKit 驱动。开源 IOKit Driver 接口中有大部分都是无法在 Mac m1 上调用，只有 IOHIDFamily 中的几个接口可以调。
+- 这周主要在刷算法题，为保研机试做准备。
+- 课程...
