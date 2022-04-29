@@ -572,7 +572,7 @@ AST-Fuzz - 扩展类型系统
 ## 第82周（2021.12.6-2021.12.12）
 
 - 阅读论文 `VulDeeLocator: A Deep Learning-based Fine-grained Vulnerability Detector`
-- 刷了六题 reversing.kr 
+- 刷了六题 reversing.kr
 - 各类课程实验、大作业
 - 加入老师的课题组，参与寒假实习
 
@@ -688,7 +688,7 @@ AST-Fuzz - 扩展类型系统
   
 - 后来 lldb 直接调试 XNU 中的 `OSKext::load` 方法，发现其实 hook_start 已经执行了，printf 函数也跑了，但是 log 就是没有正常的输出，包括 dmesg 里也没有信息，这就奇了怪了。
   
-- 之后我在 kext start 里增加了个循环，循环调用 printf 50次，之后再跑一次。这下才知道，原来之前说的那个报错 `<compose failure [UUID]>` 就是对应于输出的日志，只是可能因为其他缘故所以不能正常输出; 
+- 之后我在 kext start 里增加了个循环，循环调用 printf 50次，之后再跑一次。这下才知道，原来之前说的那个报错 `<compose failure [UUID]>` 就是对应于输出的日志，只是可能因为其他缘故所以不能正常输出;
   
   然后在 dmesg 里也能看到输入的日志了，这应该是因为日志相关的缓存机制吧。
   
@@ -752,7 +752,7 @@ AST-Fuzz - 扩展类型系统
 
 - 简单看了看 IOKit UserClient 接口逆向，为下周的逆向工作做准备。
 
-- 继续 syzkaller 源码阅读，编写笔记梳理整个逻辑流程。 
+- 继续 syzkaller 源码阅读，编写笔记梳理整个逻辑流程。
 
   > 目前已经完成 syz-extract、syz-sysgen 的源码笔记编写。
   >
@@ -814,10 +814,10 @@ AST-Fuzz - 扩展类型系统
 
 - 尝试研究如何解决在 MacOS panic 时获取 panic log，简单探讨了一下，有几种方式可以试试
 
-  1. patch PESavePanicInfo 函数，将该函数劫持至自编写 DIY 驱动函数，这样在 panic 时就能自动执行自己的驱动函数，获取到 Panic log 
-  2. MacOS crash 掉后，会自动将 panic log 存放在 NVRAM，或许可以通过串口把 NVRAM 中的数据读出来，然后通过树莓派转发至 syzkaller 
-  3. 起 debugger，当 macos panic 掉时让 debugger 捕获 panic loc，缺点是每次重启 macos 时都需要重新 attach debugger，比较麻烦 
-  4. 查阅 《*OS Internal Volume I》，发现或许可以设置一下启动参数，使得 macos 在 panic 时自动发送 panic log 给指定的静态 IP。这个操作可在 Intel mac 上成功实现，但是在 M1 上不太行，可能还得再调试。 
+  1. patch PESavePanicInfo 函数，将该函数劫持至自编写 DIY 驱动函数，这样在 panic 时就能自动执行自己的驱动函数，获取到 Panic log
+  2. MacOS crash 掉后，会自动将 panic log 存放在 NVRAM，或许可以通过串口把 NVRAM 中的数据读出来，然后通过树莓派转发至 syzkaller
+  3. 起 debugger，当 macos panic 掉时让 debugger 捕获 panic loc，缺点是每次重启 macos 时都需要重新 attach debugger，比较麻烦
+  4. 查阅 《*OS Internal Volume I》，发现或许可以设置一下启动参数，使得 macos 在 panic 时自动发送 panic log 给指定的静态 IP。这个操作可在 Intel mac 上成功实现，但是在 M1 上不太行，可能还得再调试。
 
 > 接下来这五个月共22周会开始准备保研相关的事宜，因此周报里有趣的内容就有点少了。再加上课程与课设会进一步挤占自己的空闲时间，很多有意思的代码都可能得往后挪挪。
 
