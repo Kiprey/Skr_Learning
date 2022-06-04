@@ -848,8 +848,55 @@ AST-Fuzz - 扩展类型系统
 
     > vue 真有意思。
 
-## TODO List
+## 第106周（2022.5.23-2022.5.29）
+
+- 别说了，还是课设
+
+  > 这学期课设总感觉是最多最难的。
+
+- SyzGen 跑了一些对比实验。
+
+  > tmux 真好用，解决了 SSH 断开后进程终止的烦恼。
+
+- 刷了一些算法题
+
+- 计算机设计大赛省一到手，上推国赛了
+
+  > 没想到这还真能拿奖.....
+
+## 第107周（2022.5.30-2022.6.5）
+
+- 简单记录一下跑论文实验时遇到的坑点......SyzGen 需要换一个 VM 版本来跑对比试验，因为 10.15.7 版本中的 kext 并非 fat binary，但是论文工具是针对 arm 的，故最终换了一个 11.5.2 版本的 VM，重新开跑试验。
+
+  - 坑1：SyzGen 只支持 intel kext，不支持 fat binary。
+
+    解决方法：使用 `lipo xxx -thin x86_64 -output xxx_64` 将 intel 架构的 kext 解压出来。
+  
+    有意思的是，解压出来的 intel kext 竟然在内核中的布局和二进制一致。
+
+  - 坑2：通过调试 11.5.2 MacOS 发现 kextstat 中**显示**的驱动所占空间大小，竟然会小于实际装载的驱动大小。
+  
+    解决方法：可以通过 `kmutil inspect --show-fileset-entries` 来查看驱动各个段的装载位置，把判断 kextstat length 那块代码 fix 掉就可以继续工作。
+  
+  - 坑3：SyzGen 在分析 11.5.2 MacOS 上的 UserClient function table，分析出来的模板结构竟然大批量倒退，换句话说 infer_type 后的模板结构还没有 default 的模板好。
+  
+    解决方法：这个因为时间关系还真解决不了（捂脸），只能通过肉眼搭配 diaphora 来人工比对 10.15.7 与 11.5.2 之间 kext 的变动，之后选用那些在 10.15.7 上分析生成且接口与 11.5.2 变动不大的模板来做 fuzz。
+  
+    > 肉眼 bindiff 真的很累，而且眼睛都花了。
+  
+- 参加 HNU 学代会
+
+- 尝试给论文补一点 background。
+
+> 该周报大概每隔半个月 push 一次至 github 上。
+
+## TODO List after Sept
 
 - syzkaller 源码阅读（整体读了 80%，目前 syz-manager、syz-fuzzer、syz-executor 各有一部分没有阅读）
 - Stanford CS346 Redbase DBMS。这个目前才开了一个小头就暂停了，等到后面有空了再来写写。
+- 复盘 Defcon 30 Quals
+- 好玩*但随时可能会删除*的想法（排名不分先后）：
+  - 学一手 Rust（一个有趣的问题：学语言时在自己*不需要*的时候学好呢，还是在*需要*的时候学更好？）
+  - 手撸 c++filt，学习 C++ 的 name demangling 规则。
+  - 编译原理，实现最小图灵语言（大概是 C & Python 的结合体，笑，感觉想想就充满乐趣）。
 - （其余的想到再补充）...
