@@ -890,6 +890,77 @@ AST-Fuzz - 扩展类型系统
 
 > 该周报大概每隔半个月 push 一次至 github 上。
 
+## 第108周（2022.6.6-2022.6.12）
+
+- 再给论文补了一些 Background，同时辅助修改论文，直至论文投稿（6.8）
+- 准备 N 多夏令营材料
+- 复习准备期末考试（1/2）
+- 把 Redbase 捡起来些，简单写了些文档。
+
+## 第109周（2022.6.13-2022.6.19）
+
+- 期末考试（2/2）
+- 开始狂填夏令营材料
+- 刷 n 多算法题（对着洛谷的[题单广场](https://www.luogu.com.cn/training/list)刷，冲）
+
+## 第110周（2022.6.20-2022.6.26）
+
+- 小学期开始（1/2），开始有课程作业要做了......
+
+- 还在刷洛谷的基础题单（还是学了些有趣的算法 + 数据结构）。
+
+- 正在用 panda-re 搭建另一个项目的 linux 环境。
+
+- 接上条，搭建环境过程中发现有个 `progress` 命令很有趣，可以自动查找当前系统中运行的 coreutils 命令（用户可手动指定其他命令）并监测其进度 - [github](https://github.com/Xfennec/progress)，代码量共 1.2 k。
+
+  > coreutils 命令包含 cp、mv、dd、tar、gzip/gunzip、cat 等。
+
+  显示的内容包含 pid、进程名称、当前操作文件、当前处理到的进度、总进度大小、速度和剩余时间等等。
+
+  花了点时间读了一下源码，简单了解一下内部原理：
+
+  1. 通过遍历`/proc` 来获取到目标进程的 pid，并遍历 `/proc/<pid>/fd` 保存目标进程所打开的最多 512 个文件描述符。保存的这些文件描述符必须链接至其他文件（readlink），否则将会在遍历时被忽略掉，例如像这样：
+
+     ```bash
+     $ sudo ls -al /proc/64/fd
+     lrwx------ 1 kiprey kiprey 0 6月  26 10:50 0 -> /dev/tty2
+     lrwx------ 1 kiprey kiprey 0 6月  26 10:50 1 -> /dev/tty2
+     lr-x------ 1 kiprey kiprey 0 6月  26 10:49 12 -> /usr/share/zsh/functions/Completion.zwc
+     lr-x------ 1 kiprey kiprey 0 6月  26 10:49 14 -> /usr/share/zsh/functions/Completion/Base.zwc
+     ```
+
+  2. 接下来，遍历 `/proc/<pid>/fdinfo/<fd>` 来获取这些所保存文件描述符的 fdinfo。
+
+     fdinfo 中主要有几种信息，这里只感兴趣 `pos` 和 `flags`，分别是文件指针偏移量以及当前文件打开权限。
+
+     其中 flags 用于参数筛选，除此之外没有任何用处。
+
+     ```bash
+     $ cat /proc/221371/fdinfo/10
+     pos:    0
+     flags:  02104002
+     mnt_id: 1955
+     tty-index:      4
+     ```
+
+     在遍历完这些 fdinfo 后，每个目标进程都只保存下 **size 最大**的那个 `fd`。
+
+     这里的 size，指的是当前所遍历到 fd 的目标文件大小（通过 ioctl BLKGETSIZE64 获取）。
+
+  3. 等待一秒钟，之后再循环遍历一次 fdinfo。之后可以根据**两次遍历相同 fd 的 fdinfo**，其 **pos 量的增加大小和两次 fdinfo 的时间戳间隔**，来计算出大致吞吐量。
+
+  过程大致如上所示，简单总结一下关键的几个点：
+
+  1. pid 和 进程名，均可通过 `/proc` 获取
+
+  2. 将进程中 size 最大的 fd 视为当前操作的文件，并根据 readlink 获取到具体的文件名。
+
+  3. 总大小根据当前所操作文件的 size 来决定；
+
+     当前进度根据 fdinfo 中的 pos 来获取；
+  
+     吞吐量根据间隔时间 pos 量的改变来计算出。
+
 ## TODO List after Sept
 
 - syzkaller 源码阅读（整体读了 80%，目前 syz-manager、syz-fuzzer、syz-executor 各有一部分没有阅读）
@@ -897,6 +968,10 @@ AST-Fuzz - 扩展类型系统
 - 复盘 Defcon 30 Quals
 - 好玩*但随时可能会删除*的想法（排名不分先后）：
   - 学一手 Rust（一个有趣的问题：学语言时在自己*不需要*的时候学好呢，还是在*需要*的时候学更好？）
+
   - 手撸 c++filt，学习 C++ 的 name demangling 规则。
+
   - 编译原理，实现最小图灵语言（大概是 C & Python 的结合体，笑，感觉想想就充满乐趣）。
+
+    > 或许可以使用 Rust 来实现这个，一石二鸟。
 - （其余的想到再补充）...
