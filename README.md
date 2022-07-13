@@ -961,6 +961,33 @@ AST-Fuzz - 扩展类型系统
   
      吞吐量根据间隔时间 pos 量的改变来计算出。
 
+## 第111周（2022.6.27-2022.7.3）
+
+- HNU 小学期（2/2）
+
+- 夏令营投递陆陆续续过了几个院校初筛，但也收到了拒信。下周开始就是夏令营高峰期了，这两周在准备面试和专业课。今年的保研形式相对于之前几年会更加严峻，也不知自己能去成哪所院校读研，只能尽人事听天命。
+
+- 配置 windows fuzzer 环境，研究了一下 Intel-PT & Intel EPT，把 Intel-PT 特性部署在 VM 中。
+
+  Intel-PT 是 Intel CPU 的一种硬件特性，如果希望部署的 VM 可以使用 Intel-PT 的话，当前主机的 **Intel CPU 必须是 Ice Lake 微架构**（可以用 cpuz / cpuid 来查看），这种架构通常只在 Intel 至强系列上才有。
+
+  若需要在 KVM 中启用 Intel-PT，则除了 CPU 硬件条件满足上述的 IceLake 以外，还需要做一些设置：
+
+  ```bash
+  rmmod kvm-intel
+  modprobe kvm-intel pt_mode=1
+  ```
+
+  之后启 KVM 时：
+
+  ```bash
+  qemu-system-x86_64 --enable-kvm -cpu host ...
+  ```
+
+## 第112-113周（2022.7.4-2022.7.17）
+
+推免面试，一个字，寄。预推免再战 （捂脸）
+
 ## TODO List after Sept
 
 - syzkaller 源码阅读（整体读了 80%，目前 syz-manager、syz-fuzzer、syz-executor 各有一部分没有阅读）
@@ -974,4 +1001,6 @@ AST-Fuzz - 扩展类型系统
   - 编译原理，实现最小图灵语言（大概是 C & Python 的结合体，笑，感觉想想就充满乐趣）。
 
     > 或许可以使用 Rust 来实现这个，一石二鸟。
+    
+  - 阅读 Sandboxie 的源码
 - （其余的想到再补充）...
