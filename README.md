@@ -1014,6 +1014,8 @@ AST-Fuzz - 扩展类型系统
   >
   > 本人的做法：需要的时候学。因为确实要用上了（捂脸）。
 
+  速通 rust，看这本就够了：[《Rust 程序设计语言》](https://kaisery.github.io/trpl-zh-cn)
+
 ## TODO List after Sept
 
 - syzkaller 源码阅读（整体读了 80%，目前 syz-manager、syz-fuzzer、syz-executor 各有一部分没有阅读）
