@@ -1006,29 +1006,110 @@ AST-Fuzz - 扩展类型系统
 
 - 刷刷洛谷为预推免做准备。
 
-## 第 115 周（2022.7.25-2022.7.31）
+## 第 115 周（2022.7.25-2022.8.7）
 
-- 尝试一周速通 Rust（
+- 尝试一周速通 Rust
 
   > 一个有趣的问题：学语言时在自己*不需要*的时候学好呢，还是在*需要*的时候学更好？这是先前留在 TODO 里的问题。
   >
   > 本人的做法：需要的时候学。因为确实要用上了（捂脸）。
 
-  速通 rust，看这本就够了：[《Rust 程序设计语言》](https://kaisery.github.io/trpl-zh-cn)
+  速通 rust，看这些就够了：[《Rust 程序设计语言》](https://kaisery.github.io/trpl-zh-cn) + [Rust语言圣经(Rust Course)](https://course.rs/about-book.html)
+
+  > 发现 Rust 有着我非常看重的几点特性：
+  >
+  > 1. 绝对的速度。其运行速度和 C/C++ 有的一比。
+  >
+  > 2. 较高的安全性。Rust 设置了较多编译时的检查机制，若存在不安全操作，则将在编译阶段报错。
+  >
+  > 3. 静态语言。各个变量的类型在编写时就确定好，这样可以防止执行到一半报错某某类型不匹配，同时代码补全也会和 C++ 一样好用。
+  >
+  >    这里点名 Python，每次执行到一半才告诉我某某类型不匹配 ...
+  >
+  > 4. 无需内存管理。这点与 C++ 相比简直省心不少，每次写 C++ 代码。代码规模一大，内存管理就容易出问题。
+  >
+  > 5. 执行时无需 rust 环境。和 C++ 一样，编译一次后可以直接在其他平台上运行，无需配置运行时环境（点名 Python 和 Java）。
+  >
+  > 6. 拥有丰富的库。例如网络请求库，正则表达式库，Windows 图形库等丰富的第三方库。
+  >
+  > 7. 高频迭代。一门好的语言就需要实时更新迭代。
+  >
+  > 8. 编译与运行无需处理各种问题。（这里点名 Java 的各种包依赖！）
+  >
+  > 其中不妨看得出，1、3、5 是 C++ 中所拥有的特性，4、6 是 Python / Java 等语言的特性。
+  >
+  > 不过 rust 学下去发现这语法确实有忆点点晦涩，得多写写代码才能理解。
+
+- SyzGen 找到 bug 了。起因是 SyzGen 大量将一个特定内核地址硬编码进代码中，而这个内核地址在不同的 MacOS 版本上是不同的，因此需要全局替换修改。接下来跑了一些 SyzGen 的实验。
+
+## 第 116 周（2022.8.8-2022.8.14）
+
+- 实习需求：用 Rust 在仿照 syz-manager 做一个 win fuzzer manager。目前已经完成了 VM 的管理与 Fuzzer 的启动等基本逻辑，接下来还要再实现一下 Manager 和 Fuzzer 的 RPC 通信，用来传输 stats 和同步语料。
+- 生日快乐！
+- Defcon Final 划水（真就划水，还是感觉自身实力不足，0贡献......）
+
+## 第 117 周（2022.8.15-2022.8.21）
+
+- win fuzzer manager 实现完 Crash 的捕获逻辑，准备调试与测试。在写这个的过程中也对 Rust 的使用有了更进一步的体会。整个 manager 的编写加上 Rust 语言的学习共计1个月。
+- 准备预推免材料。
+- SyzGen 再跑跑实验。
+
+## 第118周（2022.8.22-2022.8.28）
+
+- HNU 小学期 (1/2)
+
+- 混了场 CTF Zone（捂脸，还是技术不太够，没啥贡献）
+
+- 趁着忙里偷闲，
+
+  - 探究了 Thread 与 Canary 之间的关系 - [浅析 Linux 程序的 Canary 机制 - Kiprey's Blog](https://kiprey.github.io/2022/08/thread_canary/)。
+
+  - 尝试学习 C++ 的 name demangling 规则，但是这方面的材料太少了，没找到什么有用的信息。
+
+    demangling 规则不在 C++ 规范中，是由各个编译器自己决定实现的，通常使用的是 [itanium-ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html#mangling)。这个 ABI 提供了一个用于 demangle 的函数：
+
+    ```cpp
+    namespace abi {
+      extern "C" char* __cxa_demangle (const char* mangled_name,
+               char* buf,
+               size_t* n,
+               int* status);
+    }
+    ```
+
+    该函数的实现不在 glibc 中，而是在 `binutils`中内部的`libiberty\cp-demangle.c` 文件里，我们所熟悉的 `c++filt` 程序就是在 binutils 中实现。最核心的 demangle 函数为：
+
+    ```cpp
+    /* Internal implementation for the demangler.  If MANGLED is a g++ v3 ABI
+       mangled name, return strings in repeated callback giving the demangled
+       name.  OPTIONS is the usual libiberty demangler options.  On success,
+       this returns 1.  On failure, returns 0.  */
+    
+    static int
+    d_demangle_callback (const char *mangled, int options,
+                         demangle_callbackref callback, void *opaque)
+    ```
+
+    该函数执行了 demangle 的完整过程，但 demangle 过程确实过于复杂，看不太懂，暂且搁置（捂脸）。
+
+  - 复盘 Defcon 30 Quals 中的 `constricted` 题。该题需要 pwn 掉一个使用 rust 编写的 JS 引擎 - [Defcon-30-Quals rust-pwn constricted 复盘笔记 - Kiprey's Blog](https://kiprey.github.io/2022/08/defcon30quals_constricted/)。
+
+> 之前在 TODO 里留下了一个疑问：学一门新的编程语言是**用到再学**，还是**先学再用**呢？根据我这段时间对 rust 的使用，我更偏向于**用到再学**，因为在动手实践中学习会把基础打得更加的牢固。
 
 ## TODO List after Sept
 
-- syzkaller 源码阅读（整体读了 80%，目前 syz-manager、syz-fuzzer、syz-executor 各有一部分没有阅读）
-- Stanford CS346 Redbase DBMS。这个目前才开了一个小头就暂停了，等到后面有空了再来写写。
-- 复盘 Defcon 30 Quals
+> 删除了一些 TODO，因为有些 TODO 后来感觉没有特别的有趣，同时有些也超出了我的技术范畴（还是得再努力努力......）
+
+- （低优先级）syzkaller 源码阅读（整体读了 80%，目前 syz-manager、syz-fuzzer、syz-executor 各有一部分没有阅读）
+
+- （低优先级）Stanford CS346 Redbase DBMS。这个目前才开了一个小头就暂停了，等到后面有空了再来写写。
+
+- 复盘 Defcon 30 Quals 的  `smuggler's cove` 。
+
 - 好玩*但随时可能会删除*的想法（排名不分先后）：
 
-  > 可能被删除的想法是因为考虑到精力等因素，可能无力**完结**。
+  - （低优先级）阅读 Sandboxie 的源码，想知道是如何做基于进程的隔离的。
 
-  - 手撸 c++filt，学习 C++ 的 name demangling 规则。
-
-  - 编译原理，实现最小图灵语言（大概是 C & Python 的结合体，笑，感觉想想就充满乐趣）。
-  
-  - 阅读 Sandboxie 的源码
+    > 由于没有 windows 编程的经验，因此阅读 win 上代码会非常的吃力。
 
 - （其余的想到再补充）...
